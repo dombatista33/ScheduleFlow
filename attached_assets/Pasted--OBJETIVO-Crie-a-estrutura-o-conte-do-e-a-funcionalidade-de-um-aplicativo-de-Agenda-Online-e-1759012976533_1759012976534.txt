@@ -1,0 +1,39 @@
+**OBJETIVO:**
+Crie a estrutura, o conteúdo e a funcionalidade de um aplicativo de **Agenda Online e Agendamento de Consultas** para "Terapia e Bem Estar"
+(Psicóloga). 
+NOME DO WEBSITE: terapiaebemestar.com.br
+FERRAMENTA/PLATAFORMA,  " HTML/PHP/CSS/JS/MYSQL/ SQL".
+Usando *** 
+banco de dados:terapiae_terapia
+Usuario: terapiae_terapia
+Senha: Ha31038866##
+terapiaebemestar.com.br
+
+
+**1. DETALHES DO PROFISSIONAL E SERVIÇOS:**
+* **Nome do Profissional:** Dra. Daniela Lima
+* **Área:** Psicóloga Online (Terapia Cognitiva Comportamental)
+* **Serviços a Exibir :** Consulta Inicial, Sessões de Acompanhamento, Terapia de Casal, etc.
+* **Informações Essenciais:** Breve descrição do serviço, preço e duração de cada sessão.
+
+**2. FUNCIONALIDADES PRINCIPAIS (Obrigatórias):**
+* **Página Inicial:** Deve apresentar o profissional (Dra. Daniela Lima), a especialidade e uma chamada clara para agendamento (Call-to-Action).
+* **Visualização de Calendário/Disponibilidade:** O usuário deve ser capaz de selecionar um serviço e ver um calendário com as datas e horários 
+disponíveis para agendamento.
+* **Formulário de Agendamento:** Após selecionar a data/horário, o formulário deve coletar as seguintes informações do cliente: Nome Completo, 
+E-mail, Telefone (WhatsApp).
+* **Confirmação:** Página de confirmação de agendamento e informações sobre  método de pagamento e link da sala virtual).
+* **Gestão (Back-end/Admin):** Criar O painel administrativo deve permitir que a Dra. Daniela Lima gerencie a 
+agenda, adicione ou bloqueie horários e visualize a lista de clientes.
+
+**3. DESIGN E ESTILO VISUAL:**
+* **Paleta de Cores: Priorizar cores neutras e suaves que promovem calma e estabilidade.
+
+Sugestões: Tons de bege, off-white, cinza claro, verde sálvia, azul claro ou tons terrosos.
+
+
+* **Layout:** O design deve ser minimalista, fácil de navegar e, **obrigatoriamente**, *mobile-first* (otimizado para celular).
+* **Elementos:** Deve incluir espaço para uma foto de perfil da profissional e informações de contato.
+
+
+
