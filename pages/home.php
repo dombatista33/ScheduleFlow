@@ -43,8 +43,8 @@
                     <!-- Professional Photo Section -->
                     <div class="professional-photo-main">
                         <div class="photo-container">
-                            <div class="photo-placeholder">
-                                <div class="photo-initials">DL</div>
+                            <div class="photo-real">
+                                <img src="assets/images/dra-daniela-lima.jpg" alt="Dra. Daniela Lima - Psicóloga" />
                             </div>
                             <div class="photo-overlay">
                                 <h3>Dra. Daniela Lima</h3>
