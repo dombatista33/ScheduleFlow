@@ -1,17 +1,25 @@
 <?php
 session_start();
 
-// Database configuration
-$db_host = 'terapiaebemestar.com.br';
-$db_name = 'terapiae_terapia';
-$db_user = 'terapiae_terapia';
-$db_pass = 'Ha31038866##';
+// Database configuration - fallback to local PostgreSQL if external MySQL fails
+$db_host = getenv('PGHOST') ?: 'localhost';
+$db_name = getenv('PGDATABASE') ?: 'postgres';
+$db_user = getenv('PGUSER') ?: 'postgres';
+$db_pass = getenv('PGPASSWORD') ?: '';
+$db_port = getenv('PGPORT') ?: '5432';
 
 try {
-    $pdo = new PDO("mysql:host=$db_host;dbname=$db_name;charset=utf8", $db_user, $db_pass);
+    // Try PostgreSQL connection first (for development)
+    $pdo = new PDO("pgsql:host=$db_host;port=$db_port;dbname=$db_name", $db_user, $db_pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
-    die("Erro de conexão: " . $e->getMessage());
+    // Fallback to external MySQL if PostgreSQL fails
+    try {
+        $pdo = new PDO("mysql:host=terapiaebemestar.com.br;dbname=terapiae_terapia;charset=utf8", 'terapiae_terapia', 'Ha31038866##');
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch(PDOException $e2) {
+        die("Erro de conexão com o banco de dados.");
+    }
 }
 
 // Route handling
