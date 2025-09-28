@@ -126,7 +126,7 @@
                                 
                                 <?php if ($selected_time): ?>
                                     <div class="mt-2 text-center">
-                                        <a href="index.php?page=booking&date=<?= urlencode($selected_date) ?>&time=<?= urlencode($selected_time) ?>" 
+                                        <a href="index.php?page=booking&date=<?= urlencode($selected_date) ?>&time=<?= urlencode($selected_time) ?><?= isset($_GET['service_id']) ? '&service_id=' . urlencode($_GET['service_id']) : '' ?>" 
                                            class="btn btn-large">Continuar para Dados Pessoais</a>
                                     </div>
                                 <?php endif; ?>
@@ -227,7 +227,11 @@
         }
         
         function selectDate(date) {
-            window.location.href = `index.php?page=calendar&date=${encodeURIComponent(date)}`;
+            // Preserve existing query parameters (like service_id)
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.set('date', date);
+            urlParams.delete('time'); // Reset time when selecting new date
+            window.location.href = `index.php?page=calendar&${urlParams.toString()}`;
         }
         
         function changeMonth(direction) {
@@ -245,7 +249,11 @@
         function selectTime(time) {
             const date = <?= json_encode($selected_date ?? '') ?>;
             if (date) {
-                window.location.href = `index.php?page=calendar&date=${encodeURIComponent(date)}&time=${encodeURIComponent(time)}`;
+                // Preserve existing query parameters (like service_id)
+                const urlParams = new URLSearchParams(window.location.search);
+                urlParams.set('date', date);
+                urlParams.set('time', time);
+                window.location.href = `index.php?page=calendar&${urlParams.toString()}`;
             }
         }
     </script>

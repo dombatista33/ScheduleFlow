@@ -222,8 +222,13 @@ function selectTime(time) {
     const serviceId = getUrlParameter('service_id');
     const date = getUrlParameter('date');
     
-    if (serviceId && date) {
-        window.location.href = `index.php?page=calendar&service_id=${serviceId}&date=${date}&time=${time}`;
+    if (date) {
+        if (serviceId) {
+            window.location.href = `index.php?page=calendar&service_id=${serviceId}&date=${date}&time=${time}`;
+        } else {
+            // Allow time selection even without service_id
+            window.location.href = `index.php?page=calendar&date=${date}&time=${time}`;
+        }
     }
 }
 
@@ -231,6 +236,9 @@ function selectDate(date) {
     const serviceId = getUrlParameter('service_id');
     if (serviceId) {
         window.location.href = `index.php?page=calendar&service_id=${serviceId}&date=${date}`;
+    } else {
+        // Allow date selection even without service_id
+        window.location.href = `index.php?page=calendar&date=${date}`;
     }
 }
 
