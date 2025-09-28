@@ -57,7 +57,7 @@
                                 SELECT t.time 
                                 FROM time_slots t 
                                 LEFT JOIN appointments a ON t.date = a.appointment_date AND t.time = a.appointment_time AND a.status != 'cancelled'
-                                WHERE t.date = ? AND t.is_available = 1 AND a.id IS NULL
+                                WHERE t.date = ? AND t.is_available = true AND a.id IS NULL
                                 ORDER BY t.time ASC
                             ");
                             $stmt->execute([$selected_date]);
@@ -160,13 +160,18 @@
         let currentYear = new Date().getFullYear();
         
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('Calendar page loaded');
             // Initialize calendar
             generateCalendar();
         });
         
         function generateCalendar() {
             const container = document.getElementById('calendar-container');
-            if (!container) return;
+            if (!container) {
+                console.error('Calendar container not found');
+                return;
+            }
+            console.log('Generating calendar for:', currentMonth + 1, currentYear);
             
             const today = new Date();
             
@@ -227,6 +232,7 @@
         }
         
         function selectDate(date) {
+            console.log('selectDate called with:', date);
             window.location.href = `index.php?page=calendar&date=${encodeURIComponent(date)}`;
         }
         

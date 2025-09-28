@@ -57,7 +57,7 @@
             
             // Verify time slot exists and is available
             try {
-                $stmt = $pdo->prepare("SELECT COUNT(*) FROM time_slots WHERE date = ? AND time = ? AND is_available = 1");
+                $stmt = $pdo->prepare("SELECT COUNT(*) FROM time_slots WHERE date = ? AND time = ? AND is_available = true");
                 $stmt->execute([$selected_date, $selected_time]);
                 $slot_exists = $stmt->fetchColumn();
                 
