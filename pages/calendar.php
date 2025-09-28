@@ -247,13 +247,24 @@
         }
         
         function selectTime(time) {
-            const date = <?= json_encode($selected_date ?? '') ?>;
+            // Get date from PHP or from current URL
+            let date = <?= json_encode($selected_date ?? '') ?>;
+            
+            // If no date from PHP, try to get from current URL
+            if (!date) {
+                const urlParams = new URLSearchParams(window.location.search);
+                date = urlParams.get('date');
+            }
+            
             if (date) {
                 // Preserve existing query parameters (like service_id)
                 const urlParams = new URLSearchParams(window.location.search);
                 urlParams.set('date', date);
                 urlParams.set('time', time);
                 window.location.href = `index.php?page=calendar&${urlParams.toString()}`;
+            } else {
+                console.error('Nenhuma data selecionada para escolher horário');
+                alert('Por favor, selecione uma data primeiro.');
             }
         }
     </script>
