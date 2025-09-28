@@ -200,6 +200,7 @@
                             // Redirect to confirmation page
                             header("Location: index.php?page=confirmation&appointment_id=$appointment_id");
                             exit;
+                            }
                         }
                     } catch(PDOException $e) {
                         if ($pdo->inTransaction()) {

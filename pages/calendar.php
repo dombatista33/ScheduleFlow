@@ -160,18 +160,13 @@
         let currentYear = new Date().getFullYear();
         
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Calendar page loaded');
             // Initialize calendar
             generateCalendar();
         });
         
         function generateCalendar() {
             const container = document.getElementById('calendar-container');
-            if (!container) {
-                console.error('Calendar container not found');
-                return;
-            }
-            console.log('Generating calendar for:', currentMonth + 1, currentYear);
+            if (!container) return;
             
             const today = new Date();
             
@@ -232,7 +227,6 @@
         }
         
         function selectDate(date) {
-            console.log('selectDate called with:', date);
             window.location.href = `index.php?page=calendar&date=${encodeURIComponent(date)}`;
         }
         
