@@ -12,7 +12,9 @@ try {
     $pdo = new PDO("mysql:host=$mysql_host;dbname=$mysql_database;charset=utf8", $mysql_username, $mysql_password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
-    die("Erro de conexão com o banco de dados: " . $e->getMessage());
+    // Log the error for debugging (in production, log to file)
+    error_log("Database connection error: " . $e->getMessage());
+    die("Erro interno do servidor. Por favor, tente novamente mais tarde.");
 }
 
 // Route handling
