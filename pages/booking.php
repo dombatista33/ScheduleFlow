@@ -23,6 +23,7 @@
     <main class="main">
         <div class="container">
             <?php
+            global $pdo;
             $selected_date = $_GET['date'] ?? null;
             $selected_time = $_GET['time'] ?? null;
             $error = '';
