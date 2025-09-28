@@ -23,6 +23,7 @@
     <main class="main">
         <div class="container">
             <?php
+            global $pdo;
             $appointment_id = $_GET['appointment_id'] ?? null;
             
             if (!$appointment_id) {
@@ -68,7 +69,7 @@
                         <p><strong>Horário:</strong> <?= date('H:i', strtotime($appointment['appointment_time'])) ?></p>
                         <p><strong>Duração:</strong> <?= $appointment['duration'] ?> minutos</p>
                         <p><strong>Valor:</strong> R$ <?= number_format($appointment['price'], 2, ',', '.') ?></p>
-                        <p><strong>Status:</strong> <span class="status-badge status-pending">Aguardando Pagamento</span></p>
+                        <p><strong>Status:</strong> <span class="status-badge status-confirmed">Confirmado</span></p>
                     </div>
                 </section>
 
@@ -92,16 +93,16 @@
                         unset($_SESSION['email_sent'], $_SESSION['email_address']); 
                         ?>
                         <div style="padding: 1rem; border-left: 4px solid var(--primary-color); background: rgba(139, 154, 139, 0.05);">
-                            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;">1. Pagamento</h3>
-                            <p>Você receberá as informações de pagamento via WhatsApp nos próximos minutos.</p>
+                            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;">1. Link da Consulta</h3>
+                            <p>Você receberá o link da sala virtual via WhatsApp e email 24 horas antes da consulta.</p>
                         </div>
                         <div style="padding: 1rem; border-left: 4px solid var(--secondary-color); background: rgba(168, 200, 236, 0.05);">
-                            <h3 style="color: var(--secondary-color); margin-bottom: 0.5rem;">2. Confirmação</h3>
-                            <p>Após o pagamento, sua consulta será confirmada e você receberá o link da sala virtual.</p>
+                            <h3 style="color: var(--secondary-color); margin-bottom: 0.5rem;">2. Lembrete</h3>
+                            <p>Você receberá um lembrete com todas as informações necessárias para a consulta.</p>
                         </div>
                         <div style="padding: 1rem; border-left: 4px solid var(--accent-color); background: rgba(212, 185, 150, 0.05);">
-                            <h3 style="color: var(--earth-tone); margin-bottom: 0.5rem;">3. Lembrete</h3>
-                            <p>Você receberá um lembrete 24 horas antes da consulta com todas as informações.</p>
+                            <h3 style="color: var(--earth-tone); margin-bottom: 0.5rem;">3. Preparação</h3>
+                            <p>Certifique-se de ter uma conexão estável e um ambiente tranquilo para a consulta.</p>
                         </div>
                     </div>
                 </section>
@@ -119,9 +120,9 @@
                 <!-- Virtual Meeting -->
                 <section class="card">
                     <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Sala Virtual</h2>
-                    <p>Sua consulta será realizada via Google Meet. O link da sala será enviado após a confirmação do pagamento:</p>
+                    <p>Sua consulta será realizada via Google Meet. O link da sala será enviado 24 horas antes da consulta:</p>
                     <div style="background: rgba(139, 154, 139, 0.1); padding: 1rem; border-radius: 10px; margin: 1rem 0;">
-                        <p><strong>Link da Sala:</strong> <span style="color: var(--text-light);">Será enviado após pagamento</span></p>
+                        <p><strong>Link da Sala:</strong> <span style="color: var(--text-light);">Será enviado 24 horas antes da consulta</span></p>
                     </div>
                     <p style="color: var(--text-light); font-size: 0.9rem;">
                         <strong>Dica:</strong> Teste sua câmera e microfone antes da consulta. Certifique-se de ter uma conexão estável com a internet.
@@ -132,7 +133,6 @@
                 <section class="card">
                     <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Informações Importantes</h2>
                     <ul style="margin-left: 1.5rem; line-height: 1.8;">
-                        <li>O pagamento deve ser realizado até 24 horas antes da consulta</li>
                         <li>Cancelamentos devem ser feitos com pelo menos 24 horas de antecedência</li>
                         <li>A sessão terá duração de <?= $appointment['duration'] ?> minutos</li>
                         <li>Mantenha seu WhatsApp ativo para receber as atualizações</li>

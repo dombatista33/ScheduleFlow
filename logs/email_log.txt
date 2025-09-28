@@ -1,0 +1,7 @@
+2025-09-28 18:39:04 | FAILED | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-09-28 18:47:00 | FAILED | TO: teste@exemplo.com | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-09-28 18:48:22 | FAILED | TO: test@replit.com | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-09-28 18:48:49 | FAILED | ReplitEmail | TO: final@test.com | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-09-28 18:48:49 | FAILED | TO: final@test.com | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-09-28 18:50:38 | FAILED | ReplitEmail | TO: corrected@test.com | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-09-28 18:50:38 | FAILED | TO: corrected@test.com | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar

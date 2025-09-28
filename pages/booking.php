@@ -58,6 +58,7 @@ global $pdo;
             
             // Include email system
             require_once 'includes/email_system.php';
+            require_once 'includes/replit_email.php';
             
             // Process form submission
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$error) {
@@ -136,7 +137,7 @@ global $pdo;
                             $virtual_room_link = "https://meet.google.com/new"; // This would be dynamically generated
                             $stmt = $pdo->prepare("
                                 INSERT INTO appointments (client_id, service_id, appointment_date, appointment_time, status, payment_method, virtual_room_link, notes) 
-                                VALUES (?, ?, ?, ?, 'pending', 'Pix/Transferência', ?, ?)
+                                VALUES (?, ?, ?, ?, 'confirmed', NULL, ?, ?)
                             ");
                             $stmt->execute([$client_id, $service_id, $selected_date, $selected_time, $virtual_room_link, $notes]);
                             $appointment_id = $pdo->lastInsertId();
@@ -146,7 +147,8 @@ global $pdo;
                             // Send confirmation email
                             $email_sent = false;
                             try {
-                                $email_system = new EmailSystem();
+                                // Try ReplitEmail first
+                                $replit_email = new ReplitEmail();
                                 $email_data = [
                                     'full_name' => $full_name,
                                     'email' => $email,
@@ -158,7 +160,14 @@ global $pdo;
                                     'virtual_room_link' => $virtual_room_link
                                 ];
                                 
-                                $email_sent = $email_system->sendAppointmentConfirmation($email_data);
+                                $email_sent = $replit_email->sendAppointmentConfirmation($email_data);
+                                
+                                // Fallback to regular system if ReplitEmail fails
+                                if (!$email_sent) {
+                                    error_log("ReplitEmail failed, trying fallback system");
+                                    $email_system = new EmailSystem();
+                                    $email_sent = $email_system->sendAppointmentConfirmation($email_data);
+                                }
                                 
                                 // Log email sending result
                                 if (!$email_sent) {
