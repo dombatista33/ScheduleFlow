@@ -49,6 +49,9 @@
                 $error = "Erro ao carregar informações do serviço.";
             }
             
+            // Include email system
+            require_once 'includes/email_system.php';
+            
             // Process form submission
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$error) {
                 $full_name = trim($_POST['full_name'] ?? '');
@@ -99,6 +102,36 @@
                             ");
                             $stmt->execute([$client_id, $service_id, $selected_date, $selected_time, $virtual_room_link, $notes]);
                             $appointment_id = $pdo->lastInsertId();
+                            
+                            // Send confirmation email
+                            $email_sent = false;
+                            try {
+                                $email_system = new EmailSystem();
+                                $email_data = [
+                                    'full_name' => $full_name,
+                                    'email' => $email,
+                                    'service_name' => $service['name'],
+                                    'appointment_date' => $selected_date,
+                                    'appointment_time' => $selected_time,
+                                    'duration' => $service['duration'],
+                                    'price' => $service['price'],
+                                    'virtual_room_link' => $virtual_room_link
+                                ];
+                                
+                                $email_sent = $email_system->sendAppointmentConfirmation($email_data);
+                                
+                                // Log email sending result
+                                if (!$email_sent) {
+                                    error_log("Failed to send confirmation email to: " . $email);
+                                }
+                            } catch (Exception $e) {
+                                error_log("Email system error: " . $e->getMessage());
+                                $email_sent = false;
+                            }
+                            
+                            // Store email status in session for confirmation page
+                            $_SESSION['email_sent'] = $email_sent;
+                            $_SESSION['email_address'] = $email;
                             
                             // Redirect to confirmation page
                             header("Location: index.php?page=confirmation&appointment_id=$appointment_id");

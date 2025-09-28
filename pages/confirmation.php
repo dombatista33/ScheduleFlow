@@ -76,6 +76,21 @@
                 <section class="card">
                     <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Próximos Passos</h2>
                     <div style="display: grid; gap: 1rem;">
+                        <?php if (isset($_SESSION['email_sent']) && $_SESSION['email_sent']): ?>
+                            <div style="padding: 1rem; border-left: 4px solid var(--success-color); background: rgba(124, 179, 66, 0.05);">
+                                <h3 style="color: var(--success-color); margin-bottom: 0.5rem;">✉️ E-mail Enviado</h3>
+                                <p>Um e-mail de confirmação foi enviado para <strong><?= htmlspecialchars($appointment['email']) ?></strong> com todos os detalhes do agendamento.</p>
+                            </div>
+                        <?php elseif (isset($_SESSION['email_sent']) && !$_SESSION['email_sent']): ?>
+                            <div style="padding: 1rem; border-left: 4px solid var(--warning-color); background: rgba(255, 138, 101, 0.05);">
+                                <h3 style="color: var(--warning-color); margin-bottom: 0.5rem;">⚠️ E-mail Não Enviado</h3>
+                                <p>Houve um problema ao enviar o e-mail de confirmação. Por favor, anote os detalhes do agendamento. Você receberá as informações via WhatsApp.</p>
+                            </div>
+                        <?php endif; ?>
+                        <?php 
+                        // Clear email status from session after displaying
+                        unset($_SESSION['email_sent'], $_SESSION['email_address']); 
+                        ?>
                         <div style="padding: 1rem; border-left: 4px solid var(--primary-color); background: rgba(139, 154, 139, 0.05);">
                             <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;">1. Pagamento</h3>
                             <p>Você receberá as informações de pagamento via WhatsApp nos próximos minutos.</p>
