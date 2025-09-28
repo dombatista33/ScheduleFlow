@@ -1,29 +1,5 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Finalizar Agendamento - Dra. Daniela Lima</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <a href="index.php" class="logo">Terapia e Bem Estar</a>
-                <nav class="nav">
-                    <a href="index.php">Início</a>
-                    <a href="index.php?page=services">Serviços</a>
-                    <a href="index.php?page=calendar" class="active">Agendar</a>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <main class="main">
-        <div class="container">
-            <?php
-            global $pdo;
+<?php
+global $pdo;
             $selected_date = $_GET['date'] ?? null;
             $selected_time = $_GET['time'] ?? null;
             $error = '';
@@ -210,8 +186,31 @@
                     }
                 }
             }
-            ?>
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Agendamento - Dra. Daniela Lima</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.php" class="logo">Terapia e Bem Estar</a>
+                <nav class="nav">
+                    <a href="index.php">Início</a>
+                    <a href="index.php?page=services">Serviços</a>
+                    <a href="index.php?page=calendar" class="active">Agendar</a>
+                </nav>
+            </div>
+        </div>
+    </header>
 
+    <main class="main">
+        <div class="container">
             <section class="hero">
                 <h1>Finalizar Agendamento</h1>
                 <p class="subtitle">Selecione o serviço e preencha seus dados para confirmar o agendamento</p>

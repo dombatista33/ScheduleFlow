@@ -158,6 +158,11 @@ class EmailSystem {
                     ($success ? "SUCCESS" : "FAILED") . " | " .
                     "TO: {$to} | SUBJECT: {$subject}" . "\n";
         
+        // Create logs directory if it doesn't exist
+        if (!is_dir('logs')) {
+            mkdir('logs', 0755, true);
+        }
+        
         file_put_contents('logs/email_log.txt', $log_entry, FILE_APPEND | LOCK_EX);
     }
     
