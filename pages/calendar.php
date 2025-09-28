@@ -139,14 +139,65 @@
                                     $stmt->execute([$selected_date]);
                                     $available_times = $stmt->fetchAll(PDO::FETCH_COLUMN);
                                     
-                                    if (count($available_times) > 0): ?>
-                                        <div class="time-slots">
-                                            <?php foreach($available_times as $time): ?>
-                                                <div class="time-slot <?= $selected_time == $time ? 'selected' : '' ?>" 
-                                                     onclick="selectTime('<?= $time ?>')">
-                                                    <?= date('H:i', strtotime($time)) ?>
+                                    if (count($available_times) > 0): 
+                                        // Organize times by period
+                                        $morning = [];
+                                        $afternoon = [];
+                                        $evening = [];
+                                        
+                                        foreach($available_times as $time) {
+                                            $hour = (int)date('H', strtotime($time));
+                                            if ($hour < 12) {
+                                                $morning[] = $time;
+                                            } elseif ($hour < 18) {
+                                                $afternoon[] = $time;
+                                            } else {
+                                                $evening[] = $time;
+                                            }
+                                        }
+                                        ?>
+                                        <div class="time-periods">
+                                            <?php if (!empty($morning)): ?>
+                                                <div class="time-period">
+                                                    <h4>🌅 Manhã</h4>
+                                                    <div class="time-slots">
+                                                        <?php foreach($morning as $time): ?>
+                                                            <div class="time-slot <?= $selected_time == $time ? 'selected' : '' ?>" 
+                                                                 onclick="selectTime('<?= $time ?>')">
+                                                                <?= date('H:i', strtotime($time)) ?>
+                                                            </div>
+                                                        <?php endforeach; ?>
+                                                    </div>
                                                 </div>
-                                            <?php endforeach; ?>
+                                            <?php endif; ?>
+                                            
+                                            <?php if (!empty($afternoon)): ?>
+                                                <div class="time-period">
+                                                    <h4>☀️ Tarde</h4>
+                                                    <div class="time-slots">
+                                                        <?php foreach($afternoon as $time): ?>
+                                                            <div class="time-slot <?= $selected_time == $time ? 'selected' : '' ?>" 
+                                                                 onclick="selectTime('<?= $time ?>')">
+                                                                <?= date('H:i', strtotime($time)) ?>
+                                                            </div>
+                                                        <?php endforeach; ?>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+                                            
+                                            <?php if (!empty($evening)): ?>
+                                                <div class="time-period">
+                                                    <h4>🌙 Noite</h4>
+                                                    <div class="time-slots">
+                                                        <?php foreach($evening as $time): ?>
+                                                            <div class="time-slot <?= $selected_time == $time ? 'selected' : '' ?>" 
+                                                                 onclick="selectTime('<?= $time ?>')">
+                                                                <?= date('H:i', strtotime($time)) ?>
+                                                            </div>
+                                                        <?php endforeach; ?>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
                                         </div>
                                         
                                         <?php if ($selected_time): ?>
