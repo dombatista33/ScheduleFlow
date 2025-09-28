@@ -23,30 +23,60 @@
     <main class="main">
         <div class="container">
             <?php
-            $service_id = $_GET['service_id'] ?? null;
             $selected_date = $_GET['date'] ?? null;
             $selected_time = $_GET['time'] ?? null;
             $error = '';
             $success = '';
             
             // Validate required parameters
-            if (!$service_id || !$selected_date || !$selected_time) {
+            if (!$selected_date || !$selected_time) {
                 header('Location: index.php?page=calendar');
                 exit;
             }
             
-            // Get service information
+            // Server-side validation of date format and availability
+            if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $selected_date)) {
+                header('Location: index.php?page=calendar');
+                exit;
+            }
+            
+            if (!preg_match('/^\d{2}:\d{2}:\d{2}$/', $selected_time)) {
+                header('Location: index.php?page=calendar');
+                exit;
+            }
+            
+            // Verify date is not in the past and not weekend
+            $selected_datetime = DateTime::createFromFormat('Y-m-d', $selected_date);
+            $today = new DateTime('today');
+            $dayOfWeek = $selected_datetime->format('w'); // 0=Sunday, 6=Saturday
+            
+            if ($selected_datetime < $today || $dayOfWeek == 0 || $dayOfWeek == 6) {
+                header('Location: index.php?page=calendar');
+                exit;
+            }
+            
+            // Verify time slot exists and is available
             try {
-                $stmt = $pdo->prepare("SELECT * FROM services WHERE id = ?");
-                $stmt->execute([$service_id]);
-                $service = $stmt->fetch(PDO::FETCH_ASSOC);
+                $stmt = $pdo->prepare("SELECT COUNT(*) FROM time_slots WHERE date = ? AND time = ? AND is_available = 1");
+                $stmt->execute([$selected_date, $selected_time]);
+                $slot_exists = $stmt->fetchColumn();
                 
-                if (!$service) {
+                if (!$slot_exists) {
                     header('Location: index.php?page=calendar');
                     exit;
                 }
             } catch(PDOException $e) {
-                $error = "Erro ao carregar informações do serviço.";
+                header('Location: index.php?page=calendar');
+                exit;
+            }
+            
+            // Get all services for selection
+            $services = [];
+            try {
+                $stmt = $pdo->query("SELECT * FROM services ORDER BY id ASC");
+                $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            } catch(PDOException $e) {
+                $error = "Erro ao carregar informações dos serviços.";
             }
             
             // Include email system
@@ -54,31 +84,62 @@
             
             // Process form submission
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$error) {
+                $service_id = $_POST['service_id'] ?? null;
                 $full_name = trim($_POST['full_name'] ?? '');
                 $email = trim($_POST['email'] ?? '');
                 $whatsapp = trim($_POST['whatsapp'] ?? '');
                 $notes = trim($_POST['notes'] ?? '');
                 
+                // Get selected service information
+                $service = null;
+                if ($service_id) {
+                    foreach ($services as $svc) {
+                        if ($svc['id'] == $service_id) {
+                            $service = $svc;
+                            break;
+                        }
+                    }
+                }
+                
                 // Validation
-                if (empty($full_name)) {
+                if (empty($service_id) || !$service) {
+                    $error = "Por favor, selecione um serviço.";
+                } elseif (empty($full_name)) {
                     $error = "Por favor, informe seu nome completo.";
                 } elseif (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     $error = "Por favor, informe um e-mail válido.";
                 } elseif (empty($whatsapp)) {
                     $error = "Por favor, informe seu número do WhatsApp.";
                 } else {
-                    // Check if time slot is still available
+                    // Use transaction to prevent race condition
                     try {
+                        $pdo->beginTransaction();
+                        
+                        // Lock the specific time slot and verify availability
                         $stmt = $pdo->prepare("
-                            SELECT COUNT(*) FROM appointments 
-                            WHERE appointment_date = ? AND appointment_time = ? AND status != 'cancelled'
+                            SELECT id, is_available FROM time_slots 
+                            WHERE date = ? AND time = ? 
+                            FOR UPDATE
                         ");
                         $stmt->execute([$selected_date, $selected_time]);
-                        $count = $stmt->fetchColumn();
+                        $slot = $stmt->fetch(PDO::FETCH_ASSOC);
                         
-                        if ($count > 0) {
-                            $error = "Este horário já foi agendado. Por favor, escolha outro horário.";
+                        if (!$slot || !$slot['is_available']) {
+                            $pdo->rollback();
+                            $error = "Este horário não está mais disponível. Por favor, escolha outro horário.";
                         } else {
+                            // Check if appointment already exists
+                            $stmt = $pdo->prepare("
+                                SELECT COUNT(*) FROM appointments 
+                                WHERE appointment_date = ? AND appointment_time = ? AND status != 'cancelled'
+                            ");
+                            $stmt->execute([$selected_date, $selected_time]);
+                            $count = $stmt->fetchColumn();
+                            
+                            if ($count > 0) {
+                                $pdo->rollback();
+                                $error = "Este horário já foi agendado. Por favor, escolha outro horário.";
+                            } else {
                             // Create or get client
                             $stmt = $pdo->prepare("SELECT id FROM clients WHERE email = ?");
                             $stmt->execute([$email]);
@@ -102,6 +163,8 @@
                             ");
                             $stmt->execute([$client_id, $service_id, $selected_date, $selected_time, $virtual_room_link, $notes]);
                             $appointment_id = $pdo->lastInsertId();
+                            
+                            $pdo->commit();
                             
                             // Send confirmation email
                             $email_sent = false;
@@ -138,6 +201,9 @@
                             exit;
                         }
                     } catch(PDOException $e) {
+                        if ($pdo->inTransaction()) {
+                            $pdo->rollback();
+                        }
                         $error = "Erro ao processar agendamento. Tente novamente.";
                     }
                 }
@@ -146,27 +212,23 @@
 
             <section class="hero">
                 <h1>Finalizar Agendamento</h1>
-                <p class="subtitle">Preencha seus dados para confirmar o agendamento</p>
+                <p class="subtitle">Selecione o serviço e preencha seus dados para confirmar o agendamento</p>
             </section>
 
             <div style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
                 <!-- Appointment Summary -->
                 <section class="card">
                     <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Resumo do Agendamento</h2>
-                    <?php if (isset($service)): ?>
-                        <div style="background: rgba(139, 154, 139, 0.1); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
-                            <p><strong>Serviço:</strong> <?= htmlspecialchars($service['name']) ?></p>
-                            <p><strong>Data:</strong> <?= date('d/m/Y', strtotime($selected_date)) ?></p>
-                            <p><strong>Horário:</strong> <?= date('H:i', strtotime($selected_time)) ?></p>
-                            <p><strong>Duração:</strong> <?= $service['duration'] ?> minutos</p>
-                            <p><strong>Valor:</strong> R$ <?= number_format($service['price'], 2, ',', '.') ?></p>
-                        </div>
-                    <?php endif; ?>
+                    <div style="background: rgba(139, 154, 139, 0.1); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
+                        <p><strong>Data:</strong> <?= date('d/m/Y', strtotime($selected_date)) ?></p>
+                        <p><strong>Horário:</strong> <?= date('H:i', strtotime($selected_time)) ?></p>
+                        <p><em>Selecione um serviço abaixo para ver duração e valor</em></p>
+                    </div>
                 </section>
 
                 <!-- Booking Form -->
                 <section class="card">
-                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Seus Dados</h2>
+                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Dados do Agendamento</h2>
                     
                     <?php if ($error): ?>
                         <div style="background: rgba(255, 138, 101, 0.2); color: var(--warning-color); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
@@ -175,6 +237,26 @@
                     <?php endif; ?>
                     
                     <form method="POST" action="">
+                        <div class="form-group">
+                            <label for="service_id">Escolha o Serviço *</label>
+                            <select id="service_id" name="service_id" required onchange="updateServiceInfo()">
+                                <option value="">Selecione um serviço</option>
+                                <?php foreach($services as $svc): ?>
+                                    <option value="<?= $svc['id'] ?>" 
+                                            data-duration="<?= $svc['duration'] ?>" 
+                                            data-price="<?= number_format($svc['price'], 2, ',', '.') ?>"
+                                            data-description="<?= htmlspecialchars($svc['description']) ?>"
+                                            <?= ($_POST['service_id'] ?? '') == $svc['id'] ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($svc['name']) ?> - R$ <?= number_format($svc['price'], 2, ',', '.') ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                            <div id="service-info" style="margin-top: 0.5rem; padding: 0.5rem; background: rgba(139, 154, 139, 0.05); border-radius: 5px; display: none;">
+                                <p id="service-description" style="margin: 0; font-size: 0.9rem; color: var(--text-light);"></p>
+                                <p id="service-details" style="margin: 0.5rem 0 0 0; font-size: 0.9rem;"><strong>Duração:</strong> <span id="service-duration"></span> min | <strong>Valor:</strong> R$ <span id="service-price"></span></p>
+                            </div>
+                        </div>
+                        
                         <div class="form-group">
                             <label for="full_name">Nome Completo *</label>
                             <input type="text" id="full_name" name="full_name" required 
@@ -243,6 +325,30 @@
                 }
             }
             e.target.value = value;
+        });
+        
+        // Update service information when selection changes
+        function updateServiceInfo() {
+            const select = document.getElementById('service_id');
+            const option = select.options[select.selectedIndex];
+            const infoDiv = document.getElementById('service-info');
+            const descriptionEl = document.getElementById('service-description');
+            const durationEl = document.getElementById('service-duration');
+            const priceEl = document.getElementById('service-price');
+            
+            if (option.value) {
+                descriptionEl.textContent = option.dataset.description;
+                durationEl.textContent = option.dataset.duration;
+                priceEl.textContent = option.dataset.price;
+                infoDiv.style.display = 'block';
+            } else {
+                infoDiv.style.display = 'none';
+            }
+        }
+        
+        // Initialize service info if option is already selected
+        document.addEventListener('DOMContentLoaded', function() {
+            updateServiceInfo();
         });
     </script>
 </body>
