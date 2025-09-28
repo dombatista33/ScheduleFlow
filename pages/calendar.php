@@ -23,6 +23,7 @@
     <main class="main">
         <div class="container">
             <?php
+            global $pdo;
             $service_id = $_GET['service_id'] ?? null;
             $selected_date = $_GET['date'] ?? null;
             $selected_time = $_GET['time'] ?? null;
@@ -133,7 +134,7 @@
                                         SELECT t.time 
                                         FROM time_slots t 
                                         LEFT JOIN appointments a ON t.date = a.appointment_date AND t.time = a.appointment_time AND a.status != 'cancelled'
-                                        WHERE t.date = ? AND t.is_available = 1 AND a.id IS NULL
+                                        WHERE t.date = ? AND t.is_available = true AND a.id IS NULL
                                         ORDER BY t.time ASC
                                     ");
                                     $stmt->execute([$selected_date]);
