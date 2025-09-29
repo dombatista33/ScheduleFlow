@@ -11,3 +11,6 @@
 2025-09-28 20:03:38 | FAILED | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
 2025-09-29 17:24:13 | FAILED | ReplitEmail | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
 2025-09-29 17:24:13 | FAILED | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-09-29 17:36:29 | SUCCESS | TO: teste.smtp@gmail.com | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-09-29 17:37:55 | FAILED | ReplitEmail | TO: ana.silva.teste@gmail.com | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-09-29 17:37:56 | SUCCESS | TO: ana.silva.teste@gmail.com | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar

@@ -5,9 +5,25 @@
  */
 
 class EmailSystem {
+    private $smtp_host;
+    private $smtp_port;
+    private $smtp_username;
+    private $smtp_password;
     private $from_email = 'contato@terapiaebemestar.com.br';
     private $from_name = 'Terapia e Bem Estar - Dra. Daniela Lima';
     private $reply_to = 'contato@terapiaebemestar.com.br';
+    
+    public function __construct() {
+        // Get SMTP configuration from environment variables
+        $this->smtp_host = getenv('SMTP_HOST');
+        $this->smtp_port = getenv('SMTP_PORT');
+        $this->smtp_username = getenv('EMAIL_USERNAME');
+        $this->smtp_password = getenv('EMAIL_PASSWORD');
+        
+        if (!$this->smtp_host || !$this->smtp_port || !$this->smtp_username || !$this->smtp_password) {
+            throw new Exception('SMTP configuration not found in environment variables');
+        }
+    }
     
     /**
      * Envia e-mail de confirmação de agendamento
@@ -22,8 +38,8 @@ class EmailSystem {
         // Email headers
         $headers = $this->getEmailHeaders();
         
-        // Send email (suppress warnings se sendmail não existir)
-        $sent = @mail($to, $subject, $message, $headers);
+        // Send email using SMTP
+        $sent = $this->sendViaSMTP($to, $subject, $message, $headers);
         
         // Log email attempt
         $this->logEmailAttempt($to, $subject, $sent);
@@ -176,7 +192,7 @@ class EmailSystem {
         $message = $this->generateReminderEmailTemplate($appointment_data);
         $headers = $this->getEmailHeaders();
         
-        $sent = @mail($to, $subject, $message, $headers);
+        $sent = $this->sendViaSMTP($to, $subject, $message, $headers);
         $this->logEmailAttempt($to, $subject, $sent);
         
         return $sent;
@@ -238,6 +254,103 @@ class EmailSystem {
 </html>';
         
         return $template;
+    }
+    
+    /**
+     * Send email via SMTP using raw socket connection
+     */
+    private function sendViaSMTP($to, $subject, $message, $headers) {
+        try {
+            // Create SSL context
+            $context = stream_context_create([
+                'ssl' => [
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                ]
+            ]);
+            
+            // Connect to SMTP server with SSL
+            $smtp = stream_socket_client(
+                "ssl://{$this->smtp_host}:{$this->smtp_port}",
+                $errno, $errstr, 30, STREAM_CLIENT_CONNECT, $context
+            );
+            
+            if (!$smtp) {
+                throw new Exception("Failed to connect to SMTP server: $errstr ($errno)");
+            }
+            
+            // Read server greeting
+            $this->readSMTPResponse($smtp);
+            
+            // Send EHLO
+            fwrite($smtp, "EHLO {$this->smtp_host}\r\n");
+            $this->readSMTPResponse($smtp);
+            
+            // Send AUTH LOGIN
+            fwrite($smtp, "AUTH LOGIN\r\n");
+            $this->readSMTPResponse($smtp);
+            
+            // Send username (base64 encoded)
+            fwrite($smtp, base64_encode($this->smtp_username) . "\r\n");
+            $this->readSMTPResponse($smtp);
+            
+            // Send password (base64 encoded)
+            fwrite($smtp, base64_encode($this->smtp_password) . "\r\n");
+            $this->readSMTPResponse($smtp);
+            
+            // Send MAIL FROM
+            fwrite($smtp, "MAIL FROM: <{$this->from_email}>\r\n");
+            $this->readSMTPResponse($smtp);
+            
+            // Send RCPT TO
+            fwrite($smtp, "RCPT TO: <{$to}>\r\n");
+            $this->readSMTPResponse($smtp);
+            
+            // Send DATA
+            fwrite($smtp, "DATA\r\n");
+            $this->readSMTPResponse($smtp);
+            
+            // Send email headers and body
+            $email_content = "From: {$this->from_name} <{$this->from_email}>\r\n";
+            $email_content .= "To: {$to}\r\n";
+            $email_content .= "Subject: {$subject}\r\n";
+            $email_content .= "MIME-Version: 1.0\r\n";
+            $email_content .= "Content-Type: text/html; charset=UTF-8\r\n";
+            $email_content .= "\r\n";
+            $email_content .= $message;
+            $email_content .= "\r\n.\r\n";
+            
+            fwrite($smtp, $email_content);
+            $this->readSMTPResponse($smtp);
+            
+            // Send QUIT
+            fwrite($smtp, "QUIT\r\n");
+            $this->readSMTPResponse($smtp);
+            
+            // Close connection
+            fclose($smtp);
+            
+            return true;
+            
+        } catch (Exception $e) {
+            error_log("SMTP Error: " . $e->getMessage());
+            return false;
+        }
+    }
+    
+    /**
+     * Read SMTP server response
+     */
+    private function readSMTPResponse($smtp) {
+        $response = '';
+        while (($line = fgets($smtp, 515)) !== false) {
+            $response .= $line;
+            if (substr($line, 3, 1) === ' ') {
+                break;
+            }
+        }
+        return $response;
     }
 }
 ?>
