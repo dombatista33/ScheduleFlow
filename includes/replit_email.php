@@ -59,9 +59,16 @@ class ReplitEmail {
         ];
         
         $context = stream_context_create($options);
-        $result = file_get_contents($url, false, $context);
+        
+        // Suprimir warnings para evitar "headers already sent"
+        $result = @file_get_contents($url, false, $context);
         
         if ($result === FALSE) {
+            // Verificar se houve erro HTTP específico
+            $error = error_get_last();
+            if ($error && strpos($error['message'], '403 Forbidden') !== false) {
+                throw new Exception('Authentication failed: Replit email service access denied');
+            }
             throw new Exception('Failed to send email via Replit API');
         }
         
@@ -103,6 +110,7 @@ class ReplitEmail {
             return true;
             
         } catch (Exception $e) {
+            // Log silencioso - sem output para não quebrar headers
             error_log('ReplitEmail error: ' . $e->getMessage());
             $this->logEmailAttempt($appointment_data['email'], $subject ?? 'Confirmação de Agendamento', false);
             return false;

@@ -165,8 +165,13 @@ global $pdo;
                                 // Fallback to regular system if ReplitEmail fails
                                 if (!$email_sent) {
                                     error_log("ReplitEmail failed, trying fallback system");
-                                    $email_system = new EmailSystem();
-                                    $email_sent = $email_system->sendAppointmentConfirmation($email_data);
+                                    try {
+                                        $email_system = new EmailSystem();
+                                        $email_sent = $email_system->sendAppointmentConfirmation($email_data);
+                                    } catch (Exception $e) {
+                                        error_log("Fallback email system also failed: " . $e->getMessage());
+                                        $email_sent = false;
+                                    }
                                 }
                                 
                                 // Log email sending result

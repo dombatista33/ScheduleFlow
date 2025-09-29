@@ -22,8 +22,8 @@ class EmailSystem {
         // Email headers
         $headers = $this->getEmailHeaders();
         
-        // Send email
-        $sent = mail($to, $subject, $message, $headers);
+        // Send email (suppress warnings se sendmail não existir)
+        $sent = @mail($to, $subject, $message, $headers);
         
         // Log email attempt
         $this->logEmailAttempt($to, $subject, $sent);
@@ -176,7 +176,7 @@ class EmailSystem {
         $message = $this->generateReminderEmailTemplate($appointment_data);
         $headers = $this->getEmailHeaders();
         
-        $sent = mail($to, $subject, $message, $headers);
+        $sent = @mail($to, $subject, $message, $headers);
         $this->logEmailAttempt($to, $subject, $sent);
         
         return $sent;
