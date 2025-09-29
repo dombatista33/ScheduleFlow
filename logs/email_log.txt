@@ -19,3 +19,5 @@
 2025-09-29 19:43:34 | FAILED | ReplitEmail | TO: hd3publicidade@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
 2025-09-29 19:43:35 | SUCCESS | TO: hd3publicidade@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
 2025-09-29 19:57:27 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Lembrete: Sua consulta é amanhã - Terapia e Bem Estar
+2025-09-29 20:42:07 | FAILED | ReplitEmail | TO: teste@teste.com | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-09-29 20:42:08 | SUCCESS | TO: teste@teste.com | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
