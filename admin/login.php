@@ -33,7 +33,7 @@
                     <form method="POST" action="">
                         <div class="form-group">
                             <label for="username">Usuário</label>
-                            <input type="text" id="username" name="username" required value="admin">
+                            <input type="text" id="username" name="username" required placeholder="Digite seu usuário">
                         </div>
                         
                         <div class="form-group">
@@ -48,7 +48,7 @@
                 </div>
                 
                 <div style="text-align: center; margin-top: 1rem; color: var(--text-light);">
-                    <small>Credenciais padrão: admin / admin123</small>
+                    <small>Entre com seu usuário e senha de administrador</small>
                 </div>
             </div>
         </div>
