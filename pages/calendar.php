@@ -227,11 +227,20 @@
         }
         
         function selectDate(date) {
+            // Debug log
+            console.log('selectDate chamada com:', date);
+            
             // Preserve existing query parameters (like service_id)
             const urlParams = new URLSearchParams(window.location.search);
+            urlParams.set('page', 'calendar');
             urlParams.set('date', date);
             urlParams.delete('time'); // Reset time when selecting new date
-            window.location.href = `index.php?page=calendar&${urlParams.toString()}`;
+            
+            // Build absolute URL
+            const newUrl = window.location.origin + window.location.pathname + '?' + urlParams.toString();
+            console.log('Redirecionando para:', newUrl);
+            
+            window.location.href = newUrl;
         }
         
         function changeMonth(direction) {
@@ -257,11 +266,20 @@
             }
             
             if (date) {
+                // Debug log
+                console.log('selectTime chamada com:', time, 'data:', date);
+                
                 // Preserve existing query parameters (like service_id)
                 const urlParams = new URLSearchParams(window.location.search);
+                urlParams.set('page', 'calendar');
                 urlParams.set('date', date);
                 urlParams.set('time', time);
-                window.location.href = `index.php?page=calendar&${urlParams.toString()}`;
+                
+                // Build absolute URL
+                const newUrl = window.location.origin + window.location.pathname + '?' + urlParams.toString();
+                console.log('Redirecionando para:', newUrl);
+                
+                window.location.href = newUrl;
             } else {
                 console.error('Nenhuma data selecionada para escolher horário');
                 alert('Por favor, selecione uma data primeiro.');
