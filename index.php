@@ -8,7 +8,17 @@ try {
         throw new Exception("DATABASE_URL not found");
     }
     
-    $pdo = new PDO($database_url);
+    // Parse DATABASE_URL to build proper PostgreSQL DSN
+    $url_parts = parse_url($database_url);
+    $host = $url_parts['host'];
+    $port = isset($url_parts['port']) ? $url_parts['port'] : 5432;
+    $dbname = ltrim($url_parts['path'], '/');
+    $user = $url_parts['user'];
+    $password = $url_parts['pass'];
+    
+    // Build PostgreSQL DSN
+    $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
+    $pdo = new PDO($dsn, $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch(PDOException $e) {
     // Log the error for debugging (in production, log to file)
