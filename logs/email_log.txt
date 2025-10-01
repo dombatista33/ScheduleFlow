@@ -27,3 +27,5 @@
 2025-09-29 22:22:41 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
 2025-09-30 12:46:36 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Lembrete: Sua consulta é amanhã - Terapia e Bem Estar
 2025-09-30 12:46:37 | SUCCESS | TO: ana.silva.teste@gmail.com | SUBJECT: Lembrete: Sua consulta é amanhã - Terapia e Bem Estar
+2025-10-01 01:01:36 | FAILED | ReplitEmail | TO: contato@digital9.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-01 01:01:37 | SUCCESS | TO: contato@digital9.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
