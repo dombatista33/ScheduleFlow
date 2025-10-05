@@ -57,7 +57,7 @@ try {
         <h3 style="margin: 0 0 0.5rem 0; color: #333;">📱 Como Entrar nas Consultas pelo Celular?</h3>
         <p style="margin: 0; color: #555;">Acesse o tutorial completo sobre como usar o Google Meet no celular para suas consultas online.</p>
     </div>
-    <a href="admin/google_meet_guide.php" target="_blank" style="background: white; color: #333; padding: 0.75rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: 600; white-space: nowrap; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+    <a href="/admin/google_meet_guide.php" target="_blank" style="background: white; color: #333; padding: 0.75rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: 600; white-space: nowrap; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: all 0.3s ease;">
         Ver Tutorial Completo →
     </a>
 </div>
