@@ -1,4 +1,6 @@
 <?php
+global $pdo;
+
 // Database-based admin authentication check
 if (!isset($_SESSION['admin_logged_in'])) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

@@ -1,4 +1,6 @@
 <?php
+global $pdo;
+
 // Handle appointment status updates
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {
     $appointment_id = $_POST['appointment_id'];
