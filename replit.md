@@ -18,14 +18,20 @@ Preferred communication style: Simple, everyday language.
 
 ### Backend Architecture
 - **Server Technology**: PHP for server-side processing and business logic
-- **Database**: MySQL with dedicated database `terapiae_terapia` for data persistence
+- **Database**: PostgreSQL (Replit-hosted) for data persistence
 - **Session Management**: Standard PHP sessions for user state management
 - **Form Processing**: Server-side validation and sanitization of user inputs
+- **Automated Tasks**: Daily cron-like workflow for sending appointment reminders via email
 
 ### Data Storage Solutions
-- **Primary Database**: MySQL database named `terapiae_terapia`
-- **Database Schema**: Designed to handle appointments, client information, service types, and availability schedules
-- **Data Security**: Secure credential management with dedicated database user access
+- **Primary Database**: PostgreSQL (Replit-hosted) with environment variable DATABASE_URL
+- **Database Schema**: Five main tables:
+  - `admin_users`: Administrator accounts with password hashing
+  - `appointments`: Scheduled therapy sessions with client and service references
+  - `clients`: Client information including contact details
+  - `services`: Available therapy services with pricing and duration
+  - `time_slots`: Available appointment slots by date and time
+- **Data Security**: Password hashing with bcrypt, secure credential management via environment variables
 
 ### Authentication and Authorization
 - **Admin Access**: Secure login system for Dr. Daniela Lima to access administrative panel
@@ -38,6 +44,8 @@ Preferred communication style: Simple, everyday language.
 - **Client Management**: Complete client information collection and storage
 - **Administrative Panel**: Backend interface for managing appointments, availability, and client data
 - **Confirmation System**: Automated booking confirmation with payment and virtual meeting room information
+- **Email Reminders**: Automated email reminder system that sends notifications 24 hours before appointments
+- **Google Meet Integration**: Complete tutorials for both clients and therapist on how to access online consultations via Google Meet on mobile devices
 
 ## External Dependencies
 
@@ -50,6 +58,14 @@ Preferred communication style: Simple, everyday language.
 - **Domain**: terapiaebemestar.com.br
 - **Hosting Environment**: PHP-enabled web server with MySQL database support
 
+## Recent Updates (October 2025)
+
+### Tutorial System for Google Meet
+- **Client Tutorial**: Created comprehensive step-by-step guide at `/index.php?page=google_meet_tutorial` teaching clients how to download Google Meet app, join consultations, and prepare for online sessions
+- **Professional Tutorial**: Created detailed guide at `/admin/google_meet_guide.php` for the therapist, covering how to create meetings, share links, manage sessions, and troubleshoot common issues on mobile devices
+- **Menu Integration**: Added "Primeira Consulta" button to all client-facing pages for easy access to the tutorial
+- **Admin Access**: Added highlighted tutorial button in the administrative dashboard for quick access by the therapist
+
 ### Frontend Libraries
 - **CSS Framework**: Custom CSS with CSS Grid and Flexbox for responsive layouts
 - **JavaScript**: Vanilla JavaScript for form validation, phone formatting, and calendar functionality
@@ -57,8 +73,11 @@ Preferred communication style: Simple, everyday language.
 
 ### Communication Features
 - **WhatsApp Integration**: Phone number collection formatted for WhatsApp communication
-- **Email System**: Contact form and appointment confirmation via email
-- **Virtual Meeting**: Integration capability for online therapy session links
+- **Email System**: SMTP-based email system for confirmations and automated 24-hour appointment reminders
+- **Virtual Meeting**: Google Meet platform for online therapy sessions with comprehensive tutorials
+- **Tutorial Pages**: 
+  - Client tutorial (`/index.php?page=google_meet_tutorial`) - Step-by-step guide for clients to join consultations via mobile
+  - Professional tutorial (`/admin/google_meet_guide.php`) - Complete guide for therapist to create and manage Google Meet sessions on mobile
 
 ### Security Considerations
 - **Input Validation**: Both client-side and server-side validation for all forms

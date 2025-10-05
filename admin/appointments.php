@@ -49,6 +49,17 @@ try {
 }
 ?>
 
+<!-- Tutorial Quick Access -->
+<div style="background: linear-gradient(135deg, #ADD8E6 0%, #87CEEB 100%); padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+    <div>
+        <h3 style="margin: 0 0 0.5rem 0; color: #333;">📱 Como Entrar nas Consultas pelo Celular?</h3>
+        <p style="margin: 0; color: #555;">Acesse o tutorial completo sobre como usar o Google Meet no celular para suas consultas online.</p>
+    </div>
+    <a href="admin/google_meet_guide.php" target="_blank" style="background: white; color: #333; padding: 0.75rem 1.5rem; border-radius: 25px; text-decoration: none; font-weight: 600; white-space: nowrap; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+        Ver Tutorial Completo →
+    </a>
+</div>
+
 <section class="card">
     <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Gerenciar Agendamentos</h2>
     
