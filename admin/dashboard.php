@@ -66,7 +66,11 @@ $action = $_GET['action'] ?? 'appointments';
 
     <main class="main">
         <div class="container">
-            <nav class="admin-nav">
+            <button class="admin-menu-toggle" id="adminMenuToggle" aria-label="Abrir menu de navegação">
+                ☰ Menu
+            </button>
+            
+            <nav class="admin-nav" id="adminNav">
                 <a href="/index.php?page=admin&action=appointments" class="<?= $action === 'appointments' ? 'active' : '' ?>">Agendamentos</a>
                 <a href="/index.php?page=admin&action=calendar" class="<?= $action === 'calendar' ? 'active' : '' ?>">Gerenciar Agenda</a>
                 <a href="/index.php?page=admin&action=clients" class="<?= $action === 'clients' ? 'active' : '' ?>">Clientes</a>
@@ -105,5 +109,37 @@ $action = $_GET['action'] ?? 'appointments';
             <p>&copy; 2024 Terapia e Bem Estar - Painel Administrativo</p>
         </div>
     </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('adminMenuToggle');
+            const adminNav = document.getElementById('adminNav');
+            
+            if (menuToggle && adminNav) {
+                menuToggle.addEventListener('click', function() {
+                    adminNav.classList.toggle('is-open');
+                    
+                    if (adminNav.classList.contains('is-open')) {
+                        menuToggle.textContent = '✕ Fechar';
+                        menuToggle.setAttribute('aria-expanded', 'true');
+                    } else {
+                        menuToggle.textContent = '☰ Menu';
+                        menuToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+                
+                const navLinks = adminNav.querySelectorAll('a');
+                navLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        if (window.innerWidth < 768) {
+                            adminNav.classList.remove('is-open');
+                            menuToggle.textContent = '☰ Menu';
+                            menuToggle.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>

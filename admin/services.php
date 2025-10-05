@@ -167,20 +167,20 @@ if (isset($_GET['edit'])) {
                 <tbody>
                     <?php foreach($services as $service): ?>
                         <tr>
-                            <td>
+                            <td data-label="Serviço">
                                 <strong><?= htmlspecialchars($service['name']) ?></strong>
                                 <?php if ($service['description']): ?>
                                     <br><small style="color: var(--text-light);"><?= htmlspecialchars($service['description']) ?></small>
                                 <?php endif; ?>
                             </td>
-                            <td><?= $service['duration'] ?> min</td>
-                            <td>R$ <?= number_format($service['price'], 2, ',', '.') ?></td>
-                            <td style="text-align: center;"><?= $service['total_appointments'] ?></td>
-                            <td style="text-align: center;"><?= $service['completed_appointments'] ?></td>
-                            <td>R$ <?= number_format($service['total_revenue'], 2, ',', '.') ?></td>
-                            <td style="white-space: nowrap;">
+                            <td data-label="Duração"><?= $service['duration'] ?> min</td>
+                            <td data-label="Preço">R$ <?= number_format($service['price'], 2, ',', '.') ?></td>
+                            <td data-label="Agendamentos" style="text-align: center;"><?= $service['total_appointments'] ?></td>
+                            <td data-label="Concluídos" style="text-align: center;"><?= $service['completed_appointments'] ?></td>
+                            <td data-label="Receita Total">R$ <?= number_format($service['total_revenue'], 2, ',', '.') ?></td>
+                            <td data-label="Ações" style="white-space: nowrap;">
                                 <a href="index.php?page=admin&action=services&edit=<?= $service['id'] ?>" 
-                                   style="color: var(--primary-color); text-decoration: none; margin-right: 1rem;">
+                                   class="btn-small" style="color: var(--primary-color); text-decoration: none; margin-right: 1rem;">
                                     Editar
                                 </a>
                                 
@@ -189,7 +189,7 @@ if (isset($_GET['edit'])) {
                                           onsubmit="return confirm('Tem certeza que deseja excluir este serviço?')">
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="service_id" value="<?= $service['id'] ?>">
-                                        <button type="submit" style="background: none; border: none; color: var(--warning-color); cursor: pointer;">
+                                        <button type="submit" class="btn-small" style="background: none; border: none; color: var(--warning-color); cursor: pointer;">
                                             Excluir
                                         </button>
                                     </form>

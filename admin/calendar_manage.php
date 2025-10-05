@@ -106,21 +106,21 @@ $times = ['09:00:00', '10:00:00', '11:00:00', '12:00:00', '13:00:00', '14:00:00'
     <?php endif; ?>
     
     <!-- Week Navigation -->
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; gap: 1rem; flex-wrap: wrap;">
         <a href="index.php?page=admin&action=calendar&week=<?= date('Y-m-d', strtotime('-1 week', strtotime($week_start))) ?>" 
-           class="btn btn-secondary">← Semana Anterior</a>
+           class="btn btn-secondary" style="flex: 0 0 auto;">← Semana Anterior</a>
         
-        <h3 style="margin: 0; color: var(--primary-color);">
+        <h3 style="margin: 0; color: var(--primary-color); flex: 1 1 auto; text-align: center; min-width: 200px;">
             <?= date('d/m/Y', strtotime($week_start)) ?> - <?= date('d/m/Y', strtotime($week_end)) ?>
         </h3>
         
         <a href="index.php?page=admin&action=calendar&week=<?= date('Y-m-d', strtotime('+1 week', strtotime($week_start))) ?>" 
-           class="btn btn-secondary">Próxima Semana →</a>
+           class="btn btn-secondary" style="flex: 0 0 auto;">Próxima Semana →</a>
     </div>
     
     <!-- Weekly Calendar -->
-    <div style="overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 2rem;">
+    <div class="calendar-week-view" style="overflow-x: auto;">
+        <table class="calendar-time-grid" style="width: 100%; border-collapse: collapse; margin-bottom: 2rem;">
             <thead>
                 <tr style="background: var(--primary-color); color: white;">
                     <th style="padding: 1rem; text-align: left;">Horário</th>

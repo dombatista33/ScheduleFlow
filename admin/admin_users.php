@@ -237,21 +237,21 @@ if (isset($_GET['edit'])) {
                 <tbody>
                     <?php foreach($admin_users as $user): ?>
                         <tr>
-                            <td>
+                            <td data-label="Usuário">
                                 <strong><?= htmlspecialchars($user['username']) ?></strong>
                                 <?php if ($user['id'] == $_SESSION['admin_id']): ?>
                                     <br><small style="color: var(--primary-color);">(Você)</small>
                                 <?php endif; ?>
                             </td>
-                            <td><?= htmlspecialchars($user['full_name']) ?></td>
-                            <td><?= htmlspecialchars($user['email']) ?></td>
-                            <td><?= date('d/m/Y H:i', strtotime($user['created_at'])) ?></td>
-                            <td>
+                            <td data-label="Nome Completo"><?= htmlspecialchars($user['full_name']) ?></td>
+                            <td data-label="Email"><?= htmlspecialchars($user['email']) ?></td>
+                            <td data-label="Criado em"><?= date('d/m/Y H:i', strtotime($user['created_at'])) ?></td>
+                            <td data-label="Status">
                                 <span style="color: var(--success-color); font-weight: bold;">Ativo</span>
                             </td>
-                            <td style="white-space: nowrap;">
+                            <td data-label="Ações" style="white-space: nowrap;">
                                 <a href="index.php?page=admin&action=admin_users&edit=<?= $user['id'] ?>" 
-                                   style="color: var(--primary-color); text-decoration: none; margin-right: 1rem;">
+                                   class="btn-small" style="color: var(--primary-color); text-decoration: none; margin-right: 1rem;">
                                     Editar
                                 </a>
                                 
@@ -260,7 +260,7 @@ if (isset($_GET['edit'])) {
                                           onsubmit="return confirm('ATENÇÃO: Tem certeza que deseja excluir este usuário administrativo? Esta ação não pode ser desfeita.')">
                                         <input type="hidden" name="action" value="delete">
                                         <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
-                                        <button type="submit" style="background: none; border: none; color: var(--warning-color); cursor: pointer;">
+                                        <button type="submit" class="btn-small" style="background: none; border: none; color: var(--warning-color); cursor: pointer;">
                                             Excluir
                                         </button>
                                     </form>

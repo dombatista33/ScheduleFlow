@@ -47,10 +47,10 @@ try {
                 <tbody>
                     <?php foreach($clients as $client): ?>
                         <tr>
-                            <td>
+                            <td data-label="Cliente">
                                 <strong><?= htmlspecialchars($client['full_name']) ?></strong>
                             </td>
-                            <td>
+                            <td data-label="Contato">
                                 <div><?= htmlspecialchars($client['email']) ?></div>
                                 <div>
                                     <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $client['whatsapp']) ?>" target="_blank" style="color: var(--primary-color);">
@@ -58,25 +58,25 @@ try {
                                     </a>
                                 </div>
                             </td>
-                            <td style="text-align: center;">
+                            <td data-label="Total de Consultas" style="text-align: center;">
                                 <?= $client['total_appointments'] ?>
                             </td>
-                            <td>
+                            <td data-label="Última Consulta">
                                 <?php if ($client['last_appointment']): ?>
                                     <?= date('d/m/Y', strtotime($client['last_appointment'])) ?>
                                 <?php else: ?>
                                     <span style="color: var(--text-light);">Nunca</span>
                                 <?php endif; ?>
                             </td>
-                            <td style="text-align: right;">
+                            <td data-label="Total Gasto" style="text-align: right;">
                                 R$ <?= number_format($client['total_spent'], 2, ',', '.') ?>
                             </td>
-                            <td>
+                            <td data-label="Cadastro">
                                 <?= date('d/m/Y', strtotime($client['created_at'])) ?>
                             </td>
-                            <td>
+                            <td data-label="Ações">
                                 <a href="index.php?page=admin&action=appointments&filter_client=<?= $client['id'] ?>" 
-                                   style="color: var(--primary-color); text-decoration: none; font-size: 0.9rem;">
+                                   class="btn-small" style="color: var(--primary-color); text-decoration: none; font-size: 0.9rem;">
                                     Ver Agendamentos
                                 </a>
                             </td>

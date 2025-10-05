@@ -115,24 +115,24 @@ try {
                 <tbody>
                     <?php foreach($appointments as $apt): ?>
                         <tr>
-                            <td>
+                            <td data-label="Data/Hora">
                                 <?= date('d/m/Y', strtotime($apt['appointment_date'])) ?><br>
                                 <small><?= date('H:i', strtotime($apt['appointment_time'])) ?></small>
                             </td>
-                            <td>
+                            <td data-label="Cliente">
                                 <strong><?= htmlspecialchars($apt['full_name']) ?></strong><br>
                                 <small><?= htmlspecialchars($apt['email']) ?></small>
                             </td>
-                            <td>
+                            <td data-label="Serviço">
                                 <?= htmlspecialchars($apt['service_name']) ?><br>
                                 <small><?= $apt['duration'] ?> min</small>
                             </td>
-                            <td>
+                            <td data-label="Contato">
                                 <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $apt['whatsapp']) ?>" target="_blank" style="color: var(--primary-color);">
                                     <?= htmlspecialchars($apt['whatsapp']) ?>
                                 </a>
                             </td>
-                            <td>
+                            <td data-label="Status">
                                 <span class="status-badge status-<?= $apt['status'] ?>">
                                     <?php
                                     $status_labels = [
@@ -145,11 +145,11 @@ try {
                                     ?>
                                 </span>
                             </td>
-                            <td>R$ <?= number_format($apt['price'], 2, ',', '.') ?></td>
-                            <td>
+                            <td data-label="Valor">R$ <?= number_format($apt['price'], 2, ',', '.') ?></td>
+                            <td data-label="Ações">
                                 <form method="POST" style="display: inline;">
                                     <input type="hidden" name="appointment_id" value="<?= $apt['id'] ?>">
-                                    <select name="status" onchange="this.form.submit()" style="padding: 0.3rem; font-size: 0.8rem;">
+                                    <select name="status" onchange="this.form.submit()" style="padding: 0.3rem; font-size: 0.8rem;" class="btn-small">
                                         <option value="pending" <?= $apt['status'] === 'pending' ? 'selected' : '' ?>>Pendente</option>
                                         <option value="confirmed" <?= $apt['status'] === 'confirmed' ? 'selected' : '' ?>>Confirmado</option>
                                         <option value="cancelled" <?= $apt['status'] === 'cancelled' ? 'selected' : '' ?>>Cancelado</option>

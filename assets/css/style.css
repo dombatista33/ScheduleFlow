@@ -1073,3 +1073,326 @@ body {
     background-color: rgba(139, 154, 139, 0.2);
     color: var(--primary-color);
 }
+
+/* ============================================ */
+/* RESPONSIVE ADMIN PANEL STYLES */
+/* ============================================ */
+
+/* Hamburger menu button - hidden by default on desktop */
+.admin-menu-toggle {
+    display: none;
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.admin-menu-toggle:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Admin navigation wrapper */
+.admin-nav-wrapper {
+    position: relative;
+}
+
+/* Responsive tables for admin panel */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 1rem 0;
+}
+
+/* Action buttons in tables */
+.admin-table .btn-small {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    margin: 0.2rem;
+    display: inline-block;
+}
+
+/* Form grid for admin forms */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-grid-full {
+    grid-column: 1 / -1;
+}
+
+/* Calendar responsive styles for admin */
+.calendar-week-view {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.calendar-time-grid {
+    display: grid;
+    grid-template-columns: 80px repeat(7, minmax(100px, 1fr));
+    gap: 5px;
+    min-width: 800px;
+}
+
+/* Stats cards for dashboard */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.stat-card {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    border-left: 4px solid var(--primary-color);
+}
+
+.stat-card h4 {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.stat-card .stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+/* ============================================ */
+/* TABLET RESPONSIVE (768px - 1023px) */
+/* ============================================ */
+@media (max-width: 1023px) {
+    .admin-nav {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .admin-nav a {
+        font-size: 0.9rem;
+        padding: 0.6rem 0.8rem;
+    }
+    
+    .admin-table th,
+    .admin-table td {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .form-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+    
+    .calendar-time-grid {
+        grid-template-columns: 60px repeat(7, minmax(80px, 1fr));
+        gap: 3px;
+        font-size: 0.85rem;
+    }
+}
+
+/* ============================================ */
+/* MOBILE RESPONSIVE (< 768px) */
+/* ============================================ */
+@media (max-width: 767px) {
+    /* Show hamburger menu button on mobile */
+    .admin-menu-toggle {
+        display: block !important;
+        width: 100%;
+    }
+    
+    /* Hide admin navigation by default on mobile */
+    .admin-nav {
+        display: none !important;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-top: 1rem;
+        background: var(--white);
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    /* Show navigation when active */
+    .admin-nav.is-open {
+        display: flex !important;
+    }
+    
+    .admin-nav a {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+        font-size: 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+    }
+    
+    /* Responsive table for mobile - card layout */
+    .admin-table {
+        display: block;
+        overflow-x: auto;
+    }
+    
+    .admin-table thead {
+        display: none;
+    }
+    
+    .admin-table tbody {
+        display: block;
+    }
+    
+    .admin-table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        overflow: hidden;
+        background: var(--white);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    
+    .admin-table td {
+        display: block;
+        text-align: right;
+        padding: 0.8rem 1rem;
+        border-bottom: 1px solid var(--border-color);
+        position: relative;
+        padding-left: 50%;
+    }
+    
+    .admin-table td:last-child {
+        border-bottom: none;
+    }
+    
+    .admin-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 1rem;
+        font-weight: bold;
+        text-align: left;
+        color: var(--primary-color);
+    }
+    
+    /* Action buttons stack vertically on mobile */
+    .admin-table td .btn-small {
+        display: block;
+        width: 100%;
+        margin: 0.3rem 0;
+        text-align: center;
+    }
+    
+    /* Form adjustments for mobile */
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea,
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"],
+    input[type="date"],
+    input[type="time"],
+    select,
+    textarea {
+        font-size: 16px !important; /* Prevents zoom on iOS */
+        min-height: 44px !important; /* Touch-friendly size */
+        padding: 0.75rem !important;
+    }
+    
+    .btn,
+    button[type="submit"],
+    a.btn {
+        width: 100%;
+        padding: 1rem !important;
+        font-size: 16px !important;
+        min-height: 44px !important;
+        margin-bottom: 0.5rem;
+    }
+    
+    /* Ensure small buttons are also touch-friendly */
+    .btn-small,
+    .admin-table select,
+    .admin-table button {
+        min-height: 44px !important;
+        font-size: 16px !important;
+        padding: 0.75rem !important;
+    }
+    
+    /* Calendar mobile layout */
+    .calendar-time-grid {
+        display: block;
+        min-width: 100%;
+    }
+    
+    .calendar-week-view {
+        overflow-x: visible;
+    }
+    
+    /* Stats grid mobile */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    /* Header adjustments for mobile */
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .admin-header .header-content h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* ============================================ */
+/* SMALL MOBILE (< 480px) */
+/* ============================================ */
+@media (max-width: 479px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .card {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .admin-header .header-content h1 {
+        font-size: 1.3rem;
+    }
+    
+    .admin-table td {
+        padding: 0.6rem 0.8rem;
+        padding-left: 45%;
+        font-size: 0.9rem;
+    }
+    
+    .admin-table td::before {
+        font-size: 0.85rem;
+        left: 0.8rem;
+    }
+    
+    .stat-card .stat-number {
+        font-size: 1.5rem;
+    }
+    
+    .form-group label {
+        font-size: 0.9rem;
+    }
+}
