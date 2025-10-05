@@ -27,7 +27,7 @@ if (!isset($_SESSION['admin_logged_in'])) {
     }
     
     // Show login form
-    include 'admin/login.php';
+    include __DIR__ . '/login.php';
     return;
 }
 
