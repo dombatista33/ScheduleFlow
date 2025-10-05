@@ -103,6 +103,11 @@
                         <div style="padding: 1rem; border-left: 4px solid var(--accent-color); background: rgba(212, 185, 150, 0.05);">
                             <h3 style="color: var(--earth-tone); margin-bottom: 0.5rem;">3. Preparação</h3>
                             <p>Certifique-se de ter uma conexão estável e um ambiente tranquilo para a consulta.</p>
+                            <p style="margin-top: 0.5rem;">
+                                <a href="index.php?page=google_meet_tutorial" style="color: var(--primary-color); font-weight: bold; text-decoration: underline;">
+                                    📱 Ver guia completo: Como acessar a consulta online
+                                </a>
+                            </p>
                         </div>
                     </div>
                 </section>
@@ -127,6 +132,11 @@
                     <p style="color: var(--text-light); font-size: 0.9rem;">
                         <strong>Dica:</strong> Teste sua câmera e microfone antes da consulta. Certifique-se de ter uma conexão estável com a internet.
                     </p>
+                    <div style="text-align: center; margin-top: 1.5rem;">
+                        <a href="index.php?page=google_meet_tutorial" class="btn" style="display: inline-block;">
+                            📱 Como Acessar a Consulta Online
+                        </a>
+                    </div>
                 </section>
 
                 <!-- Important Notes -->
