@@ -48,6 +48,9 @@ switch($page) {
     case 'confirmation':
         include 'pages/confirmation.php';
         break;
+    case 'google_meet_tutorial':
+        include 'pages/google_meet_tutorial.php';
+        break;
     case 'admin':
         include 'admin/dashboard.php';
         break;
