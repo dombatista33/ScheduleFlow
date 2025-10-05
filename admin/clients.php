@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/config.php';
+
 // Get clients with their appointment counts
 try {
     $stmt = $pdo->query("

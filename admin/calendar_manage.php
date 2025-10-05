@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/config.php';
+
 // Handle time slot updates
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['block_slots'])) {

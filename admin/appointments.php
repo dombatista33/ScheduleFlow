@@ -1,5 +1,5 @@
 <?php
-global $pdo;
+require_once __DIR__ . '/config.php';
 
 // Handle appointment status updates
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_status'])) {

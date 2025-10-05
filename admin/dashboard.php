@@ -1,5 +1,5 @@
 <?php
-global $pdo;
+require_once __DIR__ . '/config.php';
 
 // Database-based admin authentication check
 if (!isset($_SESSION['admin_logged_in'])) {
