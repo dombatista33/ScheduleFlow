@@ -49,7 +49,7 @@ $action = $_GET['action'] ?? 'appointments';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Administrativo - Dra. Daniela Lima</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
     <header class="admin-header">
@@ -79,22 +79,22 @@ $action = $_GET['action'] ?? 'appointments';
             <?php
             switch($action) {
                 case 'appointments':
-                    include 'admin/appointments.php';
+                    include __DIR__ . '/appointments.php';
                     break;
                 case 'calendar':
-                    include 'admin/calendar_manage.php';
+                    include __DIR__ . '/calendar_manage.php';
                     break;
                 case 'clients':
-                    include 'admin/clients.php';
+                    include __DIR__ . '/clients.php';
                     break;
                 case 'services':
-                    include 'admin/services.php';
+                    include __DIR__ . '/services.php';
                     break;
                 case 'admin_users':
-                    include 'admin/admin_users.php';
+                    include __DIR__ . '/admin_users.php';
                     break;
                 default:
-                    include 'admin/appointments.php';
+                    include __DIR__ . '/appointments.php';
             }
             ?>
         </div>
