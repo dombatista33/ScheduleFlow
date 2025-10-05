@@ -58,7 +58,7 @@ $action = $_GET['action'] ?? 'appointments';
                 <h1 style="color: white; margin: 0;">Painel Administrativo</h1>
                 <div>
                     <span style="color: #ccc;">Olá, <?= htmlspecialchars($_SESSION['admin_name'] ?? 'Administrador') ?></span>
-                    <a href="index.php?page=admin&logout=1" style="color: white; margin-left: 1rem; text-decoration: none;">[Sair]</a>
+                    <a href="/index.php?page=admin&logout=1" style="color: white; margin-left: 1rem; text-decoration: none;">[Sair]</a>
                 </div>
             </div>
         </div>
@@ -67,11 +67,11 @@ $action = $_GET['action'] ?? 'appointments';
     <main class="main">
         <div class="container">
             <nav class="admin-nav">
-                <a href="index.php?page=admin&action=appointments" class="<?= $action === 'appointments' ? 'active' : '' ?>">Agendamentos</a>
-                <a href="index.php?page=admin&action=calendar" class="<?= $action === 'calendar' ? 'active' : '' ?>">Gerenciar Agenda</a>
-                <a href="index.php?page=admin&action=clients" class="<?= $action === 'clients' ? 'active' : '' ?>">Clientes</a>
-                <a href="index.php?page=admin&action=services" class="<?= $action === 'services' ? 'active' : '' ?>">Serviços</a>
-                <a href="index.php?page=admin&action=admin_users" class="<?= $action === 'admin_users' ? 'active' : '' ?>">Usuários Admin</a>
+                <a href="/index.php?page=admin&action=appointments" class="<?= $action === 'appointments' ? 'active' : '' ?>">Agendamentos</a>
+                <a href="/index.php?page=admin&action=calendar" class="<?= $action === 'calendar' ? 'active' : '' ?>">Gerenciar Agenda</a>
+                <a href="/index.php?page=admin&action=clients" class="<?= $action === 'clients' ? 'active' : '' ?>">Clientes</a>
+                <a href="/index.php?page=admin&action=services" class="<?= $action === 'services' ? 'active' : '' ?>">Serviços</a>
+                <a href="/index.php?page=admin&action=admin_users" class="<?= $action === 'admin_users' ? 'active' : '' ?>">Usuários Admin</a>
                 <a href="/admin/google_meet_guide.php" target="_blank" style="background: #ADD8E6; color: #333;">📱 Tutorial Google Meet</a>
                 <a href="/" target="_blank">Ver Site</a>
             </nav>
