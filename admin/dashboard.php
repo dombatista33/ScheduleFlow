@@ -73,7 +73,7 @@ $action = $_GET['action'] ?? 'appointments';
                 <a href="index.php?page=admin&action=services" class="<?= $action === 'services' ? 'active' : '' ?>">Serviços</a>
                 <a href="index.php?page=admin&action=admin_users" class="<?= $action === 'admin_users' ? 'active' : '' ?>">Usuários Admin</a>
                 <a href="/admin/google_meet_guide.php" target="_blank" style="background: #ADD8E6; color: #333;">📱 Tutorial Google Meet</a>
-                <a href="index.php" target="_blank">Ver Site</a>
+                <a href="/" target="_blank">Ver Site</a>
             </nav>
 
             <?php
