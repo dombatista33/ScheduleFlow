@@ -15,6 +15,7 @@
                     <a href="index.php">Início</a>
                     <a href="index.php?page=services" class="active">Serviços</a>
                     <a href="index.php?page=calendar">Agendar</a>
+                    <a href="index.php?page=google_meet_tutorial">Primeira Consulta</a>
                 </nav>
             </div>
         </div>
