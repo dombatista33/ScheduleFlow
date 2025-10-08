@@ -226,37 +226,76 @@ global $pdo;
 
     <main class="main">
         <div class="container">
+            <!-- Progress Indicator -->
+            <div style="max-width: 800px; margin: 2rem auto 3rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+                    <div style="position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: var(--success-color); z-index: 0;"></div>
+                    
+                    <div style="display: flex; flex-direction: column; align-items: center; z-index: 1;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--success-color); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 0.5rem;">✓</div>
+                        <span style="font-size: 0.85rem; color: var(--success-color);">Horário</span>
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column; align-items: center; z-index: 1;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 0.5rem;">2</div>
+                        <span style="font-size: 0.85rem; font-weight: 600; color: var(--primary-color);">Seus Dados</span>
+                    </div>
+                    
+                    <div style="display: flex; flex-direction: column; align-items: center; z-index: 1;">
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: #e0e0e0; color: #999; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 0.5rem;">3</div>
+                        <span style="font-size: 0.85rem; color: #999;">Confirmação</span>
+                    </div>
+                </div>
+            </div>
+
             <section class="hero">
-                <h1>Finalizar Agendamento</h1>
-                <p class="subtitle">Selecione o serviço e preencha seus dados para confirmar o agendamento</p>
+                <h1 style="color: var(--primary-color); font-size: 2rem; margin-bottom: 0.5rem;">✨ Falta pouco! Precisamos conhecê-lo melhor</h1>
+                <p class="subtitle" style="color: var(--text-light); font-size: 1.1rem;">Preencha suas informações para finalizarmos seu agendamento</p>
             </section>
 
-            <div style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
-                <!-- Appointment Summary -->
-                <section class="card">
-                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Resumo do Agendamento</h2>
-                    <div style="background: rgba(139, 154, 139, 0.1); padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem;">
-                        <p><strong>Data:</strong> <?= date('d/m/Y', strtotime($selected_date)) ?></p>
-                        <p><strong>Horário:</strong> <?= date('H:i', strtotime($selected_time)) ?></p>
-                        <p><em>Selecione um serviço abaixo para ver duração e valor</em></p>
+            <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1000px; margin: 0 auto;">
+                <!-- Appointment Summary Card -->
+                <section class="card" style="background: linear-gradient(135deg, rgba(139, 154, 139, 0.1), rgba(173, 216, 230, 0.1)); border: 2px solid var(--success-color);">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                        <div style="width: 50px; height: 50px; background: var(--success-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">✓</div>
+                        <div>
+                            <h2 style="color: var(--success-color); margin: 0; font-size: 1.2rem;">Horário Reservado</h2>
+                            <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">Seu horário está garantido por 10 minutos</p>
+                        </div>
+                    </div>
+                    <div style="background: white; padding: 1.5rem; border-radius: 10px;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                            <div>
+                                <p style="margin: 0; color: var(--text-light); font-size: 0.85rem;">📅 Data</p>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 1.1rem; font-weight: 600; color: var(--text-dark);"><?= date('d/m/Y', strtotime($selected_date)) ?></p>
+                            </div>
+                            <div>
+                                <p style="margin: 0; color: var(--text-light); font-size: 0.85rem;">🕐 Horário</p>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 1.1rem; font-weight: 600; color: var(--text-dark);"><?= date('H:i', strtotime($selected_time)) ?></p>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
                 <!-- Booking Form -->
                 <section class="card">
-                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Dados do Agendamento</h2>
+                    <div style="border-left: 4px solid var(--primary-color); padding-left: 1rem; margin-bottom: 1.5rem;">
+                        <h2 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1.3rem;">Suas Informações</h2>
+                        <p style="color: var(--text-light); margin: 0;">Preencha seus dados para confirmarmos o agendamento</p>
+                    </div>
                     
                     <?php if ($error): ?>
-                        <div style="background: rgba(255, 138, 101, 0.2); color: var(--warning-color); padding: 1rem; border-radius: 10px; margin-bottom: 1rem;">
-                            <?= htmlspecialchars($error) ?>
+                        <div style="background: rgba(255, 138, 101, 0.2); color: var(--warning-color); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <span style="font-size: 1.2rem;">⚠️</span>
+                            <span><?= htmlspecialchars($error) ?></span>
                         </div>
                     <?php endif; ?>
                     
                     <form method="POST" action="">
                         <div class="form-group">
-                            <label for="service_id">Escolha o Serviço *</label>
+                            <label for="service_id">Qual tipo de consulta você precisa? *</label>
                             <select id="service_id" name="service_id" required onchange="updateServiceInfo()">
-                                <option value="">Selecione um serviço</option>
+                                <option value="">Escolha o serviço</option>
                                 <?php foreach($services as $svc): ?>
                                     <option value="<?= $svc['id'] ?>" 
                                             data-duration="<?= $svc['duration'] ?>" 
@@ -267,57 +306,92 @@ global $pdo;
                                     </option>
                                 <?php endforeach; ?>
                             </select>
-                            <div id="service-info" style="margin-top: 0.5rem; padding: 0.5rem; background: rgba(139, 154, 139, 0.05); border-radius: 5px; display: none;">
-                                <p id="service-description" style="margin: 0; font-size: 0.9rem; color: var(--text-light);"></p>
-                                <p id="service-details" style="margin: 0.5rem 0 0 0; font-size: 0.9rem;"><strong>Duração:</strong> <span id="service-duration"></span> min | <strong>Valor:</strong> R$ <span id="service-price"></span></p>
+                            <div id="service-info" style="margin-top: 0.75rem; padding: 1rem; background: rgba(173, 216, 230, 0.1); border-radius: 8px; border-left: 3px solid var(--accent-color); display: none;">
+                                <p id="service-description" style="margin: 0 0 0.5rem 0; font-size: 0.95rem; color: var(--text-dark);"></p>
+                                <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                                    <p style="margin: 0; font-size: 0.9rem;"><strong>⏱️ Duração:</strong> <span id="service-duration"></span> min</p>
+                                    <p style="margin: 0; font-size: 0.9rem;"><strong>💰 Investimento:</strong> R$ <span id="service-price"></span></p>
+                                </div>
                             </div>
                         </div>
                         
                         <div class="form-group">
-                            <label for="full_name">Nome Completo *</label>
+                            <label for="full_name">Como podemos chamá-lo? *</label>
                             <input type="text" id="full_name" name="full_name" required 
                                    value="<?= htmlspecialchars($_POST['full_name'] ?? '') ?>"
-                                   placeholder="Digite seu nome completo">
+                                   placeholder="Seu nome completo">
                         </div>
                         
                         <div class="form-group">
-                            <label for="email">E-mail *</label>
+                            <label for="email">Qual seu e-mail? *</label>
                             <input type="email" id="email" name="email" required 
                                    value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
-                                   placeholder="Digite seu e-mail">
+                                   placeholder="seu@email.com">
+                            <small style="color: var(--text-light); display: block; margin-top: 0.25rem;">📧 Enviaremos a confirmação por e-mail</small>
                         </div>
                         
                         <div class="form-group">
-                            <label for="whatsapp">WhatsApp (com DDD) *</label>
+                            <label for="whatsapp">WhatsApp para contato *</label>
                             <input type="tel" id="whatsapp" name="whatsapp" required 
                                    value="<?= htmlspecialchars($_POST['whatsapp'] ?? '') ?>"
                                    placeholder="(11) 99999-9999">
+                            <small style="color: var(--text-light); display: block; margin-top: 0.25rem;">📱 Usaremos apenas para confirmar sua consulta</small>
                         </div>
                         
                         <div class="form-group">
-                            <label for="notes">Observações (opcional)</label>
+                            <label for="notes">Algo que gostaria de compartilhar? (opcional)</label>
                             <textarea id="notes" name="notes" rows="4" 
-                                      placeholder="Descreva brevemente o motivo da consulta ou alguma informação importante"><?= htmlspecialchars($_POST['notes'] ?? '') ?></textarea>
+                                      placeholder="Pode nos contar brevemente o motivo da consulta ou alguma informação que considere importante"><?= htmlspecialchars($_POST['notes'] ?? '') ?></textarea>
                         </div>
                         
                         <div style="text-align: center; margin-top: 2rem;">
-                            <button type="submit" class="btn btn-large">Confirmar Agendamento</button>
+                            <button type="submit" class="btn btn-large" style="font-size: 1.1rem; padding: 1rem 2.5rem;">
+                                Confirmar Meu Agendamento →
+                            </button>
                         </div>
                     </form>
                 </section>
 
-                <!-- Payment Information -->
-                <section class="card">
-                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Informações de Pagamento</h2>
-                    <p>O pagamento pode ser realizado via:</p>
-                    <ul style="margin-left: 2rem; line-height: 1.8;">
-                        <li><strong>Pix:</strong> Chave será enviada por WhatsApp após confirmação</li>
-                        <li><strong>Transferência bancária:</strong> Dados bancários serão fornecidos</li>
-                        <li><strong>Cartão de crédito:</strong> Link de pagamento será enviado</li>
-                    </ul>
-                    <p style="margin-top: 1rem; color: var(--text-light); font-size: 0.9rem;">
-                        <strong>Importante:</strong> O pagamento deve ser realizado até 24 horas antes da consulta para garantir a confirmação do agendamento.
-                    </p>
+                <!-- Payment Information - Redesigned -->
+                <section class="card" style="background: linear-gradient(to bottom, rgba(173, 216, 230, 0.08), white); border: 1px solid rgba(173, 216, 230, 0.3);">
+                    <div style="border-left: 4px solid var(--accent-color); padding-left: 1rem; margin-bottom: 1.5rem;">
+                        <h2 style="color: var(--accent-color); margin-bottom: 0.5rem; font-size: 1.3rem;">💳 Como Funciona o Pagamento?</h2>
+                        <p style="color: var(--text-light); margin: 0;">É simples e seguro!</p>
+                    </div>
+
+                    <div style="background: white; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                        <h3 style="color: var(--text-dark); font-size: 1.1rem; margin-bottom: 1rem;">Opções Disponíveis:</h3>
+                        <div style="display: grid; gap: 1rem;">
+                            <div style="display: flex; align-items: start; gap: 1rem; padding: 1rem; background: rgba(139, 154, 139, 0.05); border-radius: 8px;">
+                                <span style="font-size: 1.5rem;">🔄</span>
+                                <div>
+                                    <p style="margin: 0 0 0.25rem 0; font-weight: 600; color: var(--text-dark);">Pix (Recomendado)</p>
+                                    <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">Chave Pix enviada por WhatsApp após confirmação</p>
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; align-items: start; gap: 1rem; padding: 1rem; background: rgba(139, 154, 139, 0.05); border-radius: 8px;">
+                                <span style="font-size: 1.5rem;">🏦</span>
+                                <div>
+                                    <p style="margin: 0 0 0.25rem 0; font-weight: 600; color: var(--text-dark);">Transferência Bancária</p>
+                                    <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">Dados bancários fornecidos por e-mail</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Important Notice -->
+                    <div style="background: rgba(173, 216, 230, 0.15); border-left: 4px solid var(--accent-color); padding: 1.25rem; border-radius: 8px;">
+                        <div style="display: flex; align-items: start; gap: 0.75rem;">
+                            <span style="font-size: 1.3rem;">💡</span>
+                            <div>
+                                <p style="margin: 0 0 0.5rem 0; font-weight: 600; color: var(--text-dark); font-size: 1rem;">Prazo para Pagamento</p>
+                                <p style="margin: 0; color: var(--text-dark); line-height: 1.6; font-size: 0.95rem;">
+                                    Para garantir sua vaga, o pagamento deve ser realizado <strong>até 24 horas antes</strong> da consulta. Você receberá todas as instruções por e-mail e WhatsApp logo após a confirmação.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </div>
         </div>

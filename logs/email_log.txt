@@ -35,3 +35,9 @@
 2025-10-03 12:06:09 | SUCCESS | TO: hamilton.rossiter@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
 2025-10-05 14:47:57 | SUCCESS | TO: contato@digital9.com.br | SUBJECT: Lembrete: Sua consulta é amanhã - Terapia e Bem Estar
 2025-10-05 14:47:58 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Lembrete: Sua consulta é amanhã - Terapia e Bem Estar
+2025-10-08 18:43:54 | FAILED | ReplitEmail | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-08 18:43:55 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-08 18:46:28 | FAILED | ReplitEmail | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-08 18:46:29 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-08 18:47:44 | FAILED | ReplitEmail | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-08 18:47:45 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
