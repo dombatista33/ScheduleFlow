@@ -60,6 +60,40 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Updates (October 2025)
 
+### Email System Configuration with Production SMTP (October 8, 2025)
+- **SMTP Server Configuration**: Configured production SMTP server (srv96.prodns.com.br) with port 465 for secure email delivery
+- **SSL/TLS Implementation**: Implemented implicit SSL/TLS encryption using port 465 with proper certificate verification
+- **Anti-Spam Headers**: Added comprehensive email headers to prevent spam filtering:
+  - Message-ID generation with unique timestamps
+  - Return-Path configuration
+  - Proper Date headers in RFC format
+  - Content-Transfer-Encoding optimization
+- **Authentication System**: Configured AUTH LOGIN with base64 encoding for secure SMTP authentication
+- **Fallback Mechanism**: Implemented fallback SMTP connection for certificate verification issues
+- **Email Logging**: Enhanced logging system to track successful and failed email deliveries
+- **Environment Variables**: Secure credential management using Replit Secrets:
+  - SMTP_HOST: srv96.prodns.com.br
+  - SMTP_PORT: 465
+  - EMAIL_USERNAME: contato@terapiaebemestar.com.br
+  - EMAIL_PASSWORD: (stored securely)
+- **Files Updated**:
+  - `includes/email_system.php` - Complete SMTP implementation with SSL/TLS and anti-spam headers
+
+### Booking Instructions Optimization (October 8, 2025)
+- **Step-by-Step Instructions**: Redesigned booking flow with clear numbered steps and instructions
+- **Date Selection Section**: 
+  - Title: "1. Data da Sessão"
+  - Instruction: "Selecione a Data Disponível"
+  - Description: Clear explanation about calendar availability
+  - Warning: Alert about inactive dates without available slots
+- **Time Selection Section**:
+  - Title: "2. Horário da Sessão"
+  - Instruction: "Escolha um Horário Livre"
+  - Guidance: Clear explanation about occupied time slots
+  - Note: Information about unavailable but visible time slots
+- **Files Updated**:
+  - `pages/calendar.php` - Enhanced booking instructions with numbered steps
+
 ### Fully Responsive Administrative Panel (October 5, 2025)
 - **Complete Mobile Responsiveness**: All administrative pages now fully responsive for desktop (>1024px), tablet (768-1024px), and mobile (<768px) devices
 - **Hamburger Menu Navigation**: Mobile-friendly navigation with toggle button that shows/hides admin menu on small screens

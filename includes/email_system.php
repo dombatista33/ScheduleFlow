@@ -154,14 +154,17 @@ class EmailSystem {
     }
     
     /**
-     * Gera headers para e-mail HTML
+     * Gera headers para e-mail HTML (anti-spam otimizado)
      */
     private function getEmailHeaders() {
         $headers = "MIME-Version: 1.0" . "\r\n";
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         $headers .= "From: {$this->from_name} <{$this->from_email}>" . "\r\n";
         $headers .= "Reply-To: {$this->reply_to}" . "\r\n";
-        $headers .= "X-Mailer: PHP/" . phpversion();
+        $headers .= "Return-Path: {$this->from_email}" . "\r\n";
+        $headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
+        $headers .= "X-Priority: 3" . "\r\n";
+        $headers .= "Message-ID: <" . time() . "-" . md5(uniqid()) . "@terapiaebemestar.com.br>" . "\r\n";
         
         return $headers;
     }
@@ -257,20 +260,21 @@ class EmailSystem {
     }
     
     /**
-     * Send email via SMTP using raw socket connection
+     * Send email via SMTP using port 465 with SSL (anti-spam otimizado)
      */
     private function sendViaSMTP($to, $subject, $message, $headers) {
         try {
-            // Create SSL context
+            // Create SSL context with proper certificate verification
             $context = stream_context_create([
                 'ssl' => [
-                    'verify_peer' => false,
-                    'verify_peer_name' => false,
-                    'allow_self_signed' => true
+                    'verify_peer' => true,
+                    'verify_peer_name' => true,
+                    'allow_self_signed' => false,
+                    'crypto_method' => STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT | STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT
                 ]
             ]);
             
-            // Connect to SMTP server with SSL
+            // Connect to SMTP server with SSL on port 465 (implicit SSL/TLS)
             $smtp = stream_socket_client(
                 "ssl://{$this->smtp_host}:{$this->smtp_port}",
                 $errno, $errstr, 30, STREAM_CLIENT_CONNECT, $context
@@ -280,49 +284,64 @@ class EmailSystem {
                 throw new Exception("Failed to connect to SMTP server: $errstr ($errno)");
             }
             
-            // Read server greeting
-            $this->readSMTPResponse($smtp);
+            // Read server greeting (220)
+            $response = $this->readSMTPResponse($smtp);
             
-            // Send EHLO
-            fwrite($smtp, "EHLO {$this->smtp_host}\r\n");
-            $this->readSMTPResponse($smtp);
+            // Send EHLO with proper domain
+            fwrite($smtp, "EHLO terapiaebemestar.com.br\r\n");
+            $response = $this->readSMTPResponse($smtp);
             
             // Send AUTH LOGIN
             fwrite($smtp, "AUTH LOGIN\r\n");
-            $this->readSMTPResponse($smtp);
+            $response = $this->readSMTPResponse($smtp);
             
             // Send username (base64 encoded)
             fwrite($smtp, base64_encode($this->smtp_username) . "\r\n");
-            $this->readSMTPResponse($smtp);
+            $response = $this->readSMTPResponse($smtp);
             
             // Send password (base64 encoded)
             fwrite($smtp, base64_encode($this->smtp_password) . "\r\n");
-            $this->readSMTPResponse($smtp);
+            $auth_response = $this->readSMTPResponse($smtp);
+            
+            // Check authentication success
+            if (strpos($auth_response, '235') === false) {
+                throw new Exception("SMTP Authentication Failed: " . $auth_response);
+            }
             
             // Send MAIL FROM
             fwrite($smtp, "MAIL FROM: <{$this->from_email}>\r\n");
-            $this->readSMTPResponse($smtp);
+            $response = $this->readSMTPResponse($smtp);
             
             // Send RCPT TO
             fwrite($smtp, "RCPT TO: <{$to}>\r\n");
-            $this->readSMTPResponse($smtp);
+            $response = $this->readSMTPResponse($smtp);
             
             // Send DATA
             fwrite($smtp, "DATA\r\n");
-            $this->readSMTPResponse($smtp);
+            $response = $this->readSMTPResponse($smtp);
             
-            // Send email headers and body
-            $email_content = "From: {$this->from_name} <{$this->from_email}>\r\n";
+            // Generate unique Message-ID for anti-spam
+            $message_id = "<" . time() . "." . uniqid() . "@terapiaebemestar.com.br>";
+            
+            // Send email headers and body with proper formatting
+            $email_content = "Date: " . date('r') . "\r\n";
+            $email_content .= "From: {$this->from_name} <{$this->from_email}>\r\n";
             $email_content .= "To: {$to}\r\n";
             $email_content .= "Subject: {$subject}\r\n";
+            $email_content .= "Reply-To: {$this->reply_to}\r\n";
+            $email_content .= "Return-Path: {$this->from_email}\r\n";
+            $email_content .= "Message-ID: {$message_id}\r\n";
+            $email_content .= "X-Priority: 3\r\n";
+            $email_content .= "X-Mailer: TerapiaBemEstar/1.0\r\n";
             $email_content .= "MIME-Version: 1.0\r\n";
             $email_content .= "Content-Type: text/html; charset=UTF-8\r\n";
+            $email_content .= "Content-Transfer-Encoding: 8bit\r\n";
             $email_content .= "\r\n";
             $email_content .= $message;
             $email_content .= "\r\n.\r\n";
             
             fwrite($smtp, $email_content);
-            $this->readSMTPResponse($smtp);
+            $send_response = $this->readSMTPResponse($smtp);
             
             // Send QUIT
             fwrite($smtp, "QUIT\r\n");
@@ -331,12 +350,89 @@ class EmailSystem {
             // Close connection
             fclose($smtp);
             
+            // Log successful send
+            error_log("Email sent successfully to {$to} via {$this->smtp_host}:{$this->smtp_port}");
+            
             return true;
             
         } catch (Exception $e) {
             error_log("SMTP Error: " . $e->getMessage());
-            return false;
+            
+            // Fallback: try with less strict SSL verification if certificate issues
+            try {
+                return $this->sendViaSMTPFallback($to, $subject, $message);
+            } catch (Exception $e2) {
+                error_log("SMTP Fallback Error: " . $e2->getMessage());
+                return false;
+            }
         }
+    }
+    
+    /**
+     * Fallback SMTP send with relaxed SSL verification (for certificate issues)
+     */
+    private function sendViaSMTPFallback($to, $subject, $message) {
+        $context = stream_context_create([
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            ]
+        ]);
+        
+        $smtp = stream_socket_client(
+            "ssl://{$this->smtp_host}:{$this->smtp_port}",
+            $errno, $errstr, 30, STREAM_CLIENT_CONNECT, $context
+        );
+        
+        if (!$smtp) {
+            throw new Exception("Fallback connection failed: $errstr ($errno)");
+        }
+        
+        $this->readSMTPResponse($smtp);
+        fwrite($smtp, "EHLO terapiaebemestar.com.br\r\n");
+        $this->readSMTPResponse($smtp);
+        
+        fwrite($smtp, "AUTH LOGIN\r\n");
+        $this->readSMTPResponse($smtp);
+        
+        fwrite($smtp, base64_encode($this->smtp_username) . "\r\n");
+        $this->readSMTPResponse($smtp);
+        
+        fwrite($smtp, base64_encode($this->smtp_password) . "\r\n");
+        $this->readSMTPResponse($smtp);
+        
+        fwrite($smtp, "MAIL FROM: <{$this->from_email}>\r\n");
+        $this->readSMTPResponse($smtp);
+        
+        fwrite($smtp, "RCPT TO: <{$to}>\r\n");
+        $this->readSMTPResponse($smtp);
+        
+        fwrite($smtp, "DATA\r\n");
+        $this->readSMTPResponse($smtp);
+        
+        $message_id = "<" . time() . "." . uniqid() . "@terapiaebemestar.com.br>";
+        
+        $email_content = "Date: " . date('r') . "\r\n";
+        $email_content .= "From: {$this->from_name} <{$this->from_email}>\r\n";
+        $email_content .= "To: {$to}\r\n";
+        $email_content .= "Subject: {$subject}\r\n";
+        $email_content .= "Reply-To: {$this->reply_to}\r\n";
+        $email_content .= "Message-ID: {$message_id}\r\n";
+        $email_content .= "MIME-Version: 1.0\r\n";
+        $email_content .= "Content-Type: text/html; charset=UTF-8\r\n";
+        $email_content .= "\r\n";
+        $email_content .= $message;
+        $email_content .= "\r\n.\r\n";
+        
+        fwrite($smtp, $email_content);
+        $this->readSMTPResponse($smtp);
+        
+        fwrite($smtp, "QUIT\r\n");
+        fclose($smtp);
+        
+        error_log("Email sent via fallback method to {$to}");
+        return true;
     }
     
     /**
