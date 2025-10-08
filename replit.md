@@ -76,8 +76,13 @@ Preferred communication style: Simple, everyday language.
   - SMTP_PORT: 465
   - EMAIL_USERNAME: contato@terapiaebemestar.com.br
   - EMAIL_PASSWORD: (stored securely)
+- **Reminder Email Optimization** (October 8, 2025):
+  - **Subject Line**: Changed from "Lembrete: Sua consulta é amanhã" to "Sua sessão de amanhã (DD/MM/AAAA) - Dra. Daniela Lima" to avoid spam filters
+  - **Email Content**: Removed emojis and generic "reminder" language, replaced with professional "Confirmação da Sua Sessão" template
+  - **Professional Template**: Added therapist signature, CRP number, and structured appointment details
+  - **Layout**: Corporate-style design matching confirmation emails for consistency
 - **Files Updated**:
-  - `includes/email_system.php` - Complete SMTP implementation with SSL/TLS and anti-spam headers
+  - `includes/email_system.php` - Complete SMTP implementation with SSL/TLS and anti-spam headers, optimized reminder template
 
 ### Booking Instructions Optimization (October 8, 2025)
 - **Step-by-Step Instructions**: Redesigned booking flow with clear numbered steps and instructions

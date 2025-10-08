@@ -190,7 +190,8 @@ class EmailSystem {
      */
     public function sendAppointmentReminder($appointment_data) {
         $to = $appointment_data['email'];
-        $subject = 'Lembrete: Sua consulta é amanhã - Terapia e Bem Estar';
+        $date_formatted = date('d/m/Y', strtotime($appointment_data['appointment_date']));
+        $subject = "Sua sessão de amanhã ({$date_formatted}) - Dra. Daniela Lima";
         
         $message = $this->generateReminderEmailTemplate($appointment_data);
         $headers = $this->getEmailHeaders();
@@ -207,6 +208,7 @@ class EmailSystem {
     private function generateReminderEmailTemplate($data) {
         $date_formatted = date('d/m/Y', strtotime($data['appointment_date']));
         $time_formatted = date('H:i', strtotime($data['appointment_time']));
+        $price_formatted = number_format($data['price'], 2, ',', '.');
         
         $template = '
 <!DOCTYPE html>
@@ -214,43 +216,68 @@ class EmailSystem {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sessão Agendada - Terapia e Bem Estar</title>
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; background-color: #f5f7f5; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f5f7f5; }
         .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
         .header { background: linear-gradient(135deg, #8b9a8b, #a8c8ec); color: white; padding: 2rem; text-align: center; }
+        .header h1 { margin: 0; font-size: 1.8rem; }
         .content { padding: 2rem; }
-        .reminder-card { background: #fff3cd; border-left: 4px solid #ffc107; padding: 1.5rem; margin: 1rem 0; border-radius: 5px; }
-        .meeting-info { background: #e8f2e8; padding: 1rem; border-radius: 5px; margin: 1rem 0; }
+        .appointment-card { background: #f8faf8; border-left: 4px solid #8b9a8b; padding: 1.5rem; margin: 1rem 0; border-radius: 5px; }
+        .appointment-card h3 { margin: 0 0 1rem 0; color: #8b9a8b; }
+        .detail-row { margin: 0.5rem 0; }
+        .detail-row strong { color: #555; }
+        .meeting-link { display: inline-block; background: #8b9a8b; color: white; padding: 1rem 2rem; text-decoration: none; border-radius: 8px; margin: 1rem 0; font-weight: bold; }
+        .tips { background: #e8f2e8; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; }
+        .tips h4 { margin: 0 0 1rem 0; color: #8b9a8b; }
+        .tips ul { margin: 0.5rem 0; padding-left: 1.2rem; }
+        .tips li { margin: 0.5rem 0; }
+        .footer { background: #f0f2f0; padding: 1.5rem; text-align: center; color: #666; font-size: 0.9rem; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🔔 Lembrete: Sua consulta é amanhã!</h1>
+            <h1>Confirmação da Sua Sessão</h1>
+            <p>Terapia e Bem Estar - Dra. Daniela Lima</p>
         </div>
         
         <div class="content">
             <p>Olá <strong>' . htmlspecialchars($data['full_name']) . '</strong>,</p>
+            <p>Este é um aviso sobre sua sessão agendada para amanhã:</p>
             
-            <div class="reminder-card">
-                <h3>Sua consulta será amanhã:</h3>
-                <p><strong>Data:</strong> ' . $date_formatted . '</p>
-                <p><strong>Horário:</strong> ' . $time_formatted . '</p>
-                <p><strong>Serviço:</strong> ' . htmlspecialchars($data['service_name']) . '</p>
+            <div class="appointment-card">
+                <h3>Detalhes da Sessão</h3>
+                <div class="detail-row"><strong>Data:</strong> ' . $date_formatted . '</div>
+                <div class="detail-row"><strong>Horário:</strong> ' . $time_formatted . '</div>
+                <div class="detail-row"><strong>Serviço:</strong> ' . htmlspecialchars($data['service_name']) . '</div>
+                <div class="detail-row"><strong>Duração:</strong> ' . $data['duration'] . ' minutos</div>
+                <div class="detail-row"><strong>Valor:</strong> R$ ' . $price_formatted . '</div>
             </div>
             
-            <div class="meeting-info">
-                <h4>📱 Link da Sala Virtual:</h4>
-                <p><a href="' . htmlspecialchars($data['virtual_room_link']) . '" style="color: #8b9a8b; font-weight: bold;">Clique aqui para entrar na consulta</a></p>
+            <div style="text-align: center; margin: 2rem 0;">
+                <a href="' . htmlspecialchars($data['virtual_room_link']) . '" class="meeting-link">Acessar Sala Virtual Google Meet</a>
             </div>
             
-            <p><strong>Dicas importantes:</strong></p>
-            <ul>
-                <li>Entre na sala 5 minutos antes do horário</li>
-                <li>Teste sua câmera e microfone</li>
-                <li>Escolha um ambiente tranquilo e privado</li>
-                <li>Tenha um copo de água próximo</li>
-            </ul>
+            <div class="tips">
+                <h4>Preparação para a Sessão</h4>
+                <ul>
+                    <li>Acesse a sala virtual 5 minutos antes do horário agendado</li>
+                    <li>Verifique se sua câmera e microfone estão funcionando corretamente</li>
+                    <li>Escolha um ambiente tranquilo, privado e bem iluminado</li>
+                    <li>Tenha papel e caneta disponíveis, se desejar fazer anotações</li>
+                    <li>Mantenha um copo de água por perto</li>
+                </ul>
+            </div>
+            
+            <p>Aguardo você amanhã no horário combinado.</p>
+            <p>Atenciosamente,<br><strong>Dra. Daniela Lima</strong><br>Psicóloga - CRP 00000/00</p>
+        </div>
+        
+        <div class="footer">
+            <p>Terapia e Bem Estar</p>
+            <p>www.terapiaebemestar.com.br</p>
+            <p>contato@terapiaebemestar.com.br</p>
         </div>
     </div>
 </body>
