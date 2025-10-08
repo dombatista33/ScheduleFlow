@@ -49,3 +49,5 @@
 2025-10-08 20:11:46 | SUCCESS | TO: contato@terapiaebemestar.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
 2025-10-08 20:17:31 | FAILED | ReplitEmail | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
 2025-10-08 20:17:31 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-08 20:32:01 | FAILED | ReplitEmail | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-08 20:32:02 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar

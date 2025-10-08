@@ -346,26 +346,34 @@ body {
 .calendar-day {
     padding: 1rem;
     text-align: center;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    background-color: #4CAF50;
+    color: var(--white);
+    font-weight: 600;
 }
 
 .calendar-day:hover {
-    background-color: var(--primary-color);
-    color: var(--white);
+    background-color: #45A049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
 }
 
 .calendar-day.selected {
-    background-color: var(--secondary-color);
+    background-color: #45A049;
+    border-color: #45A049;
     color: var(--white);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
 }
 
 .calendar-day.unavailable {
-    background-color: var(--border-color);
-    color: var(--text-light);
+    background-color: #9E9E9E;
+    color: #FFFFFF;
     cursor: not-allowed;
+    opacity: 0.7;
+    border-color: #9E9E9E;
 }
 
 /* Time periods container */
@@ -403,12 +411,13 @@ body {
 .time-slot {
     padding: 0.8rem 1rem;
     text-align: center;
-    border: 2px solid var(--border-color);
+    border: 2px solid #2196F3;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
-    background: var(--white);
-    font-weight: 500;
+    background-color: #2196F3;
+    color: var(--white);
+    font-weight: 600;
     font-size: 0.95rem;
     display: flex;
     align-items: center;
@@ -417,26 +426,26 @@ body {
 }
 
 .time-slot:hover {
-    border-color: var(--primary-color);
-    background-color: rgba(139, 154, 139, 0.1);
+    background-color: #1976D2;
+    border-color: #1976D2;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(139, 154, 139, 0.2);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
 }
 
 .time-slot.selected {
-    background-color: var(--primary-color);
+    background-color: #1565C0;
     color: var(--white);
-    border-color: var(--primary-color);
+    border-color: #1565C0;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(139, 154, 139, 0.3);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
 }
 
 .time-slot.unavailable {
-    background-color: var(--border-color);
-    color: var(--text-light);
+    background-color: #9E9E9E;
+    color: #FFFFFF;
     cursor: not-allowed;
-    border-color: var(--border-color);
-    opacity: 0.6;
+    border-color: #9E9E9E;
+    opacity: 0.7;
 }
 
 /* Footer */
