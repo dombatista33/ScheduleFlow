@@ -243,14 +243,14 @@ global $pdo;
                     
                     <div style="display: flex; flex-direction: column; align-items: center; z-index: 1;">
                         <div style="width: 40px; height: 40px; border-radius: 50%; background: #e0e0e0; color: #999; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 0.5rem;">3</div>
-                        <span style="font-size: 0.85rem; color: #999;">Confirmação</span>
+                        <span style="font-size: 0.85rem; color: #999;">Revisão</span>
                     </div>
                 </div>
             </div>
 
             <section class="hero">
-                <h1 style="color: var(--primary-color); font-size: 2rem; margin-bottom: 0.5rem;">✨ Falta pouco! Precisamos conhecê-lo melhor</h1>
-                <p class="subtitle" style="color: var(--text-light); font-size: 1.1rem;">Preencha suas informações para finalizarmos seu agendamento</p>
+                <h1 style="color: var(--primary-color); font-size: 2.2rem; margin-bottom: 0.75rem;">Seus Dados</h1>
+                <p class="subtitle" style="color: var(--text-light); font-size: 1.15rem; max-width: 600px; margin: 0 auto;">Falta pouco! Preencha suas informações para confirmar sua sessão.</p>
             </section>
 
             <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1000px; margin: 0 auto;">
@@ -259,19 +259,19 @@ global $pdo;
                     <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
                         <div style="width: 50px; height: 50px; background: var(--success-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">✓</div>
                         <div>
-                            <h2 style="color: var(--success-color); margin: 0; font-size: 1.2rem;">Horário Reservado</h2>
-                            <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">Seu horário está garantido por 10 minutos</p>
+                            <h2 style="color: var(--success-color); margin: 0; font-size: 1.3rem;">Seu Horário Está Reservado!</h2>
+                            <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">Garantido por 10 minutos enquanto você finaliza</p>
                         </div>
                     </div>
                     <div style="background: white; padding: 1.5rem; border-radius: 10px;">
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
                             <div>
-                                <p style="margin: 0; color: var(--text-light); font-size: 0.85rem;">📅 Data</p>
-                                <p style="margin: 0.25rem 0 0 0; font-size: 1.1rem; font-weight: 600; color: var(--text-dark);"><?= date('d/m/Y', strtotime($selected_date)) ?></p>
+                                <p style="margin: 0; color: var(--text-light); font-size: 0.85rem; font-weight: 500;">📅 Data escolhida</p>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 1.15rem; font-weight: 600; color: var(--text-dark);"><?= date('d/m/Y', strtotime($selected_date)) ?></p>
                             </div>
                             <div>
-                                <p style="margin: 0; color: var(--text-light); font-size: 0.85rem;">🕐 Horário</p>
-                                <p style="margin: 0.25rem 0 0 0; font-size: 1.1rem; font-weight: 600; color: var(--text-dark);"><?= date('H:i', strtotime($selected_time)) ?></p>
+                                <p style="margin: 0; color: var(--text-light); font-size: 0.85rem; font-weight: 500;">⏰ Horário escolhido</p>
+                                <p style="margin: 0.25rem 0 0 0; font-size: 1.15rem; font-weight: 600; color: var(--text-dark);"><?= date('H:i', strtotime($selected_time)) ?></p>
                             </div>
                         </div>
                     </div>
@@ -279,9 +279,9 @@ global $pdo;
 
                 <!-- Booking Form -->
                 <section class="card">
-                    <div style="border-left: 4px solid var(--primary-color); padding-left: 1rem; margin-bottom: 1.5rem;">
-                        <h2 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1.3rem;">Suas Informações</h2>
-                        <p style="color: var(--text-light); margin: 0;">Preencha seus dados para confirmarmos o agendamento</p>
+                    <div style="margin-bottom: 1.5rem;">
+                        <h2 style="color: var(--primary-color); margin-bottom: 0.75rem; font-size: 1.4rem;">📝 Complete Seus Dados</h2>
+                        <p style="color: var(--text-light); margin: 0; line-height: 1.6;">Precisamos de algumas informações para confirmar seu agendamento</p>
                     </div>
                     
                     <?php if ($error): ?>
@@ -352,42 +352,44 @@ global $pdo;
                     </form>
                 </section>
 
-                <!-- Payment Information - Redesigned -->
+                <!-- Payment Information - Redesigned & Simplified -->
                 <section class="card" style="background: linear-gradient(to bottom, rgba(173, 216, 230, 0.08), white); border: 1px solid rgba(173, 216, 230, 0.3);">
-                    <div style="border-left: 4px solid var(--accent-color); padding-left: 1rem; margin-bottom: 1.5rem;">
-                        <h2 style="color: var(--accent-color); margin-bottom: 0.5rem; font-size: 1.3rem;">💳 Como Funciona o Pagamento?</h2>
-                        <p style="color: var(--text-light); margin: 0;">É simples e seguro!</p>
+                    <div style="margin-bottom: 1.5rem;">
+                        <h2 style="color: var(--accent-color); margin-bottom: 0.75rem; font-size: 1.4rem;">💳 Sobre o Pagamento</h2>
+                        <p style="color: var(--text-light); margin: 0; line-height: 1.6;">Simples, rápido e seguro</p>
                     </div>
 
+                    <!-- Payment Options -->
                     <div style="background: white; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
-                        <h3 style="color: var(--text-dark); font-size: 1.1rem; margin-bottom: 1rem;">Opções Disponíveis:</h3>
+                        <h3 style="color: var(--text-dark); font-size: 1.05rem; margin-bottom: 1rem; font-weight: 600;">Você pode pagar por:</h3>
                         <div style="display: grid; gap: 1rem;">
-                            <div style="display: flex; align-items: start; gap: 1rem; padding: 1rem; background: rgba(139, 154, 139, 0.05); border-radius: 8px;">
-                                <span style="font-size: 1.5rem;">🔄</span>
-                                <div>
-                                    <p style="margin: 0 0 0.25rem 0; font-weight: 600; color: var(--text-dark);">Pix (Recomendado)</p>
-                                    <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">Chave Pix enviada por WhatsApp após confirmação</p>
+                            <div style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: linear-gradient(135deg, rgba(139, 154, 139, 0.08), rgba(173, 216, 230, 0.05)); border-radius: 10px; border: 1px solid rgba(139, 154, 139, 0.2);">
+                                <div style="width: 45px; height: 45px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;">🔄</div>
+                                <div style="flex: 1;">
+                                    <p style="margin: 0 0 0.25rem 0; font-weight: 600; color: var(--text-dark); font-size: 1rem;">Pix (Mais Rápido)</p>
+                                    <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">Chave enviada por WhatsApp após confirmar</p>
                                 </div>
                             </div>
                             
-                            <div style="display: flex; align-items: start; gap: 1rem; padding: 1rem; background: rgba(139, 154, 139, 0.05); border-radius: 8px;">
-                                <span style="font-size: 1.5rem;">🏦</span>
-                                <div>
-                                    <p style="margin: 0 0 0.25rem 0; font-weight: 600; color: var(--text-dark);">Transferência Bancária</p>
-                                    <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">Dados bancários fornecidos por e-mail</p>
+                            <div style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: linear-gradient(135deg, rgba(139, 154, 139, 0.08), rgba(173, 216, 230, 0.05)); border-radius: 10px; border: 1px solid rgba(139, 154, 139, 0.2);">
+                                <div style="width: 45px; height: 45px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;">🏦</div>
+                                <div style="flex: 1;">
+                                    <p style="margin: 0 0 0.25rem 0; font-weight: 600; color: var(--text-dark); font-size: 1rem;">Transferência Bancária</p>
+                                    <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">Dados bancários enviados por e-mail</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Important Notice -->
-                    <div style="background: rgba(173, 216, 230, 0.15); border-left: 4px solid var(--accent-color); padding: 1.25rem; border-radius: 8px;">
-                        <div style="display: flex; align-items: start; gap: 0.75rem;">
-                            <span style="font-size: 1.3rem;">💡</span>
+                    <div style="background: linear-gradient(135deg, rgba(173, 216, 230, 0.15), rgba(173, 216, 230, 0.08)); border: 2px solid rgba(173, 216, 230, 0.4); padding: 1.5rem; border-radius: 10px;">
+                        <div style="display: flex; align-items: start; gap: 1rem;">
+                            <div style="width: 40px; height: 40px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">💡</div>
                             <div>
-                                <p style="margin: 0 0 0.5rem 0; font-weight: 600; color: var(--text-dark); font-size: 1rem;">Prazo para Pagamento</p>
-                                <p style="margin: 0; color: var(--text-dark); line-height: 1.6; font-size: 0.95rem;">
-                                    Para garantir sua vaga, o pagamento deve ser realizado <strong>até 24 horas antes</strong> da consulta. Você receberá todas as instruções por e-mail e WhatsApp logo após a confirmação.
+                                <p style="margin: 0 0 0.75rem 0; font-weight: 600; color: var(--text-dark); font-size: 1.05rem;">Prazo de Confirmação</p>
+                                <p style="margin: 0; color: var(--text-dark); line-height: 1.7; font-size: 0.95rem;">
+                                    Para garantir seu horário, realize o pagamento <strong>até 24 horas antes da sessão</strong>. 
+                                    Logo após confirmar, você receberá todas as instruções de pagamento por e-mail e WhatsApp. É rápido e fácil!
                                 </p>
                             </div>
                         </div>
