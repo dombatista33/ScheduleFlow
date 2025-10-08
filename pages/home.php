@@ -28,8 +28,8 @@
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-text">
-                        <h1>Terapia e Bem Estar: Seu Caminho para o Bem-Estar Online</h1>
-                        <p class="hero-subtitle">Agende sua consulta psicológica online de forma simples e rápida!</p>
+                        <h1>Cuide de Você, de Onde Estiver</h1>
+                        <p class="hero-subtitle">Terapia Online Profissional e Acolhedora</p>
                         
                         <p style="margin: 1.5rem 0; line-height: 1.8; color: var(--text-dark);">
                             Na Terapia e Bem Estar, oferecemos atendimento especializado em <strong>Terapia Cognitiva Comportamental (TCC)</strong>, uma abordagem eficaz e cientificamente comprovada para diversas questões. Cuidar da sua saúde mental nunca foi tão acessível, no conforto e segurança do seu lar.
@@ -38,7 +38,7 @@
                         <!-- Large CTA Button -->
                         <div class="cta-section">
                             <a href="index.php?page=calendar" class="btn-cta-large">
-                                📅 Agendar Consulta Online
+                                📅 Agende Agora - Fácil, Rápido e Seguro
                             </a>
                             <p class="cta-subtitle">Disponível de Segunda a Sexta</p>
                         </div>
