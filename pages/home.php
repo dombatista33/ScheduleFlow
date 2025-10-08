@@ -28,9 +28,12 @@
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-text">
-                        <h1>Agenda Online</h1>
-                        <h2>Terapia e Bem Estar</h2>
-                        <p class="hero-subtitle">Agende sua consulta psicológica online de forma simples e rápida. Atendimento especializado em Terapia Cognitiva Comportamental.</p>
+                        <h1>Terapia e Bem Estar: Seu Caminho para o Bem-Estar Online</h1>
+                        <p class="hero-subtitle">Agende sua consulta psicológica online de forma simples e rápida!</p>
+                        
+                        <p style="margin: 1.5rem 0; line-height: 1.8; color: var(--text-dark);">
+                            Na Terapia e Bem Estar, oferecemos atendimento especializado em <strong>Terapia Cognitiva Comportamental (TCC)</strong>, uma abordagem eficaz e cientificamente comprovada para diversas questões. Cuidar da sua saúde mental nunca foi tão acessível, no conforto e segurança do seu lar.
+                        </p>
                         
                         <!-- Large CTA Button -->
                         <div class="cta-section">
@@ -58,31 +61,16 @@
             </div>
         </section>
 
-        <!-- About Section -->
+        <!-- First Consultation Section -->
         <section class="about-section">
             <div class="container">
                 <div class="about-content">
-                    <h2>Sobre a Profissional</h2>
-                    <p>Mais de 10 anos de experiência em atendimento psicológico online. Formação pela Universidade de São Paulo com especialização em Terapia Cognitiva Comportamental.</p>
-                    <p>Abordagem terapêutica baseada em evidências científicas, desenvolvendo estratégias práticas para ansiedade, depressão, relacionamentos e desafios da vida moderna.</p>
-                </div>
-                <div class="specialties">
-                    <div class="specialty-item">
-                        <span class="specialty-icon">🧠</span>
-                        <h4>Ansiedade e Pânico</h4>
-                    </div>
-                    <div class="specialty-item">
-                        <span class="specialty-icon">💚</span>
-                        <h4>Depressão</h4>
-                    </div>
-                    <div class="specialty-item">
-                        <span class="specialty-icon">💑</span>
-                        <h4>Terapia de Casal</h4>
-                    </div>
-                    <div class="specialty-item">
-                        <span class="specialty-icon">⚖️</span>
-                        <h4>Autoestima</h4>
-                    </div>
+                    <h2>Sua Primeira Consulta: Tudo que Você Precisa Saber</h2>
+                    <p>Entendemos que usar novas ferramentas pode gerar dúvidas. Se você não tem familiaridade com o Google Meet (nossa plataforma para as sessões), não se preocupe!</p>
+                    <p>Basta clicar no botão <strong>"Primeira Consulta"</strong> no menu superior. Lá, você encontrará todas as orientações e detalhes necessários, passo a passo, para acessar sua sessão de forma tranquila e sem complicações.</p>
+                    <p style="margin-top: 1.5rem; font-size: 1.1rem; color: var(--success-color); font-weight: 600;">
+                        Comece hoje mesmo a jornada em direção ao seu bem-estar!
+                    </p>
                 </div>
             </div>
         </section>
