@@ -56,3 +56,6 @@
 2025-10-08 21:01:45 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Sua sessão de amanhã (09/10/2025) - Dra. Daniela Lima
 2025-10-08 21:05:38 | FAILED | ReplitEmail | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
 2025-10-08 21:05:39 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-08 23:04:15 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Sua sessão de amanhã (09/10/2025) - Dra. Daniela Lima
+2025-10-08 23:13:16 | FAILED | ReplitEmail | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-08 23:13:16 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar

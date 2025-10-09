@@ -83,8 +83,8 @@
                     <div class="contact-card">
                         <div class="contact-icon">📱</div>
                         <h3>WhatsApp</h3>
-                        <p>(11) 99999-9999</p>
-                        <a href="https://wa.me/5511999999999" target="_blank" class="contact-btn">Conversar no WhatsApp</a>
+                        <p>(11) 992196619</p>
+                        <a href="https://wa.me/5511992196619" target="_blank" class="contact-btn">Conversar no WhatsApp</a>
                     </div>
                     
                     <div class="contact-card">

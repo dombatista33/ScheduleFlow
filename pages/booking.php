@@ -250,7 +250,9 @@ global $pdo;
 
             <section class="hero">
                 <h1 style="color: var(--primary-color); font-size: 2.2rem; margin-bottom: 0.75rem;">Seus Dados</h1>
-                <p class="subtitle" style="color: var(--text-light); font-size: 1.15rem; max-width: 600px; margin: 0 auto;">Falta pouco! Preencha suas informações para confirmar sua sessão.</p>
+                <p class="subtitle" style="color: var(--text-light); font-size: 1.15rem; max-width: 650px; margin: 0 auto; line-height: 1.6;">
+                    Agora só precisamos de algumas informações suas. Leva menos de 2 minutos.
+                </p>
             </section>
 
             <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1000px; margin: 0 auto;">
@@ -280,8 +282,8 @@ global $pdo;
                 <!-- Booking Form -->
                 <section class="card">
                     <div style="margin-bottom: 1.5rem;">
-                        <h2 style="color: var(--primary-color); margin-bottom: 0.75rem; font-size: 1.4rem;">📝 Complete Seus Dados</h2>
-                        <p style="color: var(--text-light); margin: 0; line-height: 1.6;">Precisamos de algumas informações para confirmar seu agendamento</p>
+                        <h2 style="color: var(--primary-color); margin-bottom: 0.75rem; font-size: 1.6rem; font-weight: 600;">📝 Preencha os Campos Abaixo</h2>
+                        <p style="color: var(--text-light); margin: 0; line-height: 1.7; font-size: 1rem;">São apenas 4 campos simples para confirmar seu agendamento</p>
                     </div>
                     
                     <?php if ($error): ?>
@@ -352,39 +354,54 @@ global $pdo;
                     </form>
                 </section>
 
-                <!-- Payment Information - Redesigned & Simplified -->
-                <section class="card" style="background: linear-gradient(to bottom, rgba(173, 216, 230, 0.08), white); border: 1px solid rgba(173, 216, 230, 0.3);">
+                <!-- Payment Information - Completamente Redesenhada -->
+                <section class="card" style="background: linear-gradient(135deg, rgba(173, 216, 230, 0.1), white); border: 2px solid rgba(173, 216, 230, 0.3);">
                     <div style="margin-bottom: 1.5rem;">
-                        <h2 style="color: var(--accent-color); margin-bottom: 0.75rem; font-size: 1.4rem;">💳 Sobre o Pagamento</h2>
-                        <p style="color: var(--text-light); margin: 0; line-height: 1.6;">Simples, rápido e seguro</p>
+                        <h2 style="color: var(--accent-color); margin-bottom: 0.75rem; font-size: 1.6rem; font-weight: 600;">💳 Como Funciona o Pagamento</h2>
+                        <p style="color: var(--text-dark); margin: 0; line-height: 1.7; font-size: 1.05rem;">Rápido, simples e 100% seguro</p>
                     </div>
 
-                    <!-- Payment Options -->
-                    <div style="background: white; padding: 1.5rem; border-radius: 10px; margin-bottom: 1.5rem;">
-                        <h3 style="color: var(--text-dark); font-size: 1.05rem; margin-bottom: 1rem; font-weight: 600;">Você pode pagar por:</h3>
-                        <div style="display: grid; gap: 1rem;">
-                            <div style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: linear-gradient(135deg, rgba(139, 154, 139, 0.08), rgba(173, 216, 230, 0.05)); border-radius: 10px; border: 1px solid rgba(139, 154, 139, 0.2);">
-                                <div style="width: 45px; height: 45px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;">🔄</div>
+                    <!-- Payment Options Cards -->
+                    <div style="display: grid; gap: 1.5rem; margin-bottom: 2rem;">
+                        <!-- Pix Option -->
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 2px solid var(--primary-color); box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                            <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1rem;">
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--primary-color), #6d8c6d); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0; box-shadow: 0 3px 10px rgba(139, 154, 139, 0.3);">💸</div>
                                 <div style="flex: 1;">
-                                    <p style="margin: 0 0 0.25rem 0; font-weight: 600; color: var(--text-dark); font-size: 1rem;">Pix (Mais Rápido)</p>
-                                    <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">Chave enviada por WhatsApp após confirmar</p>
+                                    <h3 style="margin: 0 0 0.25rem 0; font-size: 1.3rem; color: var(--primary-color); font-weight: 700;">Pix</h3>
+                                    <p style="margin: 0; color: var(--success-color); font-size: 0.95rem; font-weight: 600;">✓ Recomendado - Mais rápido</p>
                                 </div>
                             </div>
-                            
-                            <div style="display: flex; align-items: center; gap: 1rem; padding: 1.25rem; background: linear-gradient(135deg, rgba(139, 154, 139, 0.08), rgba(173, 216, 230, 0.05)); border-radius: 10px; border: 1px solid rgba(139, 154, 139, 0.2);">
-                                <div style="width: 45px; height: 45px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;">🏦</div>
+                            <p style="color: var(--text-dark); margin: 0 0 0.75rem 0; font-size: 1rem; line-height: 1.7;">
+                                Após confirmar seu agendamento, você receberá a <strong>chave Pix</strong> via WhatsApp e também por email.
+                            </p>
+                            <p style="color: var(--text-light); margin: 0; font-size: 0.95rem; line-height: 1.6;">
+                                É só abrir seu app bancário, copiar a chave e fazer o pagamento em segundos.
+                            </p>
+                        </div>
+                        
+                        <!-- Transferência Option -->
+                        <div style="background: white; padding: 2rem; border-radius: 15px; border: 2px solid var(--accent-color); box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
+                            <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 1rem;">
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--accent-color), #b89968); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; flex-shrink: 0; box-shadow: 0 3px 10px rgba(173, 216, 230, 0.3);">🏦</div>
                                 <div style="flex: 1;">
-                                    <p style="margin: 0 0 0.25rem 0; font-weight: 600; color: var(--text-dark); font-size: 1rem;">Transferência Bancária</p>
-                                    <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">Dados bancários enviados por e-mail</p>
+                                    <h3 style="margin: 0 0 0.25rem 0; font-size: 1.3rem; color: var(--accent-color); font-weight: 700;">Transferência Bancária</h3>
+                                    <p style="margin: 0; color: var(--text-light); font-size: 0.95rem; font-weight: 500;">Alternativa tradicional</p>
                                 </div>
                             </div>
+                            <p style="color: var(--text-dark); margin: 0 0 0.75rem 0; font-size: 1rem; line-height: 1.7;">
+                                Você receberá os <strong>dados bancários completos</strong> (banco, agência, conta) por email.
+                            </p>
+                            <p style="color: var(--text-light); margin: 0; font-size: 0.95rem; line-height: 1.6;">
+                                Faça a transferência normalmente pelo seu internet banking.
+                            </p>
                         </div>
                     </div>
 
-                    <!-- Important Notice -->
-                    <div style="background: linear-gradient(135deg, rgba(173, 216, 230, 0.15), rgba(173, 216, 230, 0.08)); border: 2px solid rgba(173, 216, 230, 0.4); padding: 1.5rem; border-radius: 10px;">
-                        <div style="display: flex; align-items: start; gap: 1rem;">
-                            <div style="width: 40px; height: 40px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">💡</div>
+                    <!-- 24h Rule - DESTAQUE -->
+                    <div style="background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(255, 193, 7, 0.08)); border: 3px solid #FFC107; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);">
+                        <div style="display: flex; align-items: start; gap: 1.5rem;">
+                            <div style="width: 50px; height: 50px; background: #FFC107; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; box-shadow: 0 3px 10px rgba(255, 193, 7, 0.4);">⏰</div>
                             <div>
                                 <p style="margin: 0 0 0.75rem 0; font-weight: 600; color: var(--text-dark); font-size: 1.05rem;">Prazo de Confirmação</p>
                                 <p style="margin: 0; color: var(--text-dark); line-height: 1.7; font-size: 0.95rem;">

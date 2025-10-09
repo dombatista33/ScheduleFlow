@@ -52,20 +52,22 @@
             </div>
 
             <section class="hero">
-                <h1 style="color: var(--primary-color); font-size: 2.2rem; margin-bottom: 0.75rem;">Encontre seu Melhor Dia</h1>
-                <p class="subtitle" style="color: var(--text-light); font-size: 1.15rem; max-width: 600px; margin: 0 auto;">Siga os passos abaixo para agendar sua sessão</p>
+                <h1 style="color: var(--primary-color); font-size: 2.2rem; margin-bottom: 0.75rem;">Encontre Seu Horário</h1>
+                <p class="subtitle" style="color: var(--text-light); font-size: 1.15rem; max-width: 650px; margin: 0 auto; line-height: 1.6;">
+                    Escolha a data e o horário que melhor funcionam para você. É rápido e simples.
+                </p>
             </section>
 
             <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1000px; margin: 0 auto;">
                 <!-- Step 1: Choose Date -->
                 <section class="card">
                     <div style="margin-bottom: 1.5rem;">
-                        <h2 style="color: var(--primary-color); margin-bottom: 0.75rem; font-size: 1.5rem; font-weight: 600;">1. Escolha a Data</h2>
-                        <p style="color: var(--text-dark); margin: 0; line-height: 1.7; font-size: 1rem;">
-                            No calendário abaixo, clique em um dos dias com <strong style="color: #4CAF50;">marcação verde</strong> (indicam disponibilidade).
+                        <h2 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.6rem; font-weight: 600;">📅 Passo 1: Escolha a Data</h2>
+                        <p style="color: var(--text-dark); margin: 0 0 0.5rem 0; line-height: 1.7; font-size: 1.05rem;">
+                            Clique em qualquer dia <strong style="color: #4CAF50; background: rgba(76, 175, 80, 0.15); padding: 0.2rem 0.5rem; border-radius: 5px;">verde</strong> no calendário.
                         </p>
-                        <p style="color: var(--text-light); margin: 0.5rem 0 0 0; line-height: 1.7; font-size: 0.95rem;">
-                            Dias em <strong>cinza</strong> não possuem horários livres.
+                        <p style="color: var(--text-light); margin: 0; line-height: 1.7; font-size: 0.95rem;">
+                            Dias em cinza já estão sem vagas disponíveis.
                         </p>
                     </div>
                     <div id="calendar-container">
@@ -75,17 +77,19 @@
                 
                 <!-- Step 2: Choose Time -->
                 <?php if ($selected_date): ?>
-                <section class="card" style="background: linear-gradient(to bottom, rgba(33, 150, 243, 0.05), white); border: 2px solid rgba(33, 150, 243, 0.2);">
+                <section class="card" style="background: linear-gradient(to bottom, rgba(33, 150, 243, 0.08), white); border: 2px solid rgba(33, 150, 243, 0.3);">
                     <div style="margin-bottom: 1.5rem;">
-                        <h2 style="color: #2196F3; margin-bottom: 0.75rem; font-size: 1.5rem; font-weight: 600;">2. Escolha o Horário</h2>
-                        <p style="color: var(--text-dark); margin: 0.5rem 0; font-size: 1rem; line-height: 1.7;">
-                            Dia selecionado: <strong><?= date('d/m/Y', strtotime($selected_date)) ?></strong>
+                        <h2 style="color: #2196F3; margin-bottom: 1rem; font-size: 1.6rem; font-weight: 600;">⏰ Passo 2: Escolha o Horário</h2>
+                        <div style="background: white; padding: 1.2rem; border-radius: 10px; border-left: 4px solid #2196F3; margin-bottom: 1rem;">
+                            <p style="color: var(--text-dark); margin: 0; font-size: 1.05rem;">
+                                <strong>Data selecionada:</strong> <?= date('d/m/Y', strtotime($selected_date)) ?>
+                            </p>
+                        </div>
+                        <p style="color: var(--text-dark); margin: 0 0 0.5rem 0; line-height: 1.7; font-size: 1.05rem;">
+                            Agora clique em um horário <strong style="color: #2196F3; background: rgba(33, 150, 243, 0.15); padding: 0.2rem 0.5rem; border-radius: 5px;">azul</strong> disponível.
                         </p>
-                        <p style="color: var(--text-dark); margin: 0.5rem 0 0 0; line-height: 1.7; font-size: 1rem;">
-                            Veja a lista e clique em um dos <strong style="color: #2196F3;">horários em azul</strong>.
-                        </p>
-                        <p style="color: var(--text-light); margin: 0.5rem 0 0 0; line-height: 1.7; font-size: 0.95rem;">
-                            Horários que já foram reservados estarão em <strong>cinza</strong> e não poderão ser clicados.
+                        <p style="color: var(--text-light); margin: 0; line-height: 1.7; font-size: 0.95rem;">
+                            Horários em cinza já foram agendados por outras pessoas.
                         </p>
                     </div>
                     <div id="time-slots-container">
@@ -165,20 +169,25 @@
                                 </div>
                                 
                                 <?php if ($selected_time): ?>
-                                    <div style="margin-top: 2rem; text-align: center; padding: 2rem; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                                        <p style="color: var(--text-light); margin-bottom: 1rem; font-size: 1rem;">
-                                            ✅ Horário selecionado: <strong style="color: var(--success-color);"><?= date('d/m/Y', strtotime($selected_date)) ?> às <?= date('H:i', strtotime($selected_time)) ?></strong>
+                                    <div style="margin-top: 2rem; text-align: center; padding: 2.5rem; background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05)); border-radius: 15px; border: 2px solid var(--success-color);">
+                                        <div style="display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: var(--success-color); border-radius: 50%; margin-bottom: 1rem;">
+                                            <span style="font-size: 2rem; color: white;">✓</span>
+                                        </div>
+                                        <h3 style="color: var(--success-color); margin: 0 0 0.5rem 0; font-size: 1.4rem; font-weight: 600;">Perfeito!</h3>
+                                        <p style="color: var(--text-dark); margin: 0 0 1.5rem 0; font-size: 1.1rem;">
+                                            <strong><?= date('d/m/Y', strtotime($selected_date)) ?> às <?= date('H:i', strtotime($selected_time)) ?></strong>
                                         </p>
                                         <a href="index.php?page=booking&date=<?= urlencode($selected_date) ?>&time=<?= urlencode($selected_time) ?><?= isset($_GET['service_id']) ? '&service_id=' . urlencode($_GET['service_id']) : '' ?>" 
-                                           class="btn btn-large" style="font-size: 1.1rem; padding: 1rem 2.5rem;">
-                                            Continuar para Próximo Passo →
+                                           class="btn btn-large" style="font-size: 1.15rem; padding: 1.2rem 3rem;">
+                                            Continuar →
                                         </a>
                                     </div>
                                 <?php endif; ?>
                             <?php else: ?>
-                                <div style="text-align: center; padding: 2rem; background: rgba(255, 138, 101, 0.1); border-radius: 10px;">
-                                    <p style="color: var(--text-dark); margin: 0;">😔 Não há horários disponíveis para esta data.</p>
-                                    <p style="color: var(--text-light); margin-top: 0.5rem;">Por favor, escolha outra data no calendário acima.</p>
+                                <div style="text-align: center; padding: 2.5rem; background: rgba(255, 138, 101, 0.1); border-radius: 15px; border: 2px solid rgba(255, 138, 101, 0.3);">
+                                    <div style="font-size: 3rem; margin-bottom: 1rem;">📅</div>
+                                    <p style="color: var(--text-dark); margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 600;">Ops! Esta data está cheia</p>
+                                    <p style="color: var(--text-light); margin: 0; font-size: 1rem;">Não se preocupe, escolha outra data verde no calendário acima.</p>
                                 </div>
                             <?php endif;
                         } catch(PDOException $e) {

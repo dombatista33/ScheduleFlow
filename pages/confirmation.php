@@ -55,106 +55,196 @@
             ?>
 
             <section class="hero">
-                <h1 style="color: var(--success-color);">✓ Agendamento Confirmado!</h1>
-                <p class="subtitle">Seu agendamento foi realizado com sucesso</p>
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; background: var(--success-color); border-radius: 50%; margin-bottom: 1.5rem;">
+                    <span style="font-size: 3rem; color: white;">✓</span>
+                </div>
+                <h1 style="color: var(--success-color); font-size: 2.5rem; margin-bottom: 0.75rem;">Tudo Confirmado!</h1>
+                <p class="subtitle" style="font-size: 1.2rem; max-width: 650px; margin: 0 auto; line-height: 1.6;">
+                    Sua sessão está agendada. Agora é só seguir os próximos passos simples abaixo.
+                </p>
             </section>
 
-            <div style="display: grid; grid-template-columns: 1fr; gap: 2rem;">
+            <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; max-width: 1000px; margin: 0 auto;">
                 <!-- Appointment Details -->
-                <section class="card">
-                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Detalhes do Agendamento</h2>
-                    <div style="background: rgba(124, 179, 66, 0.1); padding: 2rem; border-radius: 15px;">
-                        <p><strong>Paciente:</strong> <?= htmlspecialchars($appointment['full_name']) ?></p>
-                        <p><strong>Serviço:</strong> <?= htmlspecialchars($appointment['service_name']) ?></p>
-                        <p><strong>Data:</strong> <?= date('d/m/Y', strtotime($appointment['appointment_date'])) ?></p>
-                        <p><strong>Horário:</strong> <?= date('H:i', strtotime($appointment['appointment_time'])) ?></p>
-                        <p><strong>Duração:</strong> <?= $appointment['duration'] ?> minutos</p>
-                        <p><strong>Valor:</strong> R$ <?= number_format($appointment['price'], 2, ',', '.') ?></p>
-                        <p><strong>Status:</strong> <span class="status-badge status-confirmed">Confirmado</span></p>
+                <section class="card" style="background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05)); border: 2px solid var(--success-color);">
+                    <h2 style="color: var(--success-color); margin-bottom: 1.5rem; font-size: 1.6rem; font-weight: 600;">📋 Resumo da Sua Sessão</h2>
+                    <div style="background: white; padding: 2.5rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                        <div style="display: grid; gap: 1.25rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                                <span style="font-size: 1.5rem;">👤</span>
+                                <div>
+                                    <p style="margin: 0; font-size: 0.85rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px;">Paciente</p>
+                                    <p style="margin: 0.25rem 0 0 0; font-size: 1.15rem; font-weight: 600; color: var(--text-dark);"><?= htmlspecialchars($appointment['full_name']) ?></p>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 1rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                                <span style="font-size: 1.5rem;">💚</span>
+                                <div>
+                                    <p style="margin: 0; font-size: 0.85rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px;">Serviço</p>
+                                    <p style="margin: 0.25rem 0 0 0; font-size: 1.15rem; font-weight: 600; color: var(--text-dark);"><?= htmlspecialchars($appointment['service_name']) ?></p>
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <span style="font-size: 1.5rem;">📅</span>
+                                    <div>
+                                        <p style="margin: 0; font-size: 0.85rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px;">Data</p>
+                                        <p style="margin: 0.25rem 0 0 0; font-size: 1.15rem; font-weight: 600; color: var(--text-dark);"><?= date('d/m/Y', strtotime($appointment['appointment_date'])) ?></p>
+                                    </div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <span style="font-size: 1.5rem;">⏰</span>
+                                    <div>
+                                        <p style="margin: 0; font-size: 0.85rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px;">Horário</p>
+                                        <p style="margin: 0.25rem 0 0 0; font-size: 1.15rem; font-weight: 600; color: var(--text-dark);"><?= date('H:i', strtotime($appointment['appointment_time'])) ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(0,0,0,0.1);">
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <span style="font-size: 1.5rem;">⏱️</span>
+                                    <div>
+                                        <p style="margin: 0; font-size: 0.85rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px;">Duração</p>
+                                        <p style="margin: 0.25rem 0 0 0; font-size: 1.15rem; font-weight: 600; color: var(--text-dark);"><?= $appointment['duration'] ?> minutos</p>
+                                    </div>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 1rem;">
+                                    <span style="font-size: 1.5rem;">💰</span>
+                                    <div>
+                                        <p style="margin: 0; font-size: 0.85rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px;">Valor</p>
+                                        <p style="margin: 0.25rem 0 0 0; font-size: 1.15rem; font-weight: 600; color: var(--text-dark);">R$ <?= number_format($appointment['price'], 2, ',', '.') ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
                 <!-- Next Steps -->
                 <section class="card">
-                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Próximos Passos</h2>
-                    <div style="display: grid; gap: 1rem;">
-                        <?php if (isset($_SESSION['email_sent']) && $_SESSION['email_sent']): ?>
-                            <div style="padding: 1rem; border-left: 4px solid var(--success-color); background: rgba(124, 179, 66, 0.05);">
-                                <h3 style="color: var(--success-color); margin-bottom: 0.5rem;">✉️ E-mail Enviado</h3>
-                                <p>Um e-mail de confirmação foi enviado para <strong><?= htmlspecialchars($appointment['email']) ?></strong> com todos os detalhes do agendamento.</p>
+                    <h2 style="color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.6rem; font-weight: 600;">✅ O Que Fazer Agora</h2>
+                    
+                    <?php if (isset($_SESSION['email_sent']) && $_SESSION['email_sent']): ?>
+                        <div style="padding: 1.5rem; border-radius: 12px; background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05)); border: 2px solid var(--success-color); margin-bottom: 2rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem;">
+                                <span style="font-size: 1.8rem;">✉️</span>
+                                <h3 style="color: var(--success-color); margin: 0; font-size: 1.2rem; font-weight: 600;">Email de Confirmação Enviado!</h3>
                             </div>
-                        <?php elseif (isset($_SESSION['email_sent']) && !$_SESSION['email_sent']): ?>
-                            <div style="padding: 1rem; border-left: 4px solid var(--warning-color); background: rgba(255, 138, 101, 0.05);">
-                                <h3 style="color: var(--warning-color); margin-bottom: 0.5rem;">⚠️ E-mail Não Enviado</h3>
-                                <p>Houve um problema ao enviar o e-mail de confirmação. Por favor, anote os detalhes do agendamento. Você receberá as informações via WhatsApp.</p>
-                            </div>
-                        <?php endif; ?>
-                        <?php 
-                        // Clear email status from session after displaying
-                        unset($_SESSION['email_sent'], $_SESSION['email_address']); 
-                        ?>
-                        <div style="padding: 1rem; border-left: 4px solid var(--primary-color); background: rgba(139, 154, 139, 0.05);">
-                            <h3 style="color: var(--primary-color); margin-bottom: 0.5rem;">1. Link da Consulta</h3>
-                            <p>Você receberá o link da sala virtual via WhatsApp e email 24 horas antes da consulta.</p>
-                        </div>
-                        <div style="padding: 1rem; border-left: 4px solid var(--secondary-color); background: rgba(168, 200, 236, 0.05);">
-                            <h3 style="color: var(--secondary-color); margin-bottom: 0.5rem;">2. Lembrete</h3>
-                            <p>Você receberá um lembrete com todas as informações necessárias para a consulta.</p>
-                        </div>
-                        <div style="padding: 1rem; border-left: 4px solid var(--accent-color); background: rgba(212, 185, 150, 0.05);">
-                            <h3 style="color: var(--earth-tone); margin-bottom: 0.5rem;">3. Preparação</h3>
-                            <p>Certifique-se de ter uma conexão estável e um ambiente tranquilo para a consulta.</p>
-                            <p style="margin-top: 0.5rem;">
-                                <a href="index.php?page=google_meet_tutorial" style="color: var(--primary-color); font-weight: bold; text-decoration: underline;">
-                                    📱 Ver guia completo: Como acessar a consulta online
-                                </a>
+                            <p style="margin: 0; color: var(--text-dark); line-height: 1.7;">
+                                Enviamos todas as informações para <strong><?= htmlspecialchars($appointment['email']) ?></strong>. 
+                                Verifique sua caixa de entrada (e também o spam, por precaução).
                             </p>
                         </div>
+                    <?php elseif (isset($_SESSION['email_sent']) && !$_SESSION['email_sent']): ?>
+                        <div style="padding: 1.5rem; border-radius: 12px; background: rgba(255, 193, 7, 0.1); border: 2px solid #FFC107; margin-bottom: 2rem;">
+                            <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem;">
+                                <span style="font-size: 1.8rem;">📱</span>
+                                <h3 style="color: #F57C00; margin: 0; font-size: 1.2rem; font-weight: 600;">Você Receberá no WhatsApp</h3>
+                            </div>
+                            <p style="margin: 0; color: var(--text-dark); line-height: 1.7;">
+                                Houve um problema temporário com o email, mas não se preocupe! Enviaremos todas as informações via WhatsApp.
+                            </p>
+                        </div>
+                    <?php endif; ?>
+                    <?php 
+                    // Clear email status from session after displaying
+                    unset($_SESSION['email_sent'], $_SESSION['email_address']); 
+                    ?>
+                    
+                    <!-- Step 1: Payment with 24h rule -->
+                    <div style="background: linear-gradient(135deg, rgba(255, 193, 7, 0.15), rgba(255, 193, 7, 0.08)); padding: 2rem; border-radius: 15px; border: 3px solid #FFC107; margin-bottom: 1.5rem; box-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);">
+                        <div style="display: flex; align-items: start; gap: 1.5rem;">
+                            <div style="width: 50px; height: 50px; background: #FFC107; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; box-shadow: 0 3px 10px rgba(255, 193, 7, 0.4);">1️⃣</div>
+                            <div style="flex: 1;">
+                                <h3 style="margin: 0 0 0.75rem 0; color: #F57C00; font-size: 1.3rem; font-weight: 700;">Realize o Pagamento em até 24 Horas</h3>
+                                <p style="margin: 0 0 1rem 0; color: var(--text-dark); line-height: 1.7; font-size: 1.05rem;">
+                                    <strong>Importante:</strong> Para garantir sua vaga, faça o pagamento <strong>até 24 horas antes da sessão</strong>.
+                                </p>
+                                <div style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+                                    <p style="margin: 0 0 1rem 0; font-weight: 600; color: var(--text-dark); font-size: 1.05rem;">Opções de Pagamento:</p>
+                                    <div style="display: grid; gap: 0.75rem;">
+                                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                            <span style="font-size: 1.3rem;">💸</span>
+                                            <p style="margin: 0; color: var(--text-dark); font-size: 1rem;"><strong>Pix:</strong> Chave enviada por WhatsApp e email</p>
+                                        </div>
+                                        <div style="display: flex; align-items: center; gap: 0.75rem;">
+                                            <span style="font-size: 1.3rem;">🏦</span>
+                                            <p style="margin: 0; color: var(--text-dark); font-size: 1rem;"><strong>Transferência:</strong> Dados bancários no email</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p style="margin: 0; color: var(--text-light); font-size: 0.95rem; font-style: italic;">
+                                    Você já recebeu (ou está recebendo) todas as informações de pagamento por WhatsApp e email.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </section>
-
-                <!-- Contact Information -->
-                <section class="card">
-                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Informações de Contato</h2>
-                    <p><strong>WhatsApp:</strong> <?= htmlspecialchars($appointment['whatsapp']) ?></p>
-                    <p><strong>E-mail:</strong> <?= htmlspecialchars($appointment['email']) ?></p>
-                    <p style="margin-top: 1rem; color: var(--text-light);">
-                        Em caso de dúvidas ou necessidade de remarcar, entre em contato conosco pelo WhatsApp (11) 99999-9999.
-                    </p>
-                </section>
-
-                <!-- Virtual Meeting -->
-                <section class="card">
-                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Sala Virtual</h2>
-                    <p>Sua consulta será realizada via Google Meet. O link da sala será enviado 24 horas antes da consulta:</p>
-                    <div style="background: rgba(139, 154, 139, 0.1); padding: 1rem; border-radius: 10px; margin: 1rem 0;">
-                        <p><strong>Link da Sala:</strong> <span style="color: var(--text-light);">Será enviado 24 horas antes da consulta</span></p>
+                    
+                    <!-- Step 2: Meeting Link -->
+                    <div style="background: white; padding: 2rem; border-radius: 15px; border: 2px solid var(--primary-color); margin-bottom: 1.5rem;">
+                        <div style="display: flex; align-items: start; gap: 1.5rem;">
+                            <div style="width: 50px; height: 50px; background: var(--primary-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; color: white;">2️⃣</div>
+                            <div style="flex: 1;">
+                                <h3 style="margin: 0 0 0.75rem 0; color: var(--primary-color); font-size: 1.3rem; font-weight: 700;">Aguarde o Link da Sala Virtual</h3>
+                                <p style="margin: 0; color: var(--text-dark); line-height: 1.7; font-size: 1.05rem;">
+                                    24 horas antes da sua sessão, você receberá o <strong>link do Google Meet</strong> por WhatsApp e email. 
+                                    É só clicar no link na hora marcada.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <p style="color: var(--text-light); font-size: 0.9rem;">
-                        <strong>Dica:</strong> Teste sua câmera e microfone antes da consulta. Certifique-se de ter uma conexão estável com a internet.
-                    </p>
-                    <div style="text-align: center; margin-top: 1.5rem;">
-                        <a href="index.php?page=google_meet_tutorial" class="btn" style="display: inline-block;">
-                            📱 Como Acessar a Consulta Online
-                        </a>
+                    
+                    <!-- Step 3: Preparation -->
+                    <div style="background: white; padding: 2rem; border-radius: 15px; border: 2px solid var(--accent-color); margin-bottom: 1.5rem;">
+                        <div style="display: flex; align-items: start; gap: 1.5rem;">
+                            <div style="width: 50px; height: 50px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; color: white;">3️⃣</div>
+                            <div style="flex: 1;">
+                                <h3 style="margin: 0 0 0.75rem 0; color: var(--accent-color); font-size: 1.3rem; font-weight: 700;">Prepare-se para a Sessão</h3>
+                                <p style="margin: 0 0 1rem 0; color: var(--text-dark); line-height: 1.7; font-size: 1.05rem;">
+                                    No dia da consulta, escolha um ambiente tranquilo e privado. Teste sua câmera e microfone com antecedência.
+                                </p>
+                                <a href="index.php?page=google_meet_tutorial" class="btn" style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 1rem;">
+                                    📱 Ver Guia: Como Acessar a Consulta Online
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
                 <!-- Important Notes -->
-                <section class="card">
-                    <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Informações Importantes</h2>
-                    <ul style="margin-left: 1.5rem; line-height: 1.8;">
-                        <li>Cancelamentos devem ser feitos com pelo menos 24 horas de antecedência</li>
-                        <li>A sessão terá duração de <?= $appointment['duration'] ?> minutos</li>
-                        <li>Mantenha seu WhatsApp ativo para receber as atualizações</li>
-                        <li>Em caso de problemas técnicos, entre em contato imediatamente</li>
-                    </ul>
+                <section class="card" style="background: linear-gradient(to bottom, rgba(173, 216, 230, 0.08), white); border: 2px solid rgba(173, 216, 230, 0.3);">
+                    <h2 style="color: var(--accent-color); margin-bottom: 1.5rem; font-size: 1.6rem; font-weight: 600;">💡 Informações Importantes</h2>
+                    <div style="display: grid; gap: 1rem;">
+                        <div style="display: flex; align-items: start; gap: 1rem; padding: 1.25rem; background: white; border-radius: 10px;">
+                            <span style="font-size: 1.5rem;">📞</span>
+                            <div>
+                                <p style="margin: 0; color: var(--text-dark); line-height: 1.7; font-size: 1rem;">
+                                    <strong>Seus Contatos:</strong> WhatsApp <?= htmlspecialchars($appointment['whatsapp']) ?> | Email <?= htmlspecialchars($appointment['email']) ?>
+                                </p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: start; gap: 1rem; padding: 1.25rem; background: white; border-radius: 10px;">
+                            <span style="font-size: 1.5rem;">🔄</span>
+                            <div>
+                                <p style="margin: 0; color: var(--text-dark); line-height: 1.7; font-size: 1rem;">
+                                    <strong>Cancelamento ou Remarcação:</strong> Entre em contato pelo WhatsApp com pelo menos 24 horas de antecedência
+                                </p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: start; gap: 1rem; padding: 1.25rem; background: white; border-radius: 10px;">
+                            <span style="font-size: 1.5rem;">📲</span>
+                            <div>
+                                <p style="margin: 0; color: var(--text-dark); line-height: 1.7; font-size: 1rem;">
+                                    <strong>Mantenha o WhatsApp ativo:</strong> Você receberá todas as atualizações e lembretes por lá
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </div>
 
-            <div class="text-center mt-2">
-                <a href="index.php" class="btn">Voltar ao Início</a>
-                <a href="index.php?page=calendar" class="btn btn-secondary">Agendar Outra Consulta</a>
+            <div style="text-align: center; margin-top: 3rem; padding: 2rem 0;">
+                <a href="index.php" class="btn btn-large" style="margin: 0 0.5rem; font-size: 1.1rem; padding: 1rem 2.5rem;">Voltar ao Início</a>
             </div>
         </div>
     </main>
