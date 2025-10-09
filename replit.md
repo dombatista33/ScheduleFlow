@@ -84,6 +84,18 @@ Preferred communication style: Simple, everyday language.
 - **Files Updated**:
   - `includes/email_system.php` - Complete SMTP implementation with SSL/TLS and anti-spam headers, optimized reminder template
 
+### Horizontal Layout for Date and Time Selection (October 9, 2025)
+- **2-Column Layout**: Date and time selection now displayed side by side horizontally
+- **Desktop View**: Calendar on left, time slots on right (grid-template-columns: 1fr 1fr)
+- **Mobile Responsive**: Columns stack vertically on screens < 768px
+- **Improved UX**: 
+  - Clear visual separation between date and time selection
+  - Neutral state message when no date selected: "Aguardando seleção de data"
+  - Color-coded legend at top (Verde = Disponível, Azul = Horários Livres, Cinza = Indisponível)
+- **Files Updated**:
+  - `pages/calendar.php` - 2-column horizontal layout
+  - `assets/css/style.css` - Responsive CSS grid (.calendar-grid-2col)
+
 ### Complete UX/Copywriting Optimization of Booking Flow (October 9, 2025)
 - **Complete 3-Step Flow Redesign**: Restructured entire booking experience with UX/copywriting best practices
 - **Mobile-First Approach**: All pages optimized for mobile devices first, then scaled up for desktop/tablet
