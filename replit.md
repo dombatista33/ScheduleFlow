@@ -60,6 +60,13 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Updates (October 2025)
 
+### Admin Password Update (October 9, 2025)
+- **Password Change**: Updated admin user password from "admin123" to "adminterapia"
+- **Credentials**: 
+  - Username: `admin`
+  - Password: `adminterapia`
+- **Database**: Password hash updated in admin_users table using bcrypt
+
 ### Session Management Fix (October 9, 2025)
 - **Bug Fix**: Eliminated PHP Notice "session_start(): Ignoring session_start() because a session is already active"
 - **admin/login.php**: Removed duplicate `session_start()`, now relies on `config.php` for session initialization
