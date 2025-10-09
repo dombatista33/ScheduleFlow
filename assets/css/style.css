@@ -1405,3 +1405,18 @@ body {
         font-size: 0.9rem;
     }
 }
+/* Calendar grid - 2 columns side by side */
+@media (min-width: 769px) {
+    .calendar-grid-2col {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .calendar-grid-2col {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+    }
+}
+
