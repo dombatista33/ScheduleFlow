@@ -73,6 +73,16 @@ Preferred communication style: Simple, everyday language.
   - Header: home.php, calendar.php, booking.php, confirmation.php, services.php, google_meet_tutorial.php, admin/login.php
   - Footer: Todas as páginas acima + admin/dashboard.php
 - **Branding**: Logo mantém identidade visual com borboleta (símbolo de transformação) e cores roxas/lilás em header e footer
+- **Footer Structure Fix** (October 10, 2025):
+  - **Problema Resolvido**: Corrigida estrutura HTML dos rodapés que estava faltando `<div class="container">`
+  - **Solução Aplicada**: Adicionada `<div class="container">` em todos os footers para centralizar conteúdo e aplicar estilos corretamente
+  - **Arquivos Corrigidos**: 
+    - pages/calendar.php
+    - pages/confirmation.php  
+    - pages/services.php
+    - pages/google_meet_tutorial.php
+    - admin/dashboard.php
+  - **Resultado**: Logo agora aparece corretamente no rodapé com background gradiente para melhor contraste
 
 ### Admin Password Update (October 9, 2025)
 - **Password Change**: Updated admin user password from "admin123" to "adminterapia"
