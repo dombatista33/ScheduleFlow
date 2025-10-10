@@ -10,7 +10,7 @@
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <a href="index.php" class="logo">Terapia e Bem Estar</a>
+                <a href="index.php" class="logo"><img src="assets/images/logo-dra-daniela.png" alt="Dra. Daniela Lima - Psicóloga"></a>
                 <nav class="nav">
                     <a href="index.php">Início</a>
                     <a href="index.php?page=services" class="active">Serviços</a>
