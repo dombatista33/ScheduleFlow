@@ -8,7 +8,7 @@
 </head>
 <body>
     <header class="header">
-
+        <div class="container">
             <div class="header-content">
                 <a href="index.php" class="logo"><img src="assets/images/logo-dra-daniela.png" alt="Dra. Daniela Lima - Psicóloga"></a>
                 <nav class="nav">
@@ -22,7 +22,7 @@
     </header>
 
     <main class="main">
-
+        <div class="container">
             <section class="hero">
                 <h1>Nossos Serviços</h1>
                 <p class="subtitle">Escolha o tipo de atendimento que melhor atende às suas necessidades</p>

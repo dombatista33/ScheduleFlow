@@ -8,7 +8,7 @@
 </head>
 <body>
     <header class="header">
-
+        <div class="container">
             <div class="header-content">
                 <a href="index.php" class="logo"><img src="assets/images/logo-dra-daniela.png" alt="Dra. Daniela Lima - Psicóloga"></a>
                 <nav class="nav">
@@ -22,7 +22,7 @@
     </header>
 
     <main class="main">
-
+        <div class="container">
             <?php
             global $pdo;
             $appointment_id = $_GET['appointment_id'] ?? null;
@@ -241,11 +241,10 @@
                         </div>
                     </div>
                 </section>
-            </div>
 
-            <div style="text-align: center; margin-top: 3rem; padding: 2rem 0;">
-                <a href="index.php" class="btn btn-large" style="margin: 0 0.5rem; font-size: 1.1rem; padding: 1rem 2.5rem;">Voltar ao Início</a>
-            </div>
+                <div style="text-align: center; margin-top: 3rem; padding: 2rem 0;">
+                    <a href="index.php" class="btn btn-large" style="margin: 0 0.5rem; font-size: 1.1rem; padding: 1rem 2.5rem;">Voltar ao Início</a>
+                </div>
         </div>
     </main>
 

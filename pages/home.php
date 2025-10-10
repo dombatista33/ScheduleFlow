@@ -9,7 +9,7 @@
 </head>
 <body>
     <header class="header">
-
+        <div class="container">
             <div class="header-content">
                 <a href="index.php" class="logo"><img src="assets/images/logo-dra-daniela.png" alt="Dra. Daniela Lima - Psicóloga"></a>
                 <nav class="nav">
@@ -23,9 +23,9 @@
     </header>
 
     <main class="main">
-        <!-- Hero Section with Focus on Online Scheduling -->
-        <section class="hero-main">
-    
+        <div class="container">
+            <!-- Hero Section with Focus on Online Scheduling -->
+            <section class="hero-main">
                 <div class="hero-content">
                     <div class="hero-text">
                         <h1>Cuide de Você, de Onde Estiver</h1>
@@ -58,12 +58,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- First Consultation Section -->
-        <section class="about-section">
-    
+            <!-- First Consultation Section -->
+            <section class="about-section">
                 <div class="about-content">
                     <h2>Sua Primeira Consulta: Tudo que Você Precisa Saber</h2>
                     <p>Entendemos que usar novas ferramentas pode gerar dúvidas. Se você não tem familiaridade com o Google Meet (nossa plataforma para as sessões), não se preocupe!</p>
@@ -72,12 +70,10 @@
                         Comece hoje mesmo a jornada em direção ao seu bem-estar!
                     </p>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Contact Information Section -->
-        <section class="contact-section">
-    
+            <!-- Contact Information Section -->
+            <section class="contact-section">
                 <h2>Entre em Contato</h2>
                 <div class="contact-grid">
                     <div class="contact-card">
@@ -101,12 +97,10 @@
                         <span class="contact-note">Consultas Online via Google Meet</span>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <!-- Quick Services Preview -->
-        <section class="services-quick">
-    
+            <!-- Quick Services Preview -->
+            <section class="services-quick">
                 <h2>Tipos de Consulta</h2>
                 <div class="services-quick-grid">
                     <div class="service-quick-card">
@@ -128,8 +122,8 @@
                 <div class="text-center" style="margin-top: 2rem;">
                     <a href="index.php?page=services" class="btn-secondary">Ver Detalhes dos Serviços</a>
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </main>
 
     <footer class="footer">
