@@ -1370,6 +1370,10 @@ body {
         gap: 1rem;
     }
     
+    .logo img {
+        height: 35px;
+    }
+    
     .admin-header .header-content h1 {
         font-size: 1.5rem;
     }
@@ -1386,6 +1390,10 @@ body {
     .card {
         padding: 1.5rem;
         margin-bottom: 1rem;
+    }
+    
+    .logo img {
+        height: 30px;
     }
     
     .admin-header .header-content h1 {
