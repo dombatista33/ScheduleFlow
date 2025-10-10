@@ -67,3 +67,13 @@
 2025-10-09 09:06:15 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
 2025-10-09 09:12:47 | FAILED | ReplitEmail | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
 2025-10-09 09:12:48 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-09 09:24:42 | FAILED | ReplitEmail | TO: hd3publicidade@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-09 09:24:43 | SUCCESS | TO: hd3publicidade@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-09 13:01:12 | SUCCESS | TO: hd3publicidade@uol.com.br | SUBJECT: Sua sessão de amanhã (10/10/2025) - Dra. Daniela Lima
+2025-10-09 13:01:12 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Sua sessão de amanhã (10/10/2025) - Dra. Daniela Lima
+2025-10-09 13:01:13 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Sua sessão de amanhã (10/10/2025) - Dra. Daniela Lima
+2025-10-09 13:05:35 | FAILED | ReplitEmail | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-09 13:05:36 | SUCCESS | TO: dombatista@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-10 20:49:19 | FAILED | ReplitEmail | TO: hamilton.rossiter@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-10 20:49:20 | SUCCESS | TO: hamilton.rossiter@uol.com.br | SUBJECT: Confirmação de Agendamento - Terapia e Bem Estar
+2025-10-10 20:49:32 | SUCCESS | TO: hamilton.rossiter@uol.com.br | SUBJECT: Sua sessão de amanhã (13/10/2025) - Dra. Daniela Lima
