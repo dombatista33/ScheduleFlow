@@ -64,11 +64,11 @@ Preferred communication style: Simple, everyday language.
 - **Logo Visual**: Implementada logo profissional da Dra. Daniela Lima com borboleta roxa
 - **Arquivo**: `assets/images/logo-dra-daniela.png` 
 - **Integração Completa**: Logo substituída em todas as páginas (cliente e administrativo)
-- **Header Otimizado**: Faixa do topo ajustada (padding: 1.2rem) para melhor acomodar a logo
+- **Header Otimizado**: Faixa do topo ajustada (padding: 1.5rem) para melhor acomodar a logo
 - **CSS Responsivo**: 
-  - Desktop (>768px): 50px de altura no header, 40px no footer
-  - Tablet (<=768px): 35px de altura  
-  - Mobile (<480px): 30px de altura
+  - Desktop (>768px): 65px de altura no header, 50px no footer
+  - Tablet (<=768px): 45px de altura  
+  - Mobile (<480px): 40px de altura
 - **Páginas Atualizadas**: 
   - Header: home.php, calendar.php, booking.php, confirmation.php, services.php, google_meet_tutorial.php, admin/login.php
   - Footer: Todas as páginas acima + admin/dashboard.php
