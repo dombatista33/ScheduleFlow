@@ -30,44 +30,41 @@
             ?>
 
             <!-- Progress Indicator -->
-            <div style="max-width: 800px; margin: 2rem auto 3rem;">
+            <div class="progress-indicator">
                 <div style="display: flex; justify-content: space-between; align-items: center; position: relative;">
-                    <div style="position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: #e0e0e0; z-index: 0;"></div>
-                    
-                    <div style="display: flex; flex-direction: column; align-items: center; z-index: 1;">
-                        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 0.5rem;">1</div>
-                        <span style="font-size: 0.85rem; font-weight: 600; color: var(--primary-color);">Encontre Seu Horário</span>
+                    <div class="progress-track"></div>
+                    <div class="progress-step active">
+                        <div class="progress-number">1</div>
+                        <span class="progress-label">Encontre Seu Horário</span>
                     </div>
-                    
-                    <div style="display: flex; flex-direction: column; align-items: center; z-index: 1;">
-                        <div style="width: 40px; height: 40px; border-radius: 50%; background: #e0e0e0; color: #999; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 0.5rem;">2</div>
-                        <span style="font-size: 0.85rem; color: #999;">Seus Dados</span>
+                    <div class="progress-step">
+                        <div class="progress-number">2</div>
+                        <span class="progress-label">Seus Dados</span>
                     </div>
-                    
-                    <div style="display: flex; flex-direction: column; align-items: center; z-index: 1;">
-                        <div style="width: 40px; height: 40px; border-radius: 50%; background: #e0e0e0; color: #999; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-bottom: 0.5rem;">3</div>
-                        <span style="font-size: 0.85rem; color: #999;">Revisão</span>
+                    <div class="progress-step">
+                        <div class="progress-number">3</div>
+                        <span class="progress-label">Revisão</span>
                     </div>
                 </div>
             </div>
 
             <section class="hero">
-                <h1 style="color: var(--primary-color); font-size: 2.2rem; margin-bottom: 0.75rem;">Escolha Data e Horário</h1>
-                <p class="subtitle" style="color: var(--text-light); font-size: 1.15rem; max-width: 750px; margin: 0 auto 1rem; line-height: 1.6;">
+                <h1 class="calendar-title">Escolha Data e Horário</h1>
+                <p class="calendar-subtitle">
                     Selecione a data e o horário que melhor funcionam para você. É rápido e simples.
                 </p>
-                <div style="max-width: 850px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; align-items: center;">
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                        <div style="width: 20px; height: 20px; background: #4CAF50; border-radius: 4px;"></div>
-                        <span style="color: var(--text-dark); font-size: 0.95rem;">Verde = Disponível</span>
+                <div class="calendar-legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #4CAF50;"></div>
+                        <span>Verde = Disponível</span>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                        <div style="width: 20px; height: 20px; background: #2196F3; border-radius: 4px;"></div>
-                        <span style="color: var(--text-dark); font-size: 0.95rem;">Azul = Horários Livres</span>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #2196F3;"></div>
+                        <span>Azul = Horários Livres</span>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
-                        <div style="width: 20px; height: 20px; background: #ccc; border-radius: 4px;"></div>
-                        <span style="color: var(--text-dark); font-size: 0.95rem;">Cinza = Indisponível</span>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ccc;"></div>
+                        <span>Cinza = Indisponível</span>
                     </div>
                 </div>
             </section>
