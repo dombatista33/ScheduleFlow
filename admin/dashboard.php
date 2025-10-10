@@ -53,7 +53,7 @@ $action = $_GET['action'] ?? 'appointments';
 </head>
 <body>
     <header class="admin-header">
-        <div class="container">
+
             <div class="header-content">
                 <h1 style="color: white; margin: 0;">Painel Administrativo</h1>
                 <div>
@@ -65,7 +65,7 @@ $action = $_GET['action'] ?? 'appointments';
     </header>
 
     <main class="main">
-        <div class="container">
+
             <button class="admin-menu-toggle" id="adminMenuToggle" aria-label="Abrir menu de navegação">
                 ☰ Menu
             </button>
@@ -105,7 +105,9 @@ $action = $_GET['action'] ?? 'appointments';
     </main>
 
     <footer class="footer">
-        <div class="container">
+
+            <div class="logo-footer"><img src="../assets/images/logo-dra-daniela.png" alt="Dra. Daniela Lima - Psicóloga"></div>
+
             <p>&copy; 2024 Terapia e Bem Estar - Painel Administrativo</p>
         </div>
     </footer>
