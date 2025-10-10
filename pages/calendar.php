@@ -31,7 +31,7 @@
 
             <!-- Progress Indicator -->
             <div class="progress-indicator">
-                <div style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+                <div class="progress-steps">
                     <div class="progress-track"></div>
                     <div class="progress-step active">
                         <div class="progress-number">1</div>
@@ -55,26 +55,26 @@
                 </p>
                 <div class="calendar-legend">
                     <div class="legend-item">
-                        <div class="legend-color" style="background: #4CAF50;"></div>
+                        <div class="legend-color legend-color-available"></div>
                         <span>Verde = Disponível</span>
                     </div>
                     <div class="legend-item">
-                        <div class="legend-color" style="background: #2196F3;"></div>
+                        <div class="legend-color legend-color-free"></div>
                         <span>Azul = Horários Livres</span>
                     </div>
                     <div class="legend-item">
-                        <div class="legend-color" style="background: #ccc;"></div>
+                        <div class="legend-color legend-color-unavailable"></div>
                         <span>Cinza = Indisponível</span>
                     </div>
                 </div>
             </section>
 
-            <div class="calendar-grid-2col" style="gap: 2rem; max-width: 1200px; margin: 0 auto;">
+            <div class="calendar-grid-2col">
                 <!-- Left Column: Choose Date -->
                 <section class="card">
-                    <div style="margin-bottom: 1.5rem;">
-                        <h2 style="color: var(--primary-color); margin-bottom: 0.5rem; font-size: 1.4rem; font-weight: 600;">📅 Selecione a Data</h2>
-                        <p style="color: var(--text-light); margin: 0; line-height: 1.6; font-size: 0.95rem;">
+                    <div class="card-header">
+                        <h2 class="card-title">📅 Selecione a Data</h2>
+                        <p class="card-description">
                             Clique em qualquer dia verde
                         </p>
                     </div>
@@ -84,20 +84,20 @@
                 </section>
                 
                 <!-- Right Column: Choose Time -->
-                <section class="card" style="<?php if ($selected_date): ?>background: linear-gradient(to bottom, rgba(33, 150, 243, 0.08), white); border: 2px solid rgba(33, 150, 243, 0.3);<?php endif; ?>">
-                    <div style="margin-bottom: 1.5rem;">
-                        <h2 style="color: #2196F3; margin-bottom: 0.5rem; font-size: 1.4rem; font-weight: 600;">⏰ Selecione o Horário</h2>
+                <section class="card <?php if ($selected_date): ?>card-active<?php endif; ?>">
+                    <div class="card-header">
+                        <h2 class="card-title card-title-time">⏰ Selecione o Horário</h2>
                         <?php if ($selected_date): ?>
-                            <div style="background: white; padding: 1rem; border-radius: 8px; border-left: 4px solid #2196F3; margin-bottom: 1rem;">
-                                <p style="color: var(--text-dark); margin: 0; font-size: 1rem;">
+                            <div class="selected-date-box">
+                                <p>
                                     <strong><?= date('d/m/Y', strtotime($selected_date)) ?></strong>
                                 </p>
                             </div>
-                            <p style="color: var(--text-light); margin: 0; line-height: 1.6; font-size: 0.95rem;">
+                            <p class="card-description">
                                 Clique em um horário azul disponível
                             </p>
                         <?php else: ?>
-                            <p style="color: var(--text-light); margin: 0; line-height: 1.6; font-size: 0.95rem;">
+                            <p class="card-description">
                                 Primeiro selecione uma data ao lado
                             </p>
                         <?php endif; ?>
@@ -137,7 +137,7 @@
                                 <div class="time-periods">
                                     <?php if (!empty($morning)): ?>
                                         <div class="time-period">
-                                            <h4 style="color: var(--primary-color); display: flex; align-items: center; gap: 0.5rem;">🌅 Manhã</h4>
+                                            <h4 class="time-period-title">🌅 Manhã</h4>
                                             <div class="time-slots">
                                                 <?php foreach($morning as $time): ?>
                                                     <div class="time-slot <?= $selected_time == $time ? 'selected' : '' ?>" 
@@ -151,7 +151,7 @@
                                     
                                     <?php if (!empty($afternoon)): ?>
                                         <div class="time-period">
-                                            <h4 style="color: var(--primary-color); display: flex; align-items: center; gap: 0.5rem;">☀️ Tarde</h4>
+                                            <h4 class="time-period-title">☀️ Tarde</h4>
                                             <div class="time-slots">
                                                 <?php foreach($afternoon as $time): ?>
                                                     <div class="time-slot <?= $selected_time == $time ? 'selected' : '' ?>" 
@@ -165,7 +165,7 @@
                                     
                                     <?php if (!empty($evening)): ?>
                                         <div class="time-period">
-                                            <h4 style="color: var(--primary-color); display: flex; align-items: center; gap: 0.5rem;">🌙 Noite</h4>
+                                            <h4 class="time-period-title">🌙 Noite</h4>
                                             <div class="time-slots">
                                                 <?php foreach($evening as $time): ?>
                                                     <div class="time-slot <?= $selected_time == $time ? 'selected' : '' ?>" 
@@ -179,39 +179,39 @@
                                 </div>
                                 
                                 <?php if ($selected_time): ?>
-                                    <div style="margin-top: 2rem; text-align: center; padding: 2.5rem; background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.05)); border-radius: 15px; border: 2px solid var(--success-color);">
-                                        <div style="display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: var(--success-color); border-radius: 50%; margin-bottom: 1rem;">
-                                            <span style="font-size: 2rem; color: white;">✓</span>
+                                    <div class="success-box">
+                                        <div class="success-icon">
+                                            <span>✓</span>
                                         </div>
-                                        <h3 style="color: var(--success-color); margin: 0 0 0.5rem 0; font-size: 1.4rem; font-weight: 600;">Perfeito!</h3>
-                                        <p style="color: var(--text-dark); margin: 0 0 1.5rem 0; font-size: 1.1rem;">
+                                        <h3 class="success-title">Perfeito!</h3>
+                                        <p class="success-text">
                                             <strong><?= date('d/m/Y', strtotime($selected_date)) ?> às <?= date('H:i', strtotime($selected_time)) ?></strong>
                                         </p>
                                         <a href="index.php?page=booking&date=<?= urlencode($selected_date) ?>&time=<?= urlencode($selected_time) ?><?= isset($_GET['service_id']) ? '&service_id=' . urlencode($_GET['service_id']) : '' ?>" 
-                                           class="btn btn-large" style="font-size: 1.15rem; padding: 1.2rem 3rem;">
+                                           class="btn btn-large btn-continue">
                                             Continuar →
                                         </a>
                                     </div>
                                 <?php endif; ?>
                             <?php else: ?>
-                                <div style="text-align: center; padding: 2.5rem; background: rgba(255, 138, 101, 0.1); border-radius: 15px; border: 2px solid rgba(255, 138, 101, 0.3);">
-                                    <div style="font-size: 3rem; margin-bottom: 1rem;">📅</div>
-                                    <p style="color: var(--text-dark); margin: 0 0 0.5rem 0; font-size: 1.15rem; font-weight: 600;">Ops! Esta data está cheia</p>
-                                    <p style="color: var(--text-light); margin: 0; font-size: 1rem;">Não se preocupe, escolha outra data verde no calendário acima.</p>
+                                <div class="warning-box">
+                                    <div class="warning-icon">📅</div>
+                                    <p class="warning-title">Ops! Esta data está cheia</p>
+                                    <p class="warning-text">Não se preocupe, escolha outra data verde no calendário acima.</p>
                                 </div>
                             <?php endif;
                         } catch(PDOException $e) {
-                            echo '<div style="text-align: center; padding: 2rem; background: rgba(255, 138, 101, 0.1); border-radius: 10px;"><p style="color: var(--warning-color);">Erro ao carregar horários disponíveis.</p></div>';
+                            echo '<div class="error-box"><p>Erro ao carregar horários disponíveis.</p></div>';
                         }
                         } elseif (!$selected_date) {
                             // Show neutral prompt when no date is selected
-                            echo '<div style="text-align: center; padding: 3rem 2rem; background: rgba(139, 154, 139, 0.05); border-radius: 15px; border: 2px dashed var(--primary-color);">
-                                    <div style="font-size: 3rem; margin-bottom: 1rem;">📆</div>
-                                    <p style="color: var(--text-dark); margin: 0 0 0.5rem 0; font-size: 1.1rem; font-weight: 500;">Aguardando seleção de data</p>
-                                    <p style="color: var(--text-light); margin: 0; font-size: 0.95rem;">Clique em um dia verde no calendário ao lado para ver os horários disponíveis</p>
+                            echo '<div class="empty-state-box">
+                                    <div class="empty-state-icon">📆</div>
+                                    <p class="empty-state-title">Aguardando seleção de data</p>
+                                    <p class="empty-state-text">Clique em um dia verde no calendário ao lado para ver os horários disponíveis</p>
                                 </div>';
                         } else {
-                            echo '<div style="text-align: center; padding: 2rem; background: rgba(255, 138, 101, 0.1); border-radius: 10px;"><p style="color: var(--warning-color);">Erro de conexão com banco de dados.</p></div>';
+                            echo '<div class="error-box"><p>Erro de conexão com banco de dados.</p></div>';
                         }
                         ?>
                     </div>
@@ -247,17 +247,17 @@
                 <div class="calendar">
                     <div class="calendar-header">
                         <button class="calendar-nav" onclick="changeMonth(-1)">&lt;</button>
-                        <h3 id="month-year" style="color: var(--primary-color); font-weight: 600;">${getMonthName(currentMonth)} ${currentYear}</h3>
+                        <h3 id="month-year" class="calendar-month-year">${getMonthName(currentMonth)} ${currentYear}</h3>
                         <button class="calendar-nav" onclick="changeMonth(1)">&gt;</button>
                     </div>
                     <div class="calendar-grid">
-                        <div style="font-weight: bold; background: var(--primary-color); color: white; padding: 0.5rem; text-align: center;">Dom</div>
-                        <div style="font-weight: bold; background: var(--primary-color); color: white; padding: 0.5rem; text-align: center;">Seg</div>
-                        <div style="font-weight: bold; background: var(--primary-color); color: white; padding: 0.5rem; text-align: center;">Ter</div>
-                        <div style="font-weight: bold; background: var(--primary-color); color: white; padding: 0.5rem; text-align: center;">Qua</div>
-                        <div style="font-weight: bold; background: var(--primary-color); color: white; padding: 0.5rem; text-align: center;">Qui</div>
-                        <div style="font-weight: bold; background: var(--primary-color); color: white; padding: 0.5rem; text-align: center;">Sex</div>
-                        <div style="font-weight: bold; background: var(--primary-color); color: white; padding: 0.5rem; text-align: center;">Sáb</div>
+                        <div class="calendar-weekday">Dom</div>
+                        <div class="calendar-weekday">Seg</div>
+                        <div class="calendar-weekday">Ter</div>
+                        <div class="calendar-weekday">Qua</div>
+                        <div class="calendar-weekday">Qui</div>
+                        <div class="calendar-weekday">Sex</div>
+                        <div class="calendar-weekday">Sáb</div>
             `;
             
             // Generate calendar days
