@@ -105,9 +105,8 @@ $action = $_GET['action'] ?? 'appointments';
     </main>
 
     <footer class="footer">
-
+        <div class="container">
             <div class="logo-footer"><img src="../assets/images/logo-dra-daniela.png" alt="Dra. Daniela Lima - Psicóloga"></div>
-
             <p>&copy; 2024 Terapia e Bem Estar - Painel Administrativo</p>
         </div>
     </footer>
