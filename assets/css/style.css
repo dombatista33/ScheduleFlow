@@ -37,7 +37,7 @@ body {
 .header {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: var(--white);
-    padding: 1.2rem 0;
+    padding: 1.5rem 0;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -59,7 +59,7 @@ body {
 }
 
 .logo img {
-    height: 50px;
+    height: 65px;
     width: auto;
     display: block;
 }
@@ -469,7 +469,7 @@ body {
 }
 
 .footer .logo-footer img {
-    height: 40px;
+    height: 50px;
     width: auto;
     opacity: 0.9;
 }
@@ -1382,7 +1382,7 @@ body {
     }
     
     .logo img {
-        height: 35px;
+        height: 45px;
     }
     
     .admin-header .header-content h1 {
@@ -1404,7 +1404,7 @@ body {
     }
     
     .logo img {
-        height: 30px;
+        height: 40px;
     }
     
     .admin-header .header-content h1 {
