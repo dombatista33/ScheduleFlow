@@ -60,6 +60,16 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Updates (October 2025)
 
+### Layout Centralizado Responsivo (October 10, 2025)
+- **Desktop Layout**: Implementado layout com largura máxima (1200px) centralizado horizontalmente
+- **Estrutura Corrigida**: Adicionado `<div class="container">` em header, main e footer de todas as páginas
+- **Páginas Atualizadas**:
+  - Cliente: home.php, calendar.php, booking.php, confirmation.php, services.php, google_meet_tutorial.php
+  - Admin: dashboard.php
+- **Responsividade**: Layout se adapta automaticamente - centralizado em desktop (>1200px), largura total em mobile
+- **CSS Mantido**: Utiliza classe `.container` existente (max-width: 1200px, margin: 0 auto, padding: 0 20px)
+- **Benefícios**: Melhor leitura em telas grandes, conteúdo não esticado na largura total da tela
+
 ### Logo Profissional Implementada (October 10, 2025)
 - **Logo Visual**: Implementada logo profissional da Dra. Daniela Lima com borboleta roxa
 - **Arquivo**: `assets/images/logo-dra-daniela.png` 
