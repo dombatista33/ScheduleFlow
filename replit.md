@@ -60,6 +60,17 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Updates (October 2025)
 
+### Logo Profissional Implementada (October 10, 2025)
+- **Logo Visual**: Implementada logo profissional da Dra. Daniela Lima com borboleta roxa
+- **Arquivo**: `assets/images/logo-dra-daniela.png` 
+- **Integração Completa**: Logo substituída em todas as páginas (cliente e administrativo)
+- **CSS Responsivo**: 
+  - Desktop (>768px): 45px de altura
+  - Tablet (<=768px): 35px de altura  
+  - Mobile (<480px): 30px de altura
+- **Páginas Atualizadas**: home.php, calendar.php, booking.php, confirmation.php, services.php, google_meet_tutorial.php, admin/login.php
+- **Branding**: Logo mantém identidade visual com borboleta (símbolo de transformação) e cores roxas/lilás
+
 ### Admin Password Update (October 9, 2025)
 - **Password Change**: Updated admin user password from "admin123" to "adminterapia"
 - **Credentials**: 
