@@ -1,230 +1,39 @@
 # Terapia e Bem Estar - Online Therapy Appointment System
 
 ## Overview
-
-This is a web-based appointment scheduling system for "Terapia e Bem Estar" (terapiaebemestar.com.br), designed for Dr. Daniela Lima, an online psychologist specializing in Cognitive Behavioral Therapy. The application provides a complete booking system where clients can view available appointment slots, schedule sessions, and manage their bookings. The system includes both client-facing functionality and an administrative panel for the therapist to manage appointments, availability, and client information.
+"Terapia e Bem Estar" is a web-based appointment scheduling system for Dr. Daniela Lima, an online psychologist specializing in Cognitive Behavioral Therapy. The platform allows clients to view availability, book sessions, and manage appointments, while providing an administrative panel for the therapist to manage bookings, availability, and client information. The system aims to streamline the booking process for online therapy sessions and enhance client-therapist interaction.
 
 ## User Preferences
-
 Preferred communication style: Simple, everyday language.
 
 ## System Architecture
 
-### Frontend Architecture
-- **Technology Stack**: HTML, CSS, JavaScript with mobile-first responsive design
-- **Design Philosophy**: Minimalist, calming aesthetic using neutral colors (sage green, light blue, beige, off-white)
-- **User Interface**: Clean, accessible forms with real-time validation and Brazilian phone number formatting
-- **Responsive Design**: Mobile-first approach ensuring optimal experience across all devices
+### UI/UX Decisions
+The design emphasizes a minimalist, calming aesthetic using a neutral color palette (sage green, light blue, beige, off-white). It employs a mobile-first responsive design approach, ensuring accessibility and optimal experience across all devices. The user interface features clean, accessible forms with real-time validation, Brazilian phone number formatting, and a clear, direct copywriting style throughout the booking flow.
 
-### Backend Architecture
-- **Server Technology**: PHP for server-side processing and business logic
-- **Database**: PostgreSQL (Replit-hosted) for data persistence
-- **Session Management**: Standard PHP sessions for user state management
-- **Form Processing**: Server-side validation and sanitization of user inputs
-- **Automated Tasks**: Daily cron-like workflow for sending appointment reminders via email
+### Technical Implementations
+- **Frontend**: HTML, CSS (with CSS Grid and Flexbox for responsiveness), and vanilla JavaScript for dynamic elements. Uses system fonts for performance.
+- **Backend**: PHP for server-side logic, processing, and session management.
+- **Database**: PostgreSQL (Replit-hosted) for all data persistence, utilizing environment variables for secure connection.
+- **Security**: Includes client-side and server-side input validation, data sanitization to prevent SQL injection and XSS, and secure authentication for administrative access with bcrypt password hashing.
 
-### Data Storage Solutions
-- **Primary Database**: PostgreSQL (Replit-hosted) with environment variable DATABASE_URL
-- **Database Schema**: Five main tables:
-  - `admin_users`: Administrator accounts with password hashing
-  - `appointments`: Scheduled therapy sessions with client and service references
-  - `clients`: Client information including contact details
-  - `services`: Available therapy services with pricing and duration
-  - `time_slots`: Available appointment slots by date and time
-- **Data Security**: Password hashing with bcrypt, secure credential management via environment variables
+### Feature Specifications
+- **Appointment Scheduling**: Interactive calendar for clients to select and book available time slots.
+- **Service Management**: Supports multiple therapy services with customizable pricing and duration.
+- **Client Management**: Comprehensive client information collection and storage.
+- **Administrative Panel**: A secure backend interface for managing appointments, client data, and availability.
+- **Automated Confirmations & Reminders**: System sends automated booking confirmations and 24-hour appointment reminders via email.
+- **Google Meet Integration**: Provides step-by-step tutorials for both clients and the therapist on using Google Meet for online consultations.
+- **Booking Flow Redesign**: A 3-step mobile-first booking process with clear visual feedback, simplified forms, and redesigned payment options (Pix, Bank Transfer).
 
-### Authentication and Authorization
-- **Admin Access**: Secure login system for Dr. Daniela Lima to access administrative panel
-- **Client Sessions**: Session-based tracking for appointment booking process
-- **Role-based Access**: Separation between client-facing features and administrative functions
-
-### Core Features
-- **Appointment Scheduling**: Interactive calendar system showing available time slots
-- **Service Management**: Multiple therapy services (Initial Consultation, Follow-up Sessions, Couples Therapy)
-- **Client Management**: Complete client information collection and storage
-- **Administrative Panel**: Backend interface for managing appointments, availability, and client data
-- **Confirmation System**: Automated booking confirmation with payment and virtual meeting room information
-- **Email Reminders**: Automated email reminder system that sends notifications 24 hours before appointments
-- **Google Meet Integration**: Complete tutorials for both clients and therapist on how to access online consultations via Google Meet on mobile devices
+### System Design Choices
+- **Responsive Layouts**: Implemented a centralized, responsive layout with a maximum width for desktop, adapting seamlessly to mobile devices.
+- **Email System**: Robust SMTP-based email system with production-grade configuration (SSL/TLS, anti-spam headers) for reliable communication.
+- **Session Management**: Standard PHP sessions are used for maintaining user state.
 
 ## External Dependencies
 
-### Database Connection
-- **MySQL Server**: Remote database hosting with connection credentials
-- **Database Name**: `terapiae_terapia`
-- **Database User**: `terapiae_terapia` with appropriate permissions
-
-### Web Hosting
-- **Domain**: terapiaebemestar.com.br
-- **Hosting Environment**: PHP-enabled web server with MySQL database support
-
-## Recent Updates (October 2025)
-
-### Layout Centralizado Responsivo (October 10, 2025)
-- **Desktop Layout**: Implementado layout com largura máxima (1200px) centralizado horizontalmente
-- **Estrutura Corrigida**: Adicionado `<div class="container">` em header, main e footer de todas as páginas
-- **Páginas Atualizadas**:
-  - Cliente: home.php, calendar.php, booking.php, confirmation.php, services.php, google_meet_tutorial.php
-  - Admin: dashboard.php
-- **Responsividade**: Layout se adapta automaticamente - centralizado em desktop (>1200px), largura total em mobile
-- **CSS Mantido**: Utiliza classe `.container` existente (max-width: 1200px, margin: 0 auto, padding: 0 20px)
-- **Benefícios**: Melhor leitura em telas grandes, conteúdo não esticado na largura total da tela
-
-### Logo Profissional Implementada (October 10, 2025)
-- **Logo Visual**: Implementada logo profissional da Dra. Daniela Lima com borboleta roxa
-- **Arquivo**: `assets/images/logo-dra-daniela.png` 
-- **Integração Completa**: Logo substituída em todas as páginas (cliente e administrativo)
-- **Header Otimizado**: Faixa do topo ajustada (padding: 1.5rem) para melhor acomodar a logo
-- **CSS Responsivo**: 
-  - Desktop (>768px): 65px de altura no header, 50px no footer
-  - Tablet (<=768px): 45px de altura  
-  - Mobile (<480px): 40px de altura
-- **Páginas Atualizadas**: 
-  - Header: home.php, calendar.php, booking.php, confirmation.php, services.php, google_meet_tutorial.php, admin/login.php
-  - Footer: Todas as páginas acima + admin/dashboard.php
-- **Branding**: Logo mantém identidade visual com borboleta (símbolo de transformação) e cores roxas/lilás em header e footer
-- **Footer Structure Fix** (October 10, 2025):
-  - **Problema Resolvido**: Corrigida estrutura HTML dos rodapés que estava faltando `<div class="container">`
-  - **Solução Aplicada**: Adicionada `<div class="container">` em todos os footers para centralizar conteúdo e aplicar estilos corretamente
-  - **Arquivos Corrigidos**: 
-    - pages/calendar.php
-    - pages/confirmation.php  
-    - pages/services.php
-    - pages/google_meet_tutorial.php
-    - admin/dashboard.php
-  - **Resultado**: Logo agora aparece corretamente no rodapé com background gradiente para melhor contraste
-
-### Admin Password Update (October 9, 2025)
-- **Password Change**: Updated admin user password from "admin123" to "adminterapia"
-- **Credentials**: 
-  - Username: `admin`
-  - Password: `adminterapia`
-- **Database**: Password hash updated in admin_users table using bcrypt
-
-### Session Management Fix (October 9, 2025)
-- **Bug Fix**: Eliminated PHP Notice "session_start(): Ignoring session_start() because a session is already active"
-- **admin/login.php**: Removed duplicate `session_start()`, now relies on `config.php` for session initialization
-- **admin/google_meet_guide.php**: Added `session_status()` check before starting session
-- **Centralized Session Management**: All admin pages now follow consistent session handling pattern
-- **Files Updated**:
-  - `admin/login.php` - Removed duplicate session_start
-  - `admin/google_meet_guide.php` - Added session guard
-
-### Email System Configuration with Production SMTP (October 8, 2025)
-- **SMTP Server Configuration**: Configured production SMTP server (srv96.prodns.com.br) with port 465 for secure email delivery
-- **SSL/TLS Implementation**: Implemented implicit SSL/TLS encryption using port 465 with proper certificate verification
-- **Anti-Spam Headers**: Added comprehensive email headers to prevent spam filtering:
-  - Message-ID generation with unique timestamps
-  - Return-Path configuration
-  - Proper Date headers in RFC format
-  - Content-Transfer-Encoding optimization
-- **Authentication System**: Configured AUTH LOGIN with base64 encoding for secure SMTP authentication
-- **Fallback Mechanism**: Implemented fallback SMTP connection for certificate verification issues
-- **Email Logging**: Enhanced logging system to track successful and failed email deliveries
-- **Environment Variables**: Secure credential management using Replit Secrets:
-  - SMTP_HOST: srv96.prodns.com.br
-  - SMTP_PORT: 465
-  - EMAIL_USERNAME: contato@terapiaebemestar.com.br
-  - EMAIL_PASSWORD: (stored securely)
-- **Reminder Email Optimization** (October 8, 2025):
-  - **Subject Line**: Changed from "Lembrete: Sua consulta é amanhã" to "Sua sessão de amanhã (DD/MM/AAAA) - Dra. Daniela Lima" to avoid spam filters
-  - **Email Content**: Removed emojis and generic "reminder" language, replaced with professional "Confirmação da Sua Sessão" template
-  - **Professional Template**: Added therapist signature, CRP number, and structured appointment details
-  - **Layout**: Corporate-style design matching confirmation emails for consistency
-- **Files Updated**:
-  - `includes/email_system.php` - Complete SMTP implementation with SSL/TLS and anti-spam headers, optimized reminder template
-
-### Horizontal Layout for Date and Time Selection (October 9, 2025)
-- **2-Column Layout**: Date and time selection now displayed side by side horizontally
-- **Desktop View**: Calendar on left, time slots on right (grid-template-columns: 1fr 1fr)
-- **Mobile Responsive**: Columns stack vertically on screens < 768px
-- **Improved UX**: 
-  - Clear visual separation between date and time selection
-  - Neutral state message when no date selected: "Aguardando seleção de data"
-  - Color-coded legend at top (Verde = Disponível, Azul = Horários Livres, Cinza = Indisponível)
-- **Files Updated**:
-  - `pages/calendar.php` - 2-column horizontal layout
-  - `assets/css/style.css` - Responsive CSS grid (.calendar-grid-2col)
-
-### Complete UX/Copywriting Optimization of Booking Flow (October 9, 2025)
-- **Complete 3-Step Flow Redesign**: Restructured entire booking experience with UX/copywriting best practices
-- **Mobile-First Approach**: All pages optimized for mobile devices first, then scaled up for desktop/tablet
-- **Welcoming Copywriting**: Direct, reassuring language throughout the entire journey
-- **Visual Feedback System**: 
-  - Green highlights for available dates
-  - Blue highlights for available time slots
-  - Gray for unavailable options
-  - Celebratory confirmations with checkmarks and success colors
-
-**Step 1 - Calendar (Find Your Time):**
-- Title: "Encontre Seu Horário" (welcoming and direct)
-- Subtitle: "Choose the date and time that work best for you. It's quick and simple."
-- Clear color-coded instructions with visual highlights (green = available, gray = no slots)
-- Celebratory selection confirmation with checkmark icon and "Perfeito!" message
-- Improved empty state message: "Ops! Esta data está cheia"
-
-**Step 2 - Booking (Your Information):**
-- Title: "Seus Dados" with subtitle "Takes less than 2 minutes"
-- Simplified form with only 4 essential fields
-- Completely redesigned payment section:
-  - Visual cards for Pix (recommended) and Bank Transfer options
-  - Clear explanation of how each payment method works
-  - **24-Hour Rule HIGHLIGHTED** in yellow box with clock icon
-  - Professional gradient designs for each payment option
-- Reserved time slot confirmation card showing selected date/time
-
-**Step 3 - Confirmation (All Set):**
-- Celebratory header with large checkmark icon and "Tudo Confirmado!"
-- Redesigned appointment summary with icon-based layout
-- **Clear Next Steps** numbered 1-2-3:
-  1. Payment within 24 hours (HIGHLIGHTED in yellow with payment options)
-  2. Wait for Google Meet link (24 hours before session)
-  3. Prepare for session (with link to tutorial)
-- Simplified important information section with icons
-- Clean, single-button footer
-
-- **Files Updated**:
-  - `pages/calendar.php` - Complete UX/copywriting optimization
-  - `pages/booking.php` - Redesigned payment section and form
-  - `pages/confirmation.php` - Celebratory confirmation with clear next steps
-
-### Fully Responsive Administrative Panel (October 5, 2025)
-- **Complete Mobile Responsiveness**: All administrative pages now fully responsive for desktop (>1024px), tablet (768-1024px), and mobile (<768px) devices
-- **Hamburger Menu Navigation**: Mobile-friendly navigation with toggle button that shows/hides admin menu on small screens
-- **Touch-Friendly Interface**: All inputs, buttons, and selects have minimum 44px height and 16px font size to prevent zoom on iOS and ensure easy touch interaction
-- **Responsive Tables**: All data tables convert to card layout on mobile using data-label attributes for optimal mobile viewing
-- **Mobile-Optimized Forms**: Form fields stack vertically on mobile with full-width buttons and proper spacing
-- **Responsive Calendar**: Weekly calendar view uses horizontal scroll on mobile devices for easy date navigation
-- **CSS Architecture**: Mobile-first approach with breakpoints at 768px and 1024px using media queries with !important flags to override inline styles
-- **Files Updated**: 
-  - `assets/css/style.css` - Complete responsive CSS framework
-  - `admin/dashboard.php` - Hamburger menu and responsive header
-  - `admin/appointments.php` - Responsive tables and forms
-  - `admin/clients.php` - Responsive tables and forms
-  - `admin/services.php` - Responsive tables and forms
-  - `admin/calendar_manage.php` - Responsive calendar grid
-  - `admin/admin_users.php` - Responsive tables and forms
-
-### Tutorial System for Google Meet
-- **Client Tutorial**: Created comprehensive step-by-step guide at `/index.php?page=google_meet_tutorial` teaching clients how to download Google Meet app, join consultations, and prepare for online sessions
-- **Professional Tutorial**: Created detailed guide at `/admin/google_meet_guide.php` for the therapist, covering how to create meetings, share links, manage sessions, and troubleshoot common issues on mobile devices
-- **Menu Integration**: Added "Primeira Consulta" button to all client-facing pages for easy access to the tutorial
-- **Admin Access**: Added highlighted tutorial button in the administrative dashboard for quick access by the therapist
-
-### Frontend Libraries
-- **CSS Framework**: Custom CSS with CSS Grid and Flexbox for responsive layouts
-- **JavaScript**: Vanilla JavaScript for form validation, phone formatting, and calendar functionality
-- **Font System**: System fonts (Segoe UI, Tahoma, Geneva, Verdana) for optimal performance
-
-### Communication Features
-- **WhatsApp Integration**: Phone number collection formatted for WhatsApp communication
-- **Email System**: SMTP-based email system for confirmations and automated 24-hour appointment reminders
-- **Virtual Meeting**: Google Meet platform for online therapy sessions with comprehensive tutorials
-- **Tutorial Pages**: 
-  - Client tutorial (`/index.php?page=google_meet_tutorial`) - Step-by-step guide for clients to join consultations via mobile
-  - Professional tutorial (`/admin/google_meet_guide.php`) - Complete guide for therapist to create and manage Google Meet sessions on mobile
-
-### Security Considerations
-- **Input Validation**: Both client-side and server-side validation for all forms
-- **Data Sanitization**: Protection against SQL injection and XSS attacks
-- **Secure Authentication**: Protected administrative access with secure credential management
+- **Database**: PostgreSQL (Replit-hosted) with connection credentials managed via environment variables.
+- **Email Service**: SMTP server (srv96.prodns.com.br) for sending emails, configured with SSL/TLS and secure authentication.
+- **Virtual Meeting Platform**: Google Meet for online therapy sessions.
+- **Web Hosting**: PHP-enabled web server with database support (terapiaebemestar.com.br).
