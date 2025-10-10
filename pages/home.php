@@ -9,7 +9,7 @@
 </head>
 <body>
     <header class="header">
-        <div class="container">
+
             <div class="header-content">
                 <a href="index.php" class="logo"><img src="assets/images/logo-dra-daniela.png" alt="Dra. Daniela Lima - Psicóloga"></a>
                 <nav class="nav">
@@ -25,7 +25,7 @@
     <main class="main">
         <!-- Hero Section with Focus on Online Scheduling -->
         <section class="hero-main">
-            <div class="container">
+    
                 <div class="hero-content">
                     <div class="hero-text">
                         <h1>Cuide de Você, de Onde Estiver</h1>
@@ -63,7 +63,7 @@
 
         <!-- First Consultation Section -->
         <section class="about-section">
-            <div class="container">
+    
                 <div class="about-content">
                     <h2>Sua Primeira Consulta: Tudo que Você Precisa Saber</h2>
                     <p>Entendemos que usar novas ferramentas pode gerar dúvidas. Se você não tem familiaridade com o Google Meet (nossa plataforma para as sessões), não se preocupe!</p>
@@ -77,7 +77,7 @@
 
         <!-- Contact Information Section -->
         <section class="contact-section">
-            <div class="container">
+    
                 <h2>Entre em Contato</h2>
                 <div class="contact-grid">
                     <div class="contact-card">
@@ -106,7 +106,7 @@
 
         <!-- Quick Services Preview -->
         <section class="services-quick">
-            <div class="container">
+    
                 <h2>Tipos de Consulta</h2>
                 <div class="services-quick-grid">
                     <div class="service-quick-card">
@@ -133,7 +133,9 @@
     </main>
 
     <footer class="footer">
-        <div class="container">
+
+            <div class="logo-footer"><img src="assets/images/logo-dra-daniela.png" alt="Dra. Daniela Lima - Psicóloga"></div>
+
             <p>&copy; 2024 Terapia e Bem Estar - Dra. Daniela Lima. Todos os direitos reservados.</p>
             <p>CRP 00000/00 | Atendimento psicológico online</p>
         </div>

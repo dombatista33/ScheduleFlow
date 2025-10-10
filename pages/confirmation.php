@@ -8,7 +8,7 @@
 </head>
 <body>
     <header class="header">
-        <div class="container">
+
             <div class="header-content">
                 <a href="index.php" class="logo"><img src="assets/images/logo-dra-daniela.png" alt="Dra. Daniela Lima - Psicóloga"></a>
                 <nav class="nav">
@@ -22,7 +22,7 @@
     </header>
 
     <main class="main">
-        <div class="container">
+
             <?php
             global $pdo;
             $appointment_id = $_GET['appointment_id'] ?? null;
@@ -250,7 +250,9 @@
     </main>
 
     <footer class="footer">
-        <div class="container">
+
+            <div class="logo-footer"><img src="assets/images/logo-dra-daniela.png" alt="Dra. Daniela Lima - Psicóloga"></div>
+
             <p>&copy; 2024 Terapia e Bem Estar - Dra. Daniela Lima. Todos os direitos reservados.</p>
             <p>CRP 00000/00 | Atendimento psicológico online</p>
         </div>
