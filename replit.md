@@ -37,3 +37,33 @@ The design emphasizes a minimalist, calming aesthetic using a neutral color pale
 - **Email Service**: SMTP server (srv96.prodns.com.br) for sending emails, configured with SSL/TLS and secure authentication.
 - **Virtual Meeting Platform**: Google Meet for online therapy sessions.
 - **Web Hosting**: PHP-enabled web server with database support (terapiaebemestar.com.br).
+
+## Recent Updates (October 2025)
+
+### Página "Agendar" Mobile-First Otimizada (October 10, 2025)
+- **Problema Resolvido**: Corrigida responsividade da página calendar.php para mobile Android 15
+- **HTML Limpo**: Removidos TODOS os inline styles, substituídos por classes CSS semânticas e reutilizáveis
+- **Novas Classes CSS**:
+  - Progress Indicator: `.progress-steps`, `.progress-step`, `.progress-number`, `.progress-label`
+  - Calendar: `.calendar-month-year`, `.calendar-weekday`, `.calendar-grid-2col`
+  - Cards: `.card-header`, `.card-title`, `.card-title-time`, `.card-description`, `.card-active`
+  - Estados: `.success-box`, `.warning-box`, `.error-box`, `.empty-state-box`
+  - Time periods: `.time-period-title`
+  - Legend: `.legend-color-available`, `.legend-color-free`, `.legend-color-unavailable`
+  - Date selection: `.selected-date-box`
+- **Responsividade Completa**:
+  - **Desktop (>768px)**: Layout 2 colunas (calendário | horários), elementos com tamanhos padrão
+  - **Tablet (≤768px)**: Layout 1 coluna, fontes reduzidas, boxes ajustados
+  - **Mobile (≤480px)**: Elementos compactos, touch targets adequados (34-45px), fontes legíveis (0.7-1rem)
+- **Media Queries**: Implementadas para 768px (tablet) e 480px (mobile) com ajustes específicos
+- **Benefícios**: Interface otimizada para mobile, código limpo e manutenível, performance melhorada
+
+### Layout Centralizado Responsivo (October 10, 2025)
+- **Desktop Layout**: Implementado layout com largura máxima (1200px) centralizado horizontalmente
+- **Estrutura Corrigida**: Adicionado `<div class="container">` em header, main e footer de todas as páginas
+- **Páginas Atualizadas**:
+  - Cliente: home.php, calendar.php, booking.php, confirmation.php, services.php, google_meet_tutorial.php
+  - Admin: dashboard.php
+- **Responsividade**: Layout se adapta automaticamente - centralizado em desktop (>1200px), largura total em mobile
+- **CSS Mantido**: Utiliza classe `.container` existente (max-width: 1200px, margin: 0 auto, padding: 0 20px)
+- **Benefícios**: Melhor leitura em telas grandes, conteúdo não esticado na largura total da tela
