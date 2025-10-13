@@ -40,6 +40,15 @@ The design emphasizes a minimalist, calming aesthetic using a neutral color pale
 
 ## Recent Updates (October 2025)
 
+### Redirecionamento Automático para Painel Admin (October 13, 2025)
+- **Problema Resolvido**: Erro 404 ao acessar `/admin/` diretamente
+- **Solução Implementada**: Criado arquivo `admin/index.php` com redirecionamento automático
+- **URLs Funcionais**:
+  - `/admin/` → redireciona automaticamente para `/?page=admin`
+  - `/?page=admin` → acesso direto ao painel
+  - `/index.php?page=admin` → acesso direto ao painel
+- **Benefício**: Acesso mais intuitivo ao painel administrativo
+
 ### Página "Agendar" Mobile-First Otimizada (October 10, 2025)
 - **Problema Resolvido**: Corrigida responsividade da página calendar.php para mobile Android 15
 - **HTML Limpo**: Removidos TODOS os inline styles, substituídos por classes CSS semânticas e reutilizáveis
