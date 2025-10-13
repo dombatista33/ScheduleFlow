@@ -11,34 +11,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if (isset($_FILES['service_image']) && $_FILES['service_image']['error'] === UPLOAD_ERR_OK) {
             $file = $_FILES['service_image'];
-            $allowed_types = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
             $max_size = 5 * 1024 * 1024; // 5MB
             
-            // Validate file type
-            if (!in_array($file['type'], $allowed_types)) {
-                $error_message = "Tipo de arquivo não permitido. Use JPG, PNG ou WebP.";
-            }
-            // Validate file size
-            elseif ($file['size'] > $max_size) {
+            // Validate file size first
+            if ($file['size'] > $max_size) {
                 $error_message = "Arquivo muito grande. Tamanho máximo: 5MB.";
             }
             else {
-                // Generate unique filename
-                $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
-                $filename = 'servico-' . uniqid() . '.' . $extension;
-                $upload_dir = __DIR__ . '/../assets/images/services/';
-                $upload_path = $upload_dir . $filename;
+                // Use finfo to get REAL MIME type (secure validation)
+                $finfo = new finfo(FILEINFO_MIME_TYPE);
+                $mime_type = $finfo->file($file['tmp_name']);
                 
-                // Create directory if not exists
-                if (!is_dir($upload_dir)) {
-                    mkdir($upload_dir, 0755, true);
+                // Map allowed MIME types to extensions
+                $allowed_types = [
+                    'image/jpeg' => 'jpg',
+                    'image/png' => 'png',
+                    'image/webp' => 'webp'
+                ];
+                
+                // Validate MIME type
+                if (!isset($allowed_types[$mime_type])) {
+                    $error_message = "Tipo de arquivo não permitido. Use JPG, PNG ou WebP.";
                 }
-                
-                // Move uploaded file
-                if (move_uploaded_file($file['tmp_name'], $upload_path)) {
-                    $image_url = 'assets/images/services/' . $filename;
-                } else {
-                    $error_message = "Erro ao fazer upload da imagem.";
+                else {
+                    // Use extension from validated MIME type (secure)
+                    $extension = $allowed_types[$mime_type];
+                    $filename = 'servico-' . uniqid() . '.' . $extension;
+                    $upload_dir = __DIR__ . '/../assets/images/services/';
+                    $upload_path = $upload_dir . $filename;
+                    
+                    // Create directory if not exists
+                    if (!is_dir($upload_dir)) {
+                        mkdir($upload_dir, 0755, true);
+                    }
+                    
+                    // Move uploaded file
+                    if (move_uploaded_file($file['tmp_name'], $upload_path)) {
+                        $image_url = 'assets/images/services/' . $filename;
+                    } else {
+                        $error_message = "Erro ao fazer upload da imagem.";
+                    }
                 }
             }
         }
