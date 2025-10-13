@@ -9,23 +9,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             switch ($action) {
                 case 'create':
-                    $stmt = $pdo->prepare("INSERT INTO services (name, description, duration, price) VALUES (?, ?, ?, ?)");
-                    $stmt->execute([
-                        $_POST['name'],
-                        $_POST['description'],
-                        $_POST['duration'],
-                        $_POST['price']
-                    ]);
-                    $success_message = "Serviço criado com sucesso!";
-                    break;
-                    
-                case 'update':
-                    $stmt = $pdo->prepare("UPDATE services SET name = ?, description = ?, duration = ?, price = ? WHERE id = ?");
+                    $stmt = $pdo->prepare("INSERT INTO services (name, description, duration, price, image_url) VALUES (?, ?, ?, ?, ?)");
                     $stmt->execute([
                         $_POST['name'],
                         $_POST['description'],
                         $_POST['duration'],
                         $_POST['price'],
+                        $_POST['image_url'] ?? null
+                    ]);
+                    $success_message = "Serviço criado com sucesso!";
+                    break;
+                    
+                case 'update':
+                    $stmt = $pdo->prepare("UPDATE services SET name = ?, description = ?, duration = ?, price = ?, image_url = ? WHERE id = ?");
+                    $stmt->execute([
+                        $_POST['name'],
+                        $_POST['description'],
+                        $_POST['duration'],
+                        $_POST['price'],
+                        $_POST['image_url'] ?? null,
                         $_POST['service_id']
                     ]);
                     $success_message = "Serviço atualizado com sucesso!";
@@ -132,6 +134,16 @@ if (isset($_GET['edit'])) {
             </div>
             
             <div class="form-group" style="grid-column: 1 / -1;">
+                <label for="image_url">URL da Imagem</label>
+                <input type="text" id="image_url" name="image_url" 
+                       value="<?= htmlspecialchars($edit_service['image_url'] ?? '') ?>"
+                       placeholder="Ex: assets/images/services/nome-servico.jpg">
+                <small style="color: var(--text-light); font-size: 0.85rem;">
+                    💡 Dica: Faça upload da imagem em assets/images/services/ e cole o caminho aqui
+                </small>
+            </div>
+            
+            <div class="form-group" style="grid-column: 1 / -1;">
                 <label for="description">Descrição</label>
                 <textarea id="description" name="description" rows="3"
                           placeholder="Descrição detalhada do serviço..."><?= htmlspecialchars($edit_service['description'] ?? '') ?></textarea>
@@ -155,6 +167,7 @@ if (isset($_GET['edit'])) {
             <table class="admin-table">
                 <thead>
                     <tr>
+                        <th>Imagem</th>
                         <th>Serviço</th>
                         <th>Duração</th>
                         <th>Preço</th>
@@ -167,6 +180,17 @@ if (isset($_GET['edit'])) {
                 <tbody>
                     <?php foreach($services as $service): ?>
                         <tr>
+                            <td data-label="Imagem">
+                                <?php if (!empty($service['image_url'])): ?>
+                                    <img src="<?= htmlspecialchars($service['image_url']) ?>" 
+                                         alt="<?= htmlspecialchars($service['name']) ?>"
+                                         style="width: 80px; height: 60px; object-fit: cover; border-radius: 8px;">
+                                <?php else: ?>
+                                    <div style="width: 80px; height: 60px; background: var(--border-color); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-light); font-size: 0.8rem;">
+                                        Sem imagem
+                                    </div>
+                                <?php endif; ?>
+                            </td>
                             <td data-label="Serviço">
                                 <strong><?= htmlspecialchars($service['name']) ?></strong>
                                 <?php if ($service['description']): ?>
