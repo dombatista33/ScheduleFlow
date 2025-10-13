@@ -41,7 +41,7 @@ The design emphasizes a minimalist, calming aesthetic using a neutral color pale
 ## Recent Updates (October 2025)
 
 ### Sistema de Imagens para Serviços (October 13, 2025)
-- **Implementação Completa**: Sistema de imagens para categorias de serviços
+- **Implementação Completa**: Sistema de imagens para categorias de serviços com upload seguro
 - **Banco de Dados**: Adicionada coluna `image_url VARCHAR(500)` à tabela services
 - **Imagens Stock**: 3 imagens profissionais salvas em `assets/images/services/`
   - Consulta Inicial: Consultório acolhedor de terapia
@@ -52,11 +52,14 @@ The design emphasizes a minimalist, calming aesthetic using a neutral color pale
   - Efeito hover com zoom suave nas imagens
   - Layout responsivo com .service-image e .service-content
 - **Painel Admin** (admin/services.php):
-  - Campo "URL da Imagem" no formulário de criar/editar serviços
+  - **Upload Seguro de Imagens**: Input file para upload direto do computador
+  - Validação MIME real com finfo (impede upload de arquivos maliciosos)
+  - Formatos aceitos: JPG, PNG, WebP | Tamanho máximo: 5MB
+  - Preview instantâneo da imagem selecionada
   - Thumbnail 80x60px na listagem de serviços
   - Placeholder visual quando não há imagem
-  - Dica de uso: upload em assets/images/services/
-- **Benefício**: Interface visual mais atraente e profissional para os serviços
+  - Segurança: Extensão derivada do MIME validado, nome único gerado
+- **Benefício**: Interface visual atraente + upload seguro e fácil de usar
 
 ### Redirecionamento Automático para Painel Admin (October 13, 2025)
 - **Problema Resolvido**: Erro 404 ao acessar `/admin/` diretamente
