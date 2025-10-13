@@ -30,6 +30,7 @@
 
             <section class="services-grid">
                 <?php
+                global $pdo;
                 try {
                     $stmt = $pdo->query("SELECT * FROM services ORDER BY id ASC");
                     $services = $stmt->fetchAll(PDO::FETCH_ASSOC);
