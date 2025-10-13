@@ -36,14 +36,21 @@
                     
                     foreach($services as $service): ?>
                         <div class="card service-card">
-                            <h3><?= htmlspecialchars($service['name']) ?></h3>
-                            <p><?= htmlspecialchars($service['description']) ?></p>
-                            <div class="service-info">
-                                <span class="duration"><?= $service['duration'] ?> minutos</span>
-                                <span class="price">R$ <?= number_format($service['price'], 2, ',', '.') ?></span>
-                            </div>
-                            <div class="mt-2">
-                                <a href="index.php?page=calendar&service_id=<?= $service['id'] ?>" class="btn">Agendar Agora</a>
+                            <?php if (!empty($service['image_url'])): ?>
+                                <div class="service-image">
+                                    <img src="<?= htmlspecialchars($service['image_url']) ?>" alt="<?= htmlspecialchars($service['name']) ?>">
+                                </div>
+                            <?php endif; ?>
+                            <div class="service-content">
+                                <h3><?= htmlspecialchars($service['name']) ?></h3>
+                                <p><?= htmlspecialchars($service['description']) ?></p>
+                                <div class="service-info">
+                                    <span class="duration"><?= $service['duration'] ?> minutos</span>
+                                    <span class="price">R$ <?= number_format($service['price'], 2, ',', '.') ?></span>
+                                </div>
+                                <div class="mt-2">
+                                    <a href="index.php?page=calendar&service_id=<?= $service['id'] ?>" class="btn">Agendar Agora</a>
+                                </div>
                             </div>
                         </div>
                     <?php endforeach;
