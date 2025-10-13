@@ -6,32 +6,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
         $action = $_POST['action'];
         
+        // Handle image upload
+        $image_url = $_POST['image_url'] ?? null;
+        
+        if (isset($_FILES['service_image']) && $_FILES['service_image']['error'] === UPLOAD_ERR_OK) {
+            $file = $_FILES['service_image'];
+            $allowed_types = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+            $max_size = 5 * 1024 * 1024; // 5MB
+            
+            // Validate file type
+            if (!in_array($file['type'], $allowed_types)) {
+                $error_message = "Tipo de arquivo não permitido. Use JPG, PNG ou WebP.";
+            }
+            // Validate file size
+            elseif ($file['size'] > $max_size) {
+                $error_message = "Arquivo muito grande. Tamanho máximo: 5MB.";
+            }
+            else {
+                // Generate unique filename
+                $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+                $filename = 'servico-' . uniqid() . '.' . $extension;
+                $upload_dir = __DIR__ . '/../assets/images/services/';
+                $upload_path = $upload_dir . $filename;
+                
+                // Create directory if not exists
+                if (!is_dir($upload_dir)) {
+                    mkdir($upload_dir, 0755, true);
+                }
+                
+                // Move uploaded file
+                if (move_uploaded_file($file['tmp_name'], $upload_path)) {
+                    $image_url = 'assets/images/services/' . $filename;
+                } else {
+                    $error_message = "Erro ao fazer upload da imagem.";
+                }
+            }
+        }
+        
         try {
-            switch ($action) {
-                case 'create':
-                    $stmt = $pdo->prepare("INSERT INTO services (name, description, duration, price, image_url) VALUES (?, ?, ?, ?, ?)");
-                    $stmt->execute([
-                        $_POST['name'],
-                        $_POST['description'],
-                        $_POST['duration'],
-                        $_POST['price'],
-                        $_POST['image_url'] ?? null
-                    ]);
-                    $success_message = "Serviço criado com sucesso!";
-                    break;
-                    
-                case 'update':
-                    $stmt = $pdo->prepare("UPDATE services SET name = ?, description = ?, duration = ?, price = ?, image_url = ? WHERE id = ?");
-                    $stmt->execute([
-                        $_POST['name'],
-                        $_POST['description'],
-                        $_POST['duration'],
-                        $_POST['price'],
-                        $_POST['image_url'] ?? null,
-                        $_POST['service_id']
-                    ]);
-                    $success_message = "Serviço atualizado com sucesso!";
-                    break;
+            if (!isset($error_message)) {
+                switch ($action) {
+                    case 'create':
+                        $stmt = $pdo->prepare("INSERT INTO services (name, description, duration, price, image_url) VALUES (?, ?, ?, ?, ?)");
+                        $stmt->execute([
+                            $_POST['name'],
+                            $_POST['description'],
+                            $_POST['duration'],
+                            $_POST['price'],
+                            $image_url
+                        ]);
+                        $success_message = "Serviço criado com sucesso!";
+                        break;
+                        
+                    case 'update':
+                        $stmt = $pdo->prepare("UPDATE services SET name = ?, description = ?, duration = ?, price = ?, image_url = ? WHERE id = ?");
+                        $stmt->execute([
+                            $_POST['name'],
+                            $_POST['description'],
+                            $_POST['duration'],
+                            $_POST['price'],
+                            $image_url,
+                            $_POST['service_id']
+                        ]);
+                        $success_message = "Serviço atualizado com sucesso!";
+                        break;
                     
                 case 'delete':
                     // Check if service has appointments
@@ -106,7 +144,7 @@ if (isset($_GET['edit'])) {
             <?= $edit_service ? 'Editar Serviço' : 'Adicionar Novo Serviço' ?>
         </h3>
         
-        <form method="POST" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+        <form method="POST" enctype="multipart/form-data" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
             <input type="hidden" name="action" value="<?= $edit_service ? 'update' : 'create' ?>">
             <?php if ($edit_service): ?>
                 <input type="hidden" name="service_id" value="<?= $edit_service['id'] ?>">
@@ -134,14 +172,43 @@ if (isset($_GET['edit'])) {
             </div>
             
             <div class="form-group" style="grid-column: 1 / -1;">
-                <label for="image_url">URL da Imagem</label>
-                <input type="text" id="image_url" name="image_url" 
-                       value="<?= htmlspecialchars($edit_service['image_url'] ?? '') ?>"
-                       placeholder="Ex: assets/images/services/nome-servico.jpg">
-                <small style="color: var(--text-light); font-size: 0.85rem;">
-                    💡 Dica: Faça upload da imagem em assets/images/services/ e cole o caminho aqui
+                <label for="service_image">Imagem do Serviço</label>
+                <input type="file" id="service_image" name="service_image" accept="image/jpeg,image/jpg,image/png,image/webp" onchange="previewServiceImage(this)">
+                <small style="color: var(--text-light); font-size: 0.85rem; display: block; margin-top: 0.5rem;">
+                    📷 Formatos aceitos: JPG, PNG, WebP | Tamanho máximo: 5MB
                 </small>
+                
+                <?php if (!empty($edit_service['image_url'])): ?>
+                    <div id="imagePreview" style="margin-top: 1rem;">
+                        <img src="<?= htmlspecialchars($edit_service['image_url']) ?>" 
+                             alt="Preview" 
+                             style="max-width: 300px; max-height: 200px; border-radius: 10px; object-fit: cover;">
+                        <input type="hidden" name="image_url" value="<?= htmlspecialchars($edit_service['image_url']) ?>">
+                    </div>
+                <?php else: ?>
+                    <div id="imagePreview" style="margin-top: 1rem; display: none;">
+                        <img src="" alt="Preview" style="max-width: 300px; max-height: 200px; border-radius: 10px; object-fit: cover;">
+                    </div>
+                <?php endif; ?>
             </div>
+            
+            <script>
+            function previewServiceImage(input) {
+                const preview = document.getElementById('imagePreview');
+                const img = preview.querySelector('img');
+                
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+                    
+                    reader.onload = function(e) {
+                        img.src = e.target.result;
+                        preview.style.display = 'block';
+                    }
+                    
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            </script>
             
             <div class="form-group" style="grid-column: 1 / -1;">
                 <label for="description">Descrição</label>
