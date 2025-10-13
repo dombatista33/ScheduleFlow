@@ -98,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                     break;
             }
+            }
         } catch(PDOException $e) {
             $error_message = "Erro ao processar operação: " . $e->getMessage();
         }
